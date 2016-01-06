@@ -1,0 +1,49 @@
+*,body{
+  margin: 0 auto;
+  padding: 0 auto;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.nav-bar{
+  color: #FFF;
+//  height: 100px;
+  vertical-align: middle;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(grey, black); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(grey, black); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(grey, black); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(grey, black); /* Standard syntax (must be last) */
+  padding: 1em;
+  vertical-align: super;
+
+  h1{
+    margin: 0;
+    display: inline-block;
+    width: 45%;
+  }
+
+  a{
+    text-decoration: none;
+    color: #FFF;
+  }
+
+  .user-snapshot{
+    width: 53%;
+    display: inline-block;
+    text-align: right !important;
+    vertical-align: super;
+
+    a{
+      cursor: pointer;
+    }
+  }
+}
+
+@import 'less/sk_style.less';
+@import 'less/login.less';
+@import 'less/dashboard.less';
+@import 'less/add-edit-item.less';
+@import 'directives/directives.less';
+// @import url(https://fonts.googleapis.com/css?family=Lovers+Quarrel);
+// @import url(https://fonts.googleapis.com/css?family=Sevillana);
+@import url(https://fonts.googleapis.com/css?family=Amaranth);

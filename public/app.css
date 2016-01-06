@@ -1,0 +1,311 @@
+@import url(https://fonts.googleapis.com/css?family=Amaranth);
+*,
+body {
+  margin: 0 auto;
+  padding: 0 auto;
+  font-family: 'Amaranth', sans-serif;
+}
+.nav-bar {
+  color: #FFF;
+  vertical-align: middle;
+  background: red;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(grey, black);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(grey, black);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(grey, black);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(grey, black);
+  /* Standard syntax (must be last) */
+  padding: 1em;
+  vertical-align: super;
+}
+.nav-bar h1 {
+  margin: 0;
+  display: inline-block;
+  width: 45%;
+}
+.nav-bar a {
+  text-decoration: none;
+  color: #FFF;
+}
+.nav-bar .user-snapshot {
+  width: 53%;
+  display: inline-block;
+  text-align: right !important;
+  vertical-align: super;
+}
+.nav-bar .user-snapshot a {
+  cursor: pointer;
+}
+/* ----------------------------------------------------------------------------
+* Name          : Sachin Khedkar
+* Organisation  : Xoriant
+* Contact       : sachin.khedkar@xoriant.com
+*                 sachin.khedkar91288@gmail.com
+*                 08149137792 / 09421690448
+* Please do not change the file.
+* -------------------------------------------------------------------------- */
+.inline {
+  display: inline;
+}
+.inline-block {
+  display: inline-block;
+}
+.block {
+  display: block;
+}
+.ten-percent {
+  width: 9%;
+  display: inline-block;
+}
+.twenty-percent {
+  width: 19%;
+  display: inline-block;
+}
+.thirty-percent {
+  width: 29%;
+  display: inline-block;
+}
+.forty-percent {
+  width: 39%;
+  display: inline-block;
+}
+.fifty-percent {
+  width: 49%;
+  display: inline-block;
+}
+.sixty-percent {
+  width: 59%;
+  display: inline-block;
+}
+.seventy-percent {
+  width: 69%;
+  display: inline-block;
+}
+.eighty-percent {
+  width: 79%;
+  display: inline-block;
+}
+.ninety-percent {
+  width: 89%;
+  display: inline-block;
+}
+.hundred-percent {
+  display: block;
+  width: 99%;
+}
+.top-left-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.top-right-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.bottom-left-corner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.bottom-right-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.center {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+.right {
+  position: relative;
+  right: 0;
+}
+.left {
+  position: relative;
+  left: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.pad-h {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.pad-v {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.pad-a {
+  padding: 1em;
+}
+.margin-h {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.margin-v {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.margin-a {
+  margin: 1em;
+}
+.round-corner {
+  border-radius: 1em;
+}
+.round-corner-top {
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+.round-corner-bottom {
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.round-corner-left {
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+.round-corner-right {
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-left {
+  text-align: left;
+}
+.text-align-center {
+  text-align: center;
+}
+.text-align-justify {
+  text-align: justify;
+}
+.login-content {
+  margin: 1em;
+  width: 98%;
+}
+.login-content .login-container {
+  background-color: #DFF0D8;
+  color: #a3d48e;
+  padding: 1em;
+}
+.login-content .login-container input {
+  width: 95%;
+  margin: 0 1em 1em 0;
+  color: #000;
+}
+.login-content .login-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+.login-content .login-container button {
+  width: 25%;
+}
+.login-content .login-container .right {
+  text-align: right;
+  right: 2em;
+}
+.login-content .error-message {
+  color: #d59595;
+}
+.login-content .login-heading {
+  background-color: #F2DEDE;
+  color: #d59595;
+  padding: 1em;
+  margin-bottom: 0;
+}
+.login-content .offers-display {
+  display: inline-block;
+}
+.login-content .offers-display:first-child {
+  width: 45%;
+  vertical-align: top;
+  text-align: center;
+}
+.login-content .offers-display:first-child img {
+  padding: 2em;
+}
+.login-content .offers-display:last-child {
+  vertical-align: text-bottom;
+  width: 46%;
+  border-radius: 1em;
+}
+@media (max-width: 520px) {
+  .login-content {
+    width: auto;
+  }
+  .offers-display {
+    clear: both !important;
+    width: 100% !important;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 521px) and (max-width: 800px) {
+  .login-content {
+    width: auto;
+  }
+  .offers-display {
+    clear: both !important;
+    width: 49% !important;
+    display: inline-block;
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+.dashboard-content .items-display {
+  border-top: 2px solid #D9EDF7;
+}
+.dashboard-content .items-display .item-list {
+  border-top: 2px solid #D9EDF7;
+}
+.dashboard-content .items-display .add-new {
+  margin: 20 20 10 0;
+  vertical-align: super;
+}
+.dashboard-content .stats-display {
+  background-color: #D9EDF7;
+  margin: 1em 0 1em 0;
+}
+.dashboard-content .stats-display svg {
+  margin: 1em auto;
+  padding: 1em;
+  overflow: visible !important;
+}
+.add-edit-info .img-display {
+  vertical-align: top;
+}
+.add-edit-info img:first-child {
+  max-height: 400px;
+  width: 90%;
+  margin: 0 auto;
+}
+xor-item-snapshot img {
+  min-height: 150px;
+  max-height: 200px;
+  min-width: 100px;
+  max-width: 150px;
+  vertical-align: top;
+}
+xor-item-snapshot .item {
+  margin: 1em;
+  border-bottom: 2px solid #DFF0D8;
+}
+xor-item-snapshot .details h4 {
+  color: #d59595;
+}
+xor-item-snapshot .details h5 {
+  height: 100px;
+  overflow: hidden;
+}

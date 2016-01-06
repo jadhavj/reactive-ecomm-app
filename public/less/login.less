@@ -1,0 +1,92 @@
+.login-content{
+  // text-align: center;
+  margin: 1em;
+  width: 98%;
+
+  .login-container{
+    background-color: @colorSuccess;
+    color: @fontColorSuccess;
+    padding: 1em;
+
+    input{
+      width: 95%;
+      margin: 0 1em 1em 0;
+      color: #000;
+    }
+
+    label{
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    button{
+      width: 25%;
+    }
+
+    .right{
+      text-align: right;
+      right: 2em;
+    }
+  }
+
+  .error-message{
+    color: @fontColorDanger;
+  }
+
+  .login-heading{
+    background-color: @colorDanger;
+    color: @fontColorDanger;
+    padding: 1em;
+    margin-bottom: 0;
+  }
+
+  .offers-display{
+    display: inline-block;
+  }
+
+  .offers-display:first-child{
+    width: 45%;
+    // float: left;
+    vertical-align: top;
+    text-align: center;
+
+    img{
+      padding: 2em;
+    }
+  }
+
+  .offers-display:last-child{
+    vertical-align: text-bottom;
+    width: 46%;
+    border-radius: 1em;
+    // float: right;
+  }
+}
+
+@media (max-width: 520px){
+  .login-content{
+    width: auto;
+  }
+
+  .offers-display{
+    clear: both !important;
+    width: 100% !important;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 800px){
+  .login-content{
+    width: auto;
+  }
+
+  .offers-display{
+    clear: both !important;
+    width: 49% !important;
+    display: inline-block;
+    padding: 0;
+    margin: 0 auto;
+  }
+}

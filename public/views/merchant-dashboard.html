@@ -1,0 +1,35 @@
+<div class="dashboard-content hundred-percent">
+  <div ng-controller='merchantDashboardController'>
+
+    <div class="stats-display">
+      <div class="fifty-percent inline-block text-align-center">
+        <h3 class="block text-align-center">Top Seller</h3>
+        <div id="top-sellers-donut">
+
+        </div>
+      </div>
+
+      <div class="fifty-percent inline-block text-align-center">
+        <h3 class="block text-align-center">Yearly Revenue Generation</h3>
+        <div  id="yearly-sales-revenue">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="items-display">
+      <div class="ninety-percent text-align-center">
+        <h2>Your Catalog</h2>
+      </div>
+
+      <div class="ten-percent">
+        <button class="btn btn-primary add-new" ng-click='addNewItem()'>Add New</button>
+      </div>
+
+      <div class='item-list hundred-percent margin-v'>
+        <xor-item-snapshot ng-repeat="item in items track by item.id" obj="item"></xor-item-snapshot>
+      </div>
+    </div>
+
+  </div>
+</div>
