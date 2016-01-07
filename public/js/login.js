@@ -1,4 +1,4 @@
-ShoppingApp.controller('loginController', ['$scope','$rootScope',function($scope, $rootScope){
+ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location',function($scope, $rootScope, $location){
   $scope.user = {};
 
   $scope.submit = function(){
@@ -7,5 +7,9 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope',function($scope
 
   $scope.clear = function(){
     $scope.errorMessage = null;
+  }
+
+  $scope.signup = function(){
+    $location.path('/signup')
   }
 }]);

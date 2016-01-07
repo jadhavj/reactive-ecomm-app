@@ -2,6 +2,10 @@ var ShoppingApp = angular.module("ShoppingApp",['ngRoute']);
 
 ShoppingApp.config(['$routeProvider', function($routeProvider){
   $routeProvider.
+  when("/signup",{
+    templateUrl: 'views/signup.html',
+    controller: 'signupController'
+  }).
   when("/login",{
     templateUrl: 'views/login.html',
     controller: 'loginController'
@@ -29,8 +33,8 @@ ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location',
     username: 'sachin@xoriant.com',
     password: 'sachin',
     name: 'Sachin',
-    role: 'merchant'
-    // role: 'buyer'
+    // role: 'merchant'
+    role: 'buyer'
   }
 
 //  $scope.user = $rootScope.$watch($rootScope.user);
