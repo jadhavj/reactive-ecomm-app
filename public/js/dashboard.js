@@ -35,6 +35,21 @@ ShoppingApp.controller('merchantDashboardController',['$scope', function($scope)
 }]);
 
 
+
+ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUpload', function($scope, $location, fileUpload){
+
+    $scope.uploadFile = function(){
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        var absUrl = $location.absUrl().split('#');
+        var uploadUrl = absUrl[0]+"#/fileUpload";
+        console.log("uploadUrl : ",uploadUrl);
+        fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
+
+}]);
+
 ShoppingApp.controller('buyerDashboardController',['$scope', function($scope){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
 

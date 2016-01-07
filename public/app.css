@@ -297,6 +297,17 @@ body {
 .dashboard-content .items-display .item-list {
   border-top: 2px solid #D9EDF7;
 }
+.dashboard-content .items-display .heading {
+  width: 83%;
+  display: inline-block;
+}
+.dashboard-content .items-display .heading h2 {
+  margin-left: 17% !important;
+}
+.dashboard-content .items-display .buttons {
+  width: 16%;
+  display: inline-block;
+}
 .dashboard-content .items-display .add-new {
   margin: 20 20 10 0;
   vertical-align: super;
