@@ -302,7 +302,7 @@ body {
   display: inline-block;
 }
 .dashboard-content .items-display .heading h2 {
-  margin-left: 17% !important;
+  margin-left: 17%;
 }
 .dashboard-content .items-display .buttons {
   width: 16%;
@@ -321,6 +321,9 @@ body {
   padding: 1em;
   overflow: visible !important;
 }
+.dashboard-content .stats-display svg line .c3-grid-focus {
+  visibility: hidden !important;
+}
 .dashboard-content #topCarousel .image {
   width: 59% !important;
   display: inline-block !important;
@@ -337,6 +340,39 @@ body {
   width: 70%;
   height: 450px;
   margin: auto;
+}
+@media (max-width: 600px) {
+  .stats-display {
+    margin: 0 auto !important;
+  }
+  .stats-display div {
+    display: block;
+    width: 100% !important;
+  }
+  .stats-display h3:first-child {
+    margin: 0;
+  }
+  .stats-display h3:last-child {
+    margin: 10px !important;
+  }
+  .stats-display svg {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .items-display .heading {
+    width: 100% !important;
+  }
+  .items-display .heading h2 {
+    margin-left: 0 !important;
+  }
+  .items-display .buttons {
+    width: 100% !important;
+  }
+  .items-display .buttons button {
+    width: 45%;
+    margin-left: 2.5%;
+  }
 }
 .add-edit-info .img-display {
   vertical-align: top;
@@ -363,4 +399,32 @@ xor-item-snapshot .details h4 {
 xor-item-snapshot .details h5 {
   height: 100px;
   overflow: hidden;
+}
+@media (max-width: 600px) {
+  xor-item-snapshot img,
+  xor-item-snapshot .description {
+    width: 100% !important;
+  }
+  xor-item-snapshot h3 {
+    width: 45% !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  xor-item-snapshot h4 {
+    width: 35% !important;
+    margin-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  xor-item-snapshot button {
+    width: auto !important;
+    position: relative;
+    bottom: 1.8em;
+    left: 1em;
+  }
+  xor-item-snapshot button span {
+    display: none;
+  }
 }

@@ -23,3 +23,42 @@ xor-item-snapshot{
     }
   }
 }
+
+
+@media (max-width: 600px) {
+  xor-item-snapshot{
+    img, .description{
+      width: 100% !important;
+    }
+
+    h3{
+      width: 45% !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    h3:hover{
+
+    }
+
+    h4{
+      width: 35% !important;
+      margin-left: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    button{
+      width: auto !important;
+      position: relative;
+      bottom: 1.8em;
+      left: 1em;
+
+      span{
+        display: none;
+      }
+    }
+  }
+}

@@ -1,12 +1,22 @@
 <div class="item">
   <img src="{{obj.img}}" alt="{{obj.alt}}" class="thirty-percent img-responsive pad-a"/>
   <div class="description seventy-percent">
-    <h3 class="fifty-percent capitalize">{{obj.name}}</h3>
-    <h4 class="forty-percent capitalize">{{obj.category}}</h4>
-    <button class="btn btn-success ten-percent" ng-click="edit()">Edit</button>
+    <h3 class="fifty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.name}}">{{obj.name}}</h3>
+    <h4 class="forty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.category}}">{{obj.category}}</h4>
+    <button class="btn btn-success ten-percent" ng-click="edit()" data-toggle="tooltip" title="Edit {{obj.name}}">
+      <span>Edit</span>
+      <i class="icon-edit"></i>
+    </button>
     <div class="details">
       <h4 class="block"><i>&#8377 {{obj.price}}</i></h4>
       <h5 class="text-align-justify">{{obj.details}}</h5>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
 </div>
