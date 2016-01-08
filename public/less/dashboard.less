@@ -5,12 +5,6 @@
     border-top: 2px solid @colorInfo;
     // background-color: @colorWarning;
 
-    h2{
-      // font-family: 'Lovers Quarrel', cursive;
-      // font-family: 'Sevillana', cursive;
-      // font-family: 'Amaranth', sans-serif;
-    }
-
     .item-list{
       border-top: 2px solid @colorInfo;
     }
@@ -20,7 +14,7 @@
       display: inline-block;
 
       h2{
-        margin-left: 17% !important;
+        margin-left: 17%;
       }
     }
 
@@ -43,6 +37,10 @@
       margin: 1em auto;
       padding: 1em;
       overflow: visible !important;
+
+      line .c3-grid-focus{
+        visibility: hidden !important;
+      }
     }
   }
 
@@ -67,5 +65,50 @@
         margin: auto;
     }
 
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-display {
+    margin: 0 auto !important;
+
+    div{
+      display: block;
+      width: 100% !important;
+    }
+
+    h3:first-child{
+      margin: 0;
+    }
+
+    h3:last-child{
+      margin: 10px !important;
+    }
+
+    svg{
+      margin: 0 auto !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+  }
+
+
+  .items-display{
+    .heading{
+      width: 100% !important;
+
+      h2{
+        margin-left: 0 !important;
+      }
+    }
+
+    .buttons{
+      width: 100% !important;
+
+      button{
+        width: 45%;
+        margin-left: 2.5%;
+      }
+    }
   }
 }
