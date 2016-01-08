@@ -54,4 +54,6 @@ ShoppingApp.controller('buyerDashboardController',['$scope', function($scope){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
 
   $scope.items = items.slice(0,5);
+
+  console.log("items : ",$scope.items);
 }]);
