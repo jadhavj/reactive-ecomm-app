@@ -11,23 +11,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import models.UserRole;
 import models.Address;
 import models.CardDetails;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "ID", "username", "password", "role", "firstname",
 		"lastname", "address", "email", "mobile_number", "card_details" })
+@Entity("users")
 public class User {
-
 	/**
 	 * (Required)
 	 */
 	@JsonProperty("ID")
-	private String ID;
+	@Id
+	private ObjectId ID;
 	/**
 	 * 
 	 * (Required)
 	 * 
 	 */
 	@JsonProperty("username")
+	@Property("username")
 	private Object username;
 	/**
 	 * 
@@ -35,6 +41,7 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("password")
+	@Property("password")
 	private String password;
 	/**
 	 * 
@@ -42,6 +49,7 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("role")
+	@Property("role")
 	private UserRole role;
 	/**
 	 * 
@@ -49,6 +57,7 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("firstname")
+	@Property("firstname")
 	private String firstname;
 	/**
 	 * 
@@ -56,8 +65,11 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("lastname")
+	@Property("lastname")
 	private String lastname;
+
 	@JsonProperty("address")
+	@Property("address")
 	private Address address;
 	/**
 	 * 
@@ -65,6 +77,7 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("email")
+	@Property("email")
 	private String email;
 	/**
 	 * 
@@ -72,9 +85,13 @@ public class User {
 	 * 
 	 */
 	@JsonProperty("mobile_number")
+	@Property("mobile_number")
 	private Long mobileNumber;
+
 	@JsonProperty("card_details")
+	@Property("card_details")
 	private CardDetails cardDetails;
+
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -98,7 +115,7 @@ public class User {
 	 * @param password
 	 * @param cardDetails
 	 */
-	public User(String ID, Object username, String password, UserRole role,
+	public User(ObjectId ID, Object username, String password, UserRole role,
 			String firstname, String lastname, Address address, String email,
 			Long mobileNumber, CardDetails cardDetails) {
 		this.ID = ID;
@@ -120,7 +137,7 @@ public class User {
 	 * @return The ID
 	 */
 	@JsonProperty("ID")
-	public String getID() {
+	public ObjectId getID() {
 		return ID;
 	}
 
@@ -132,7 +149,7 @@ public class User {
 	 *            The ID
 	 */
 	@JsonProperty("ID")
-	public void setID(String ID) {
+	public void setID(ObjectId ID) {
 		this.ID = ID;
 	}
 
