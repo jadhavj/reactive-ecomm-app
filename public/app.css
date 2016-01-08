@@ -196,7 +196,7 @@ body {
 }
 .login-content .login-container {
   background-color: #DFF0D8;
-  color: #a3d48e;
+  color: #529138;
   padding: 1em;
 }
 .login-content .login-container input {
@@ -213,14 +213,17 @@ body {
 }
 .login-content .login-container .right {
   text-align: right;
-  right: 2em;
+  right: 1em;
+}
+.login-content .login-container .right span {
+  margin-right: 10%;
 }
 .login-content .error-message {
-  color: #d59595;
+  color: #b84c4c;
 }
 .login-content .login-heading {
   background-color: #F2DEDE;
-  color: #d59595;
+  color: #963b3b;
   padding: 1em;
   margin-bottom: 0;
 }
@@ -264,11 +267,46 @@ body {
     margin: 0 auto;
   }
 }
+.signup-content .container {
+  margin: 2em auto;
+}
+.signup-content .container .heading {
+  display: block;
+  text-align: center;
+  margin-bottom: 2em;
+}
+.signup-content .container .right {
+  text-align: right;
+  right: 1em;
+}
+.signup-content .container .form-group {
+  margin: 1em auto;
+}
+.signup-content .container .form-group label {
+  padding-left: 10%;
+  vertical-align: top;
+}
+.signup-content .container .form-group .error-message {
+  padding-left: 5px;
+  margin-left: 29%;
+  color: #c77070;
+}
 .dashboard-content .items-display {
   border-top: 2px solid #D9EDF7;
 }
 .dashboard-content .items-display .item-list {
   border-top: 2px solid #D9EDF7;
+}
+.dashboard-content .items-display .heading {
+  width: 83%;
+  display: inline-block;
+}
+.dashboard-content .items-display .heading h2 {
+  margin-left: 17% !important;
+}
+.dashboard-content .items-display .buttons {
+  width: 16%;
+  display: inline-block;
 }
 .dashboard-content .items-display .add-new {
   margin: 20 20 10 0;
@@ -282,6 +320,23 @@ body {
   margin: 1em auto;
   padding: 1em;
   overflow: visible !important;
+}
+.dashboard-content #topCarousel .image {
+  width: 59% !important;
+  display: inline-block !important;
+}
+.dashboard-content #topCarousel .top-carousel-caption {
+  width: 39% !important;
+  display: inline-block !important;
+}
+.dashboard-content #topCarousel .top-carousel-caption {
+  color: #000 !important;
+}
+.dashboard-content #topCarousel .carousel-inner > .item > img,
+.dashboard-content #topCarousel .carousel-inner > .item > a > img {
+  width: 70%;
+  height: 450px;
+  margin: auto;
 }
 .add-edit-info .img-display {
   vertical-align: top;

@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html>
   <head>
-    <title>Welcome to Shopping App</title>
+    <title>Welcome to Shopping App test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <script type="text/javascript" src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
@@ -23,8 +23,11 @@
     <!--The following section should be deleted once the gulp issue is resolved-->
     <script type="text/javascript" src = "app.js"></script>
     <script type="text/javascript" src = "directives/item-snapshot.js"></script>
+    <script type="text/javascript" src = "directives/file-upload.js"></script>
+    <script type="text/javascript" src = "js/factories/file-upload.js"></script>
     <script type="text/javascript" src = "js/factories/dataTransfer.js"></script>
     <script type="text/javascript" src = "js/login.js"></script>
+    <script type="text/javascript" src = "js/signup.js"></script>
     <script type="text/javascript" src = "dummy-data/item-list.js"></script>
     <script type="text/javascript" src = "dummy-data/graph-data.js"></script>
     <script type="text/javascript" src = "js/dashboard.js"></script>
@@ -34,7 +37,7 @@
   <body ng-app="ShoppingApp">
     <div class="nav-bar span12 block" ng-controller='masterController'>
       <h1>
-        <a ng-if="!userLoggedIn" href="#">Shopping</a>
+        <a ng-if="!userLoggedIn" href="#/login">Shopping</a>
         <a ng-if="userLoggedIn" href="#/dashboard">Shopping</a>
       </h1>
 

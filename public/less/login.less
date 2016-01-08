@@ -5,7 +5,7 @@
 
   .login-container{
     background-color: @colorSuccess;
-    color: @fontColorSuccess;
+    color: darken(@fontColorSuccess, 30%);
     padding: 1em;
 
     input{
@@ -25,17 +25,21 @@
 
     .right{
       text-align: right;
-      right: 2em;
+      right: 1em;
+
+      span{
+        margin-right: 10%;
+      }
     }
   }
 
   .error-message{
-    color: @fontColorDanger;
+    color:  darken(@fontColorDanger, 20%);
   }
 
   .login-heading{
     background-color: @colorDanger;
-    color: @fontColorDanger;
+    color: darken(@fontColorDanger, 30%);
     padding: 1em;
     margin-bottom: 0;
   }

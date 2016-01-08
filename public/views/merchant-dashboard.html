@@ -18,12 +18,37 @@
     </div>
 
     <div class="items-display">
-      <div class="ninety-percent text-align-center">
+      <div class="heading text-align-center">
         <h2>Your Catalog</h2>
       </div>
 
-      <div class="ten-percent">
-        <button class="btn btn-primary add-new" ng-click='addNewItem()'>Add New</button>
+      <div class="buttons">
+        <button class="btn btn-primary add-new margin-v" ng-click='addNewItem()'>Add New</button>
+        <button class="btn btn-primary add-new" data-toggle="modal" data-target="#bulkItemUpload">Add Bulk</button>
+      </div>
+
+      <div id="bulkItemUpload" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Upload items in BULK ?</h4>
+            </div>
+            <div class="modal-body">
+              <p>By uploading the file containg the details of the items. This save a lot of your time. But please review your file before uploading.</p>
+              <p>*Please select only xml type of file for uploading items in bulk.</p>
+
+              <div ng-controller = "bulkUploadController">
+                  <input type="file" file-model="myFile"/>
+                  <button ng-click="uploadFile()">Upload</button>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class='item-list hundred-percent margin-v'>

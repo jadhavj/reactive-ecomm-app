@@ -1,0 +1,73 @@
+<div class="signup-content" ng-controller = "signupController">
+
+  <div class="ninety-percent margin-a pad-a container">
+    <h3 class="heading">Hola new user.. Explore the shopping world..</h3>
+
+    <form class="inline" name="form">
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Name</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Your name please.." ng-model="user.name" name="uName" required=""/>
+        <div ng-show="form.$submitted || form.uName.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uName.$error.required">What should I call u ?</label>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Register as</label>
+        <input type="radio" ng-model="user.role" value="buyer">Buyer</input>
+        <input type="radio" class="margin-h" ng-model="user.role" value="merchant">Seller</input>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Email</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Your email please.." ng-model="user.email" name="uEmail" required=""/>
+        <div ng-show="form.$submitted || form.uEmail.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uEmail.$error.required">Where can I mail you offers and other important mails ?</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Password</label>
+        <input type="password" class="inline-block seventy-percent" placeholder="desired password.." ng-model="user.password" name="uPassword" required=""/>
+        <div ng-show="form.$submitted || form.uPassword.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uPassword.$error.required">Secure your account by providing password.</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Confirm Password</label>
+        <input type="password" class="inline-block seventy-percent" placeholder="Please confirm password" ng-model="user.password_confirm" name="uPasswordConfirm" required=""/>
+        <div ng-show="form.$submitted || form.uPasswordConfirm.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uPasswordConfirm.$error.required">Check if the password entered is mistaken or not.</label>
+        </div>
+        <div ng-show="form.uPasswordConfirm.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="user.password !== user.password_confirm">I saved you, Passwords do not match !!  Please enter same password..</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Contact No</label>
+        <input type="phone" class="inline-block seventy-percent" placeholder="Your mobile no please.." ng-model="user.mobile_no" name="uMobile" required=""/>
+        <div ng-show="form.$submitted || form.uMobile.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uMobile.$error.required">Providing contact helps you resetting account immidiately, get offers-display. Important for my team to contact you.</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Address</label>
+        <textarea rows="6"  class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address" name="uAddress" required=""></textarea>
+        <div ng-show="form.$submitted || form.uAddress.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uAddress.$error.required"> Dont you want to recieve your orders ?</label>.</label>
+        </div>
+      </div>
+
+      <div class="right">
+        <button type="reset" class="btn btn-danger margin-v" ng-click="reset()">Reset</button>
+        <button type="submit" class="btn btn-primary margin-v" ng-click="registerUser()">Complete Registration</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
