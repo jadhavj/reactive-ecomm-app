@@ -1,26 +1,21 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "_id", "name", "category", "sub_category", "pricing",
-		"features", "image", "specifications", "items_in_stock", "seller",
+		"peatures", "image", "specifications", "items_in_stock", "seller",
 		"cities_for_delivery" })
-@Entity("Product")
+@Entity("products")
 public class Product {
 
 	/**
@@ -132,7 +127,7 @@ public class Product {
 	 * @return The ID
 	 */
 	@JsonProperty("_id")
-	public String getID() {
+	public String getId() {
 		return id;
 	}
 
@@ -269,7 +264,7 @@ public class Product {
 	 * @param Image
 	 *            The Image
 	 */
-	@JsonProperty("Image")
+	@JsonProperty("image")
 	public void setImage(byte[] image) {
 		this.image = image;
 	}

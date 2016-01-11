@@ -17,7 +17,7 @@ public class Specifications {
 	private String brand;
 	@JsonProperty("model_no")
 	@Property("model_no")
-	private Object modelNo;
+	private String modelNo;
 	@JsonProperty("color")
 	@Property("color")
 	private String color;
@@ -34,22 +34,22 @@ public class Specifications {
 
 	/**
 	 * 
-	 * @param Brand
-	 * @param ModelNo
-	 * @param Size
-	 * @param Color
+	 * @param brand
+	 * @param model_no
+	 * @param size
+	 * @param color
 	 */
-	public Specifications(String brand, Object modelNo, String color,
+	public Specifications(String brand, String model_no, String color,
 			String size) {
 		this.brand = brand;
-		this.modelNo = modelNo;
+		this.modelNo = model_no;
 		this.color = color;
 		this.size = size;
 	}
 
 	/**
 	 * 
-	 * @return The Brand
+	 * @return The brand
 	 */
 	@JsonProperty("brand")
 	public String getBrand() {
@@ -58,8 +58,8 @@ public class Specifications {
 
 	/**
 	 * 
-	 * @param Brand
-	 *            The Brand
+	 * @param brand
+	 *            The brand
 	 */
 	@JsonProperty("brand")
 	public void setBrand(String brand) {
@@ -68,26 +68,26 @@ public class Specifications {
 
 	/**
 	 * 
-	 * @return The ModelNo
+	 * @return The model_no
 	 */
 	@JsonProperty("model_no")
-	public Object getModelNo() {
+	public String getModelNo() {
 		return modelNo;
 	}
 
 	/**
 	 * 
-	 * @param ModelNo
-	 *            The ModelNo
+	 * @param model_no
+	 *            The model_no
 	 */
 	@JsonProperty("model_no")
-	public void setModelNo(Object modelNo) {
+	public void setModelNo(String modelNo) {
 		this.modelNo = modelNo;
 	}
 
 	/**
 	 * 
-	 * @return The Color
+	 * @return The color
 	 */
 	@JsonProperty("color")
 	public String getColor() {
@@ -96,17 +96,17 @@ public class Specifications {
 
 	/**
 	 * 
-	 * @param Color
-	 *            The Color
+	 * @param color
+	 *            The color
 	 */
-	@JsonProperty("Color")
+	@JsonProperty("color")
 	public void setColor(String color) {
 		this.color = color;
 	}
 
 	/**
 	 * 
-	 * @return The Size
+	 * @return The size
 	 */
 	@JsonProperty("size")
 	public String getSize() {
@@ -115,12 +115,11 @@ public class Specifications {
 
 	/**
 	 * 
-	 * @param Size
-	 *            The Size
+	 * @param size
+	 *            The size
 	 */
 	@JsonProperty("size")
 	public void setSize(String size) {
 		this.size = size;
 	}
-
 }

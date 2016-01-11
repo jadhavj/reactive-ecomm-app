@@ -31,9 +31,9 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @param SellingPrice
-	 * @param Discount
-	 * @param CostPrice
+	 * @param sellingPrice
+	 * @param discount
+	 * @param costPrice
 	 */
 	public Pricing(Double costPrice, Double discount, Double sellingPrice) {
 		this.costPrice = costPrice;
@@ -43,7 +43,7 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @return The CostPrice
+	 * @return The costPrice
 	 */
 	@JsonProperty("cost_price")
 	public Double getCostPrice() {
@@ -52,8 +52,8 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @param CostPrice
-	 *            The Cost_price
+	 * @param costPrice
+	 *            The cost_price
 	 */
 	@JsonProperty("cost_price")
 	public void setCostPrice(Double costPrice) {
@@ -62,7 +62,7 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @return The Discount
+	 * @return The discount
 	 */
 	@JsonProperty("discount")
 	public Double getDiscount() {
@@ -71,8 +71,8 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @param Discount
-	 *            The Discount
+	 * @param discount
+	 *            The discount
 	 */
 	@JsonProperty("discount")
 	public void setDiscount(Double discount) {
@@ -81,7 +81,7 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @return The SellingPrice
+	 * @return The sellingPrice
 	 */
 	@JsonProperty("selling_price")
 	public Double getSellingPrice() {
@@ -90,12 +90,11 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @param SellingPrice
-	 *            The Selling_price
+	 * @param sellingPrice
+	 *            The selling_price
 	 */
 	@JsonProperty("selling_price")
 	public void setSellingPrice(Double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
-
 }
