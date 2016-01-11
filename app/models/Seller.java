@@ -1,31 +1,23 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Name", "Address" })
+@JsonPropertyOrder({ "name", "address" })
 @Embedded
 public class Seller {
 
-	@JsonProperty("Name")
-	@Property("Name")
-	private String Name;
-	@JsonProperty("Address")
+	@JsonProperty("name")
+	@Property("name")
+	private String name;
+	@JsonProperty("address")
 	@Embedded("address")
-	private Address Address;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Address address;
 
 	/**
 	 * No args constructor for use in serialization
@@ -39,18 +31,18 @@ public class Seller {
 	 * @param Name
 	 * @param Address
 	 */
-	public Seller(String Name, Address Address) {
-		this.Name = Name;
-		this.Address = Address;
+	public Seller(String name, Address address) {
+		this.name = name;
+		this.address = address;
 	}
 
 	/**
 	 * 
 	 * @return The Name
 	 */
-	@JsonProperty("Name")
+	@JsonProperty("name")
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	/**
@@ -58,18 +50,18 @@ public class Seller {
 	 * @param Name
 	 *            The Name
 	 */
-	@JsonProperty("Name")
-	public void setName(String Name) {
-		this.Name = Name;
+	@JsonProperty("name")
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
 	 * 
 	 * @return The Address
 	 */
-	@JsonProperty("Address")
+	@JsonProperty("address")
 	public Address getAddress() {
-		return Address;
+		return address;
 	}
 
 	/**
@@ -77,19 +69,8 @@ public class Seller {
 	 * @param Address
 	 *            The Address
 	 */
-	@JsonProperty("Address")
-	public void setAddress(Address Address) {
-		this.Address = Address;
+	@JsonProperty("address")
+	public void setAddress(Address address) {
+		this.address = address;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 }
