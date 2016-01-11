@@ -10,3 +10,4 @@ GET     /assets/*file                       controllers.Assets.versioned(path="/
 
 GET		/login						controllers.Login.login()
 
+GET     /product                    controllers.Product.index()
