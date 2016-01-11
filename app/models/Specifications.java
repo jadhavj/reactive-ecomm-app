@@ -1,37 +1,29 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Brand", "ModelNo", "Color", "Size" })
+@JsonPropertyOrder({ "brand", "model_no", "color", "size" })
 @Embedded
 public class Specifications {
 
-	@JsonProperty("Brand")
-	@Property("Brand")
-	private String Brand;
-	@JsonProperty("ModelNo")
-	@Property("ModelNo")
-	private Object ModelNo;
-	@JsonProperty("Color")
-	@Property("Color")
-	private String Color;
-	@JsonProperty("Size")
-	@Property("Size")
-	private Object Size;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	@JsonProperty("brand")
+	@Property("brand")
+	private String brand;
+	@JsonProperty("model_no")
+	@Property("model_no")
+	private Object modelNo;
+	@JsonProperty("color")
+	@Property("color")
+	private String color;
+	@JsonProperty("size")
+	@Property("size")
+	private String size;
 
 	/**
 	 * No args constructor for use in serialization
@@ -47,21 +39,21 @@ public class Specifications {
 	 * @param Size
 	 * @param Color
 	 */
-	public Specifications(String Brand, Object ModelNo, String Color,
-			Object Size) {
-		this.Brand = Brand;
-		this.ModelNo = ModelNo;
-		this.Color = Color;
-		this.Size = Size;
+	public Specifications(String brand, Object modelNo, String color,
+			String size) {
+		this.brand = brand;
+		this.modelNo = modelNo;
+		this.color = color;
+		this.size = size;
 	}
 
 	/**
 	 * 
 	 * @return The Brand
 	 */
-	@JsonProperty("Brand")
+	@JsonProperty("brand")
 	public String getBrand() {
-		return Brand;
+		return brand;
 	}
 
 	/**
@@ -69,18 +61,18 @@ public class Specifications {
 	 * @param Brand
 	 *            The Brand
 	 */
-	@JsonProperty("Brand")
-	public void setBrand(String Brand) {
-		this.Brand = Brand;
+	@JsonProperty("brand")
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	/**
 	 * 
 	 * @return The ModelNo
 	 */
-	@JsonProperty("ModelNo")
+	@JsonProperty("model_no")
 	public Object getModelNo() {
-		return ModelNo;
+		return modelNo;
 	}
 
 	/**
@@ -88,18 +80,18 @@ public class Specifications {
 	 * @param ModelNo
 	 *            The ModelNo
 	 */
-	@JsonProperty("ModelNo")
-	public void setModelNo(Object ModelNo) {
-		this.ModelNo = ModelNo;
+	@JsonProperty("model_no")
+	public void setModelNo(Object modelNo) {
+		this.modelNo = modelNo;
 	}
 
 	/**
 	 * 
 	 * @return The Color
 	 */
-	@JsonProperty("Color")
+	@JsonProperty("color")
 	public String getColor() {
-		return Color;
+		return color;
 	}
 
 	/**
@@ -108,17 +100,17 @@ public class Specifications {
 	 *            The Color
 	 */
 	@JsonProperty("Color")
-	public void setColor(String Color) {
-		this.Color = Color;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	/**
 	 * 
 	 * @return The Size
 	 */
-	@JsonProperty("Size")
-	public Object getSize() {
-		return Size;
+	@JsonProperty("size")
+	public String getSize() {
+		return size;
 	}
 
 	/**
@@ -126,19 +118,9 @@ public class Specifications {
 	 * @param Size
 	 *            The Size
 	 */
-	@JsonProperty("Size")
-	public void setSize(Object Size) {
-		this.Size = Size;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
+	@JsonProperty("size")
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 }
