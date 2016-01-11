@@ -1,26 +1,21 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "ID", "Name", "Category", "Sub-category", "Pricing",
-		"Features", "Image", "Specifications", "items_in_stock", "Seller",
+@JsonPropertyOrder({ "_id", "name", "category", "sub_category", "pricing",
+		"peatures", "image", "specifications", "items_in_stock", "seller",
 		"cities_for_delivery" })
-@Entity("Product")
+@Entity("products")
 public class Product {
 
 	/**
@@ -28,45 +23,45 @@ public class Product {
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("ID")
-	@Property("ID")
-	private String ID;
+	@JsonProperty("_id")
+	@Property("_id")
+	private String id;
 	/**
 	 * 
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("Name")
-	@Property("Name")
-	private String Name;
+	@JsonProperty("name")
+	@Property("name")
+	private String name;
 	/**
 	 * 
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("Category")
-	@Property("Category")
-	private String Category;
-	@JsonProperty("Sub-category")
-	@Property("Sub-category")
-	private String SubCategory;
+	@JsonProperty("category")
+	@Property("category")
+	private String category;
+	@JsonProperty("sub_category")
+	@Property("sub_category")
+	private String subCategory;
 	/**
 	 * 
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("Pricing")
-	@Embedded("Pricing")
-	private Pricing Pricing;
-	@JsonProperty("Features")
-	@Property("Features")
-	private List<Object> Features = new ArrayList<Object>();
-	@JsonProperty("Image")
-	@Property("Image")
-	private byte[] Image;
-	@JsonProperty("Specifications")
-	@Embedded("Specifications")
-	private Specifications Specifications;
+	@JsonProperty("pricing")
+	@Embedded("pricing")
+	private Pricing pricing;
+	@JsonProperty("features")
+	@Property("features")
+	private List<String> features = new ArrayList<String>();
+	@JsonProperty("image")
+	@Property("image")
+	private byte[] image;
+	@JsonProperty("specifications")
+	@Embedded("specifications")
+	private Specifications specifications;
 	/**
 	 * 
 	 * (Required)
@@ -80,14 +75,13 @@ public class Product {
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("Seller")
-	@Embedded("Seller")
-	private Seller Seller;
+	@JsonProperty("seller")
+	@Embedded("seller")
+	private Seller seller;
+	
 	@JsonProperty("cities_for_delivery")
 	@Property("cities_for_delivery")
-	private List<Object> citiesForDelivery = new ArrayList<Object>();
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private List<String> citiesForDelivery = new ArrayList<String>();
 
 	/**
 	 * No args constructor for use in serialization
@@ -110,20 +104,20 @@ public class Product {
 	 * @param itemsInStock
 	 * @param Features
 	 */
-	public Product(String ID, String Name, String Category, String SubCategory,
-			Pricing Pricing, List<Object> Features, byte[] Image,
-			Specifications Specifications, Integer itemsInStock, Seller Seller,
-			List<Object> citiesForDelivery) {
-		this.ID = ID;
-		this.Name = Name;
-		this.Category = Category;
-		this.SubCategory = SubCategory;
-		this.Pricing = Pricing;
-		this.Features = Features;
-		this.Image = Image;
-		this.Specifications = Specifications;
+	public Product(String id, String name, String category, String subCategory,
+			Pricing pricing, List<String> features, byte[] image,
+			Specifications specifications, Integer itemsInStock, Seller seller,
+			List<String> citiesForDelivery) {
+		this.id = id;
+		this.name = name;
+		this.category = category;
+		this.subCategory = subCategory;
+		this.pricing = pricing;
+		this.features = features;
+		this.image = image;
+		this.specifications = specifications;
 		this.itemsInStock = itemsInStock;
-		this.Seller = Seller;
+		this.seller = seller;
 		this.citiesForDelivery = citiesForDelivery;
 	}
 
@@ -133,9 +127,9 @@ public class Product {
 	 * 
 	 * @return The ID
 	 */
-	@JsonProperty("ID")
-	public String getID() {
-		return ID;
+	@JsonProperty("_id")
+	public String getId() {
+		return id;
 	}
 
 	/**
@@ -145,9 +139,9 @@ public class Product {
 	 * @param ID
 	 *            The ID
 	 */
-	@JsonProperty("ID")
-	public void setID(String ID) {
-		this.ID = ID;
+	@JsonProperty("_id")
+	public void setID(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -156,9 +150,9 @@ public class Product {
 	 * 
 	 * @return The Name
 	 */
-	@JsonProperty("Name")
+	@JsonProperty("name")
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	/**
@@ -168,9 +162,9 @@ public class Product {
 	 * @param Name
 	 *            The Name
 	 */
-	@JsonProperty("Name")
-	public void setName(String Name) {
-		this.Name = Name;
+	@JsonProperty("name")
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -179,9 +173,9 @@ public class Product {
 	 * 
 	 * @return The Category
 	 */
-	@JsonProperty("Category")
+	@JsonProperty("category")
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 
 	/**
@@ -191,18 +185,18 @@ public class Product {
 	 * @param Category
 	 *            The Category
 	 */
-	@JsonProperty("Category")
-	public void setCategory(String Category) {
-		this.Category = Category;
+	@JsonProperty("category")
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	/**
 	 * 
 	 * @return The SubCategory
 	 */
-	@JsonProperty("Sub-category")
+	@JsonProperty("sub_category")
 	public String getSubCategory() {
-		return SubCategory;
+		return subCategory;
 	}
 
 	/**
@@ -210,9 +204,9 @@ public class Product {
 	 * @param SubCategory
 	 *            The Sub-category
 	 */
-	@JsonProperty("Sub-category")
-	public void setSubCategory(String SubCategory) {
-		this.SubCategory = SubCategory;
+	@JsonProperty("sub_category")
+	public void setSubCategory(String subCategory) {
+		this.subCategory = subCategory;
 	}
 
 	/**
@@ -221,9 +215,9 @@ public class Product {
 	 * 
 	 * @return The Pricing
 	 */
-	@JsonProperty("Pricing")
+	@JsonProperty("pricing")
 	public Pricing getPricing() {
-		return Pricing;
+		return pricing;
 	}
 
 	/**
@@ -233,18 +227,18 @@ public class Product {
 	 * @param Pricing
 	 *            The Pricing
 	 */
-	@JsonProperty("Pricing")
-	public void setPricing(Pricing Pricing) {
-		this.Pricing = Pricing;
+	@JsonProperty("pricing")
+	public void setPricing(Pricing pricing) {
+		this.pricing = pricing;
 	}
 
 	/**
 	 * 
 	 * @return The Features
 	 */
-	@JsonProperty("Features")
-	public List<Object> getFeatures() {
-		return Features;
+	@JsonProperty("features")
+	public List<String> getFeatures() {
+		return features;
 	}
 
 	/**
@@ -252,18 +246,18 @@ public class Product {
 	 * @param Features
 	 *            The Features
 	 */
-	@JsonProperty("Features")
-	public void setFeatures(List<Object> Features) {
-		this.Features = Features;
+	@JsonProperty("features")
+	public void setFeatures(List<String> features) {
+		this.features = features;
 	}
 
 	/**
 	 * 
 	 * @return The Image
 	 */
-	@JsonProperty("Image")
+	@JsonProperty("image")
 	public byte[] getImage() {
-		return Image;
+		return image;
 	}
 
 	/**
@@ -271,18 +265,18 @@ public class Product {
 	 * @param Image
 	 *            The Image
 	 */
-	@JsonProperty("Image")
-	public void setImage(byte[] Image) {
-		this.Image = Image;
+	@JsonProperty("image")
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	/**
 	 * 
 	 * @return The Specifications
 	 */
-	@JsonProperty("Specifications")
+	@JsonProperty("specifications")
 	public Specifications getSpecifications() {
-		return Specifications;
+		return specifications;
 	}
 
 	/**
@@ -291,8 +285,8 @@ public class Product {
 	 *            The Specifications
 	 */
 	@JsonProperty("Specifications")
-	public void setSpecifications(Specifications Specifications) {
-		this.Specifications = Specifications;
+	public void setSpecifications(Specifications specifications) {
+		this.specifications = specifications;
 	}
 
 	/**
@@ -324,9 +318,9 @@ public class Product {
 	 * 
 	 * @return The Seller
 	 */
-	@JsonProperty("Seller")
+	@JsonProperty("seller")
 	public Seller getSeller() {
-		return Seller;
+		return seller;
 	}
 
 	/**
@@ -336,9 +330,9 @@ public class Product {
 	 * @param Seller
 	 *            The Seller
 	 */
-	@JsonProperty("Seller")
-	public void setSeller(Seller Seller) {
-		this.Seller = Seller;
+	@JsonProperty("seller")
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 	/**
@@ -346,7 +340,7 @@ public class Product {
 	 * @return The citiesForDelivery
 	 */
 	@JsonProperty("cities_for_delivery")
-	public List<Object> getCitiesForDelivery() {
+	public List<String> getCitiesForDelivery() {
 		return citiesForDelivery;
 	}
 
@@ -356,18 +350,8 @@ public class Product {
 	 *            The cities_for_delivery
 	 */
 	@JsonProperty("cities_for_delivery")
-	public void setCitiesForDelivery(List<Object> citiesForDelivery) {
+	public void setCitiesForDelivery(List<String> citiesForDelivery) {
 		this.citiesForDelivery = citiesForDelivery;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
 	}
 
 }

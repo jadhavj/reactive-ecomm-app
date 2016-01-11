@@ -1,34 +1,26 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Cost_price", "Discount", "Selling_price" })
+@JsonPropertyOrder({ "cost_price", "discount", "selling_price" })
 @Embedded
 public class Pricing {
 
-	@JsonProperty("Cost_price")
-	@Property("Cost_price")
-	private Double CostPrice;
-	@JsonProperty("Discount")
-	@Property("Discount")
-	private Double Discount;
-	@JsonProperty("Selling_price")
-	@Property("Selling_price")
-	private Double SellingPrice;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	@JsonProperty("cost_price")
+	@Property("cost_price")
+	private Double costPrice;
+	@JsonProperty("discount")
+	@Property("discount")
+	private Double discount;
+	@JsonProperty("selling_price")
+	@Property("selling_price")
+	private Double sellingPrice;
 
 	/**
 	 * No args constructor for use in serialization
@@ -39,81 +31,70 @@ public class Pricing {
 
 	/**
 	 * 
-	 * @param SellingPrice
-	 * @param Discount
-	 * @param CostPrice
+	 * @param sellingPrice
+	 * @param discount
+	 * @param costPrice
 	 */
-	public Pricing(Double CostPrice, Double Discount, Double SellingPrice) {
-		this.CostPrice = CostPrice;
-		this.Discount = Discount;
-		this.SellingPrice = SellingPrice;
+	public Pricing(Double costPrice, Double discount, Double sellingPrice) {
+		this.costPrice = costPrice;
+		this.discount = discount;
+		this.sellingPrice = sellingPrice;
 	}
 
 	/**
 	 * 
-	 * @return The CostPrice
+	 * @return The costPrice
 	 */
-	@JsonProperty("Cost_price")
+	@JsonProperty("cost_price")
 	public Double getCostPrice() {
-		return CostPrice;
+		return costPrice;
 	}
 
 	/**
 	 * 
-	 * @param CostPrice
-	 *            The Cost_price
+	 * @param costPrice
+	 *            The cost_price
 	 */
-	@JsonProperty("Cost_price")
-	public void setCostPrice(Double CostPrice) {
-		this.CostPrice = CostPrice;
+	@JsonProperty("cost_price")
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
 	}
 
 	/**
 	 * 
-	 * @return The Discount
+	 * @return The discount
 	 */
-	@JsonProperty("Discount")
+	@JsonProperty("discount")
 	public Double getDiscount() {
-		return Discount;
+		return discount;
 	}
 
 	/**
 	 * 
-	 * @param Discount
-	 *            The Discount
+	 * @param discount
+	 *            The discount
 	 */
-	@JsonProperty("Discount")
-	public void setDiscount(Double Discount) {
-		this.Discount = Discount;
+	@JsonProperty("discount")
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 	/**
 	 * 
-	 * @return The SellingPrice
+	 * @return The sellingPrice
 	 */
-	@JsonProperty("Selling_price")
+	@JsonProperty("selling_price")
 	public Double getSellingPrice() {
-		return SellingPrice;
+		return sellingPrice;
 	}
 
 	/**
 	 * 
-	 * @param SellingPrice
-	 *            The Selling_price
+	 * @param sellingPrice
+	 *            The selling_price
 	 */
-	@JsonProperty("Selling_price")
-	public void setSellingPrice(Double SellingPrice) {
-		this.SellingPrice = SellingPrice;
+	@JsonProperty("selling_price")
+	public void setSellingPrice(Double sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 }
