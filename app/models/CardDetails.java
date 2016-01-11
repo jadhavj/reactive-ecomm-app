@@ -2,6 +2,10 @@ package models;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Property;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,18 +15,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "card_number", "cardholder_name", "expiry", "card_type" })
+@Embedded
 public class CardDetails {
 
 	@JsonProperty("card_number")
+	@Property("card_number")
 	private Long cardNumber;
 	@JsonProperty("cardholder_name")
+	@Property("cardholder_name")
 	private String cardholderName;
 	@JsonProperty("expiry")
-	private Long expiry;
+	@Property("expiry")
+	private String expiry;
 	@JsonProperty("card_type")
+	@Property("card_type")
 	private String cardType;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	/**
 	 * No args constructor for use in serialization
@@ -38,8 +45,7 @@ public class CardDetails {
 	 * @param expiry
 	 * @param cardNumber
 	 */
-	public CardDetails(Long cardNumber, String cardholderName, Long expiry,
-			String cardType) {
+	public CardDetails(Long cardNumber, String cardholderName, String expiry, String cardType) {
 		this.cardNumber = cardNumber;
 		this.cardholderName = cardholderName;
 		this.expiry = expiry;
@@ -89,7 +95,7 @@ public class CardDetails {
 	 * @return The expiry
 	 */
 	@JsonProperty("expiry")
-	public Long getExpiry() {
+	public String getExpiry() {
 		return expiry;
 	}
 
@@ -99,7 +105,7 @@ public class CardDetails {
 	 *            The expiry
 	 */
 	@JsonProperty("expiry")
-	public void setExpiry(Long expiry) {
+	public void setExpiry(String expiry) {
 		this.expiry = expiry;
 	}
 
@@ -121,15 +127,4 @@ public class CardDetails {
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 }
