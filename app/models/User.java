@@ -12,21 +12,22 @@ import models.UserRole;
 import models.Address;
 import models.CardDetails;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "ID", "username", "password", "role", "firstname",
-		"lastname", "address", "email", "mobile_number", "card_details" })
+@JsonPropertyOrder({ "_id", "username", "password", "role", "firstname", "lastname", "address", "email",
+		"mobile_number", "card_details" })
 @Entity("users")
 public class User {
 	/**
 	 * (Required)
 	 */
-	@JsonProperty("ID")
+	@JsonProperty("_id")
 	@Id
-	private ObjectId ID;
+	private ObjectId id;
 	/**
 	 * 
 	 * (Required)
@@ -34,7 +35,7 @@ public class User {
 	 */
 	@JsonProperty("username")
 	@Property("username")
-	private Object username;
+	private String username;
 	/**
 	 * 
 	 * (Required)
@@ -50,7 +51,7 @@ public class User {
 	 */
 	@JsonProperty("role")
 	@Property("role")
-	private UserRole role;
+	private String role;
 	/**
 	 * 
 	 * (Required)
@@ -69,7 +70,7 @@ public class User {
 	private String lastname;
 
 	@JsonProperty("address")
-	@Property("address")
+	@Embedded("address")
 	private Address address;
 	/**
 	 * 
@@ -89,11 +90,8 @@ public class User {
 	private Long mobileNumber;
 
 	@JsonProperty("card_details")
-	@Property("card_details")
+	@Embedded("card_details")
 	private CardDetails cardDetails;
-
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	/**
 	 * No args constructor for use in serialization
@@ -115,19 +113,18 @@ public class User {
 	 * @param password
 	 * @param cardDetails
 	 */
-	public User(ObjectId ID, Object username, String password, UserRole role,
-			String firstname, String lastname, Address address, String email,
-			Long mobileNumber, CardDetails cardDetails) {
-		this.ID = ID;
+	public User(ObjectId id, String username, String password, String role, String firstname, String lastname,
+			Address address, String email, Long mobileNumber, CardDetails cardDetails) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.address = address;
+		// this.address = address;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
-		this.cardDetails = cardDetails;
+		// this.cardDetails = cardDetails;
 	}
 
 	/**
@@ -136,9 +133,9 @@ public class User {
 	 * 
 	 * @return The ID
 	 */
-	@JsonProperty("ID")
+	@JsonProperty("_id")
 	public ObjectId getID() {
-		return ID;
+		return id;
 	}
 
 	/**
@@ -148,9 +145,9 @@ public class User {
 	 * @param ID
 	 *            The ID
 	 */
-	@JsonProperty("ID")
-	public void setID(ObjectId ID) {
-		this.ID = ID;
+	@JsonProperty("_id")
+	public void setID(ObjectId id) {
+		this.id = id;
 	}
 
 	/**
@@ -172,7 +169,7 @@ public class User {
 	 *            The username
 	 */
 	@JsonProperty("username")
-	public void setUsername(Object username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -206,7 +203,7 @@ public class User {
 	 * @return The role
 	 */
 	@JsonProperty("role")
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
@@ -218,7 +215,7 @@ public class User {
 	 *            The role
 	 */
 	@JsonProperty("role")
-	public void setRole(UserRole role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
@@ -351,15 +348,4 @@ public class User {
 	public void setCardDetails(CardDetails cardDetails) {
 		this.cardDetails = cardDetails;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 }
