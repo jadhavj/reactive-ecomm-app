@@ -113,9 +113,8 @@ public class User {
 	 * @param password
 	 * @param cardDetails
 	 */
-	public User(ObjectId id, String username, String password, String role, String firstname, String lastname,
+	public User(String username, String password, String role, String firstname, String lastname,
 			Address address, String email, Long mobileNumber, CardDetails cardDetails) {
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
