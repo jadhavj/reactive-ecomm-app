@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
@@ -11,3 +12,5 @@ GET     /assets/*file                       controllers.Assets.versioned(path="/
 GET		/login						controllers.Login.login()
 
 GET     /products                   controllers.Products.products()
+
+GET		/signup						controllers.Signup.signup()
