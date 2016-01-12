@@ -61,22 +61,35 @@
 
         <!-- Left and right controls -->
 
-        <a class="left carousel-control" href="{{url}}#topCarousel" role="button" data-slide="prev">
+        <!-- <a class="left carousel-control" href="{{url}}"+"#topCarousel" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
 
-        <a class="right carousel-control" href="{{url}}#topCarousel" role="button" data-slide="next">
+        <a class="right carousel-control" href="{{url}}"+"#topCarousel" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
-
+ -->
 
       </div>
     </div>
 
 
+    <div class="user-search">
+      <input type="text" class="user-search-box" ng-model="searchProduct" placeholder="Whats up in your mind ?"/>
+      <i class="icon-squaresearch" ng-click="search()"></i>
+    </div>
 
+    <div class="product margin-a" class="">
+      <h4 class="block">Search Results..</h4>
+      <xor-product-card ng-repeat="item in searchResults track by item.id" obj="item"></xor-product-card>
+    </div>
+
+    <div class="product margin-a" ng-if="search" class="ng-hide">
+      <h4 class="block">Recommendations for you..</h4>
+      <xor-product-card ng-repeat="item in recommendations track by item.id" obj="item"></xor-product-card>
+    </div>
 
 
   </div>

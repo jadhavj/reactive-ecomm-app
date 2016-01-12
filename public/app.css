@@ -330,6 +330,28 @@ body {
 .dashboard-content .stats-display svg g .c3-xgrid-focus line {
   visibility: hidden !important;
 }
+.dashboard-content .user-search {
+  margin: 1em;
+  width: 97%;
+  display: inline-block;
+  text-align: right;
+}
+.dashboard-content .user-search input {
+  width: 25%;
+}
+.dashboard-content .user-search i {
+  font-size: 26px;
+  position: relative;
+  top: 8px;
+  right: 27px;
+}
+.dashboard-content .product {
+  text-align: center;
+}
+.dashboard-content .product h4 {
+  text-align: left;
+  padding-left: 2em;
+}
 .dashboard-content #topCarousel .image {
   width: 39% !important;
   margin-left: 10% !important;
@@ -432,6 +454,25 @@ xor-item-snapshot .details h4 {
 xor-item-snapshot .details h5 {
   height: 100px;
   overflow: hidden;
+}
+xor-product-card .list-item-box {
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+xor-product-card .list-item-box img {
+  height: 200px;
+  width: 200px;
+}
+xor-product-card .list-item-box a {
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 @media (max-width: 600px) {
   xor-item-snapshot img,
