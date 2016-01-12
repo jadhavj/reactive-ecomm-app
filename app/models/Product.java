@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "_id", "name", "category", "sub_category", "pricing",
-		"peatures", "image", "specifications", "items_in_stock", "seller",
+@JsonPropertyOrder({ "_id", "name", "username","category", "sub_category", "pricing",
+		"peatures", "image", "specifications", "items_in_stock",
 		"cities_for_delivery" })
 @Entity("products")
 public class Product {
@@ -34,6 +34,14 @@ public class Product {
 	@JsonProperty("name")
 	@Property("name")
 	private String name;
+	/**
+	 * 
+	 * (Required)
+	 * 
+	 */
+	@JsonProperty("username")
+	@Property("username")
+	private String username;
 	/**
 	 * 
 	 * (Required)
@@ -75,9 +83,6 @@ public class Product {
 	 * (Required)
 	 * 
 	 */
-	@JsonProperty("seller")
-	@Embedded("seller")
-	private Seller seller;
 	@JsonProperty("cities_for_delivery")
 	@Property("cities_for_delivery")
 	private List<String> citiesForDelivery = new ArrayList<String>();
@@ -92,23 +97,24 @@ public class Product {
 	/**
 	 * 
 	 * @param Name
+	 * @param Username
 	 * @param Pricing
 	 * @param Category
 	 * @param Image
 	 * @param SubCategory
 	 * @param ID
 	 * @param citiesForDelivery
-	 * @param Seller
 	 * @param Specifications
 	 * @param itemsInStock
 	 * @param Features
 	 */
-	public Product(String id, String name, String category, String subCategory,
+	public Product(String id, String name,String username, String category, String subCategory,
 			Pricing pricing, List<String> features, byte[] image,
-			Specifications specifications, Integer itemsInStock, Seller seller,
+			Specifications specifications, Integer itemsInStock,
 			List<String> citiesForDelivery) {
 		this.id = id;
 		this.name = name;
+		this.username = username;
 		this.category = category;
 		this.subCategory = subCategory;
 		this.pricing = pricing;
@@ -116,7 +122,6 @@ public class Product {
 		this.image = image;
 		this.specifications = specifications;
 		this.itemsInStock = itemsInStock;
-		this.seller = seller;
 		this.citiesForDelivery = citiesForDelivery;
 	}
 
@@ -164,6 +169,29 @@ public class Product {
 	@JsonProperty("name")
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * 
+	 * (Required)
+	 * 
+	 * @return The Username
+	 */
+	@JsonProperty("username")
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * 
+	 * (Required)
+	 * 
+	 * @param Name
+	 *            The Name
+	 */
+	@JsonProperty("username")
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -309,29 +337,6 @@ public class Product {
 	@JsonProperty("items_in_stock")
 	public void setItemsInStock(Integer itemsInStock) {
 		this.itemsInStock = itemsInStock;
-	}
-
-	/**
-	 * 
-	 * (Required)
-	 * 
-	 * @return The Seller
-	 */
-	@JsonProperty("seller")
-	public Seller getSeller() {
-		return seller;
-	}
-
-	/**
-	 * 
-	 * (Required)
-	 * 
-	 * @param Seller
-	 *            The Seller
-	 */
-	@JsonProperty("seller")
-	public void setSeller(Seller seller) {
-		this.seller = seller;
 	}
 
 	/**
