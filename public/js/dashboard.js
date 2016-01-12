@@ -55,20 +55,18 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
 
   $scope.items = items.slice(0,5);
   $scope.url = $location.absUrl();
-  $scope.search = false;
+  // $scope.search = false;
   console.log("items : ",$scope.items);
-  console.log("search up : ",$scope.search);
+  // console.log("search up : ",$scope.search);
 
   $scope.recommendations = $scope.items;
 
   $scope.search = function(){
     console.log('searching for ', $scope.searchProduct);
-    $scope.search = true;
-
-    // $scope.searchResults = items.slice(-5);
     $scope.searchResults = items;
     console.log("search results = ", $scope.searchResults);
-    console.log("search", $scope.search);
+    var search = document.getElementById('search-results');
+    search.style.display = 'block';
   }
 
 

@@ -39,6 +39,20 @@ body {
 .nav-bar .user-snapshot a {
   cursor: pointer;
 }
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px 0;
+}
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
 /* ----------------------------------------------------------------------------
 * Name          : Sachin Khedkar
 * Organisation  : Xoriant
@@ -344,6 +358,9 @@ body {
   position: relative;
   top: 8px;
   right: 27px;
+}
+.dashboard-content #search-results {
+  display: none;
 }
 .dashboard-content .product {
   text-align: center;

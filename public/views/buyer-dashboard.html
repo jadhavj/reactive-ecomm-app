@@ -81,12 +81,12 @@
       <i class="icon-squaresearch" ng-click="search()"></i>
     </div>
 
-    <div class="product margin-a" class="">
+    <div class="product margin-a animate-show" id="search-results">
       <h4 class="block">Search Results..</h4>
       <xor-product-card ng-repeat="item in searchResults track by item.id" obj="item"></xor-product-card>
     </div>
 
-    <div class="product margin-a" ng-if="search" class="ng-hide">
+    <div class="product margin-a">
       <h4 class="block">Recommendations for you..</h4>
       <xor-product-card ng-repeat="item in recommendations track by item.id" obj="item"></xor-product-card>
     </div>
