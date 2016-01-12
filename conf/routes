@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
@@ -14,3 +13,5 @@ GET		/login						controllers.Login.login()
 GET     /products                   controllers.Products.products()
 
 GET		/signup						controllers.Signup.signup()
+
+GET     /editProducts                controllers.EditProducts.editProducts()
