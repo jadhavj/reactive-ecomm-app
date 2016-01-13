@@ -22,6 +22,10 @@ ShoppingApp.config(['$routeProvider', function($routeProvider){
     templateUrl: 'views/edit-item.html',
     controller: 'editItemController'
   }).
+  when("/user-id=:id/add-item",{
+    templateUrl: 'views/add-item.html',
+    controller: 'addNewItemController'
+  }).
   otherwise({
     redirectTo: '/login'
   })

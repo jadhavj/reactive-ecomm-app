@@ -1,4 +1,4 @@
-ShoppingApp.controller('merchantDashboardController',['$scope', function($scope){
+ShoppingApp.controller('merchantDashboardController',['$scope','$location', function($scope, $location){
   $scope.items = items;
   $scope.top_sellers = top_sellers;
   $scope.yearly_revenues = yearly_revenues;
@@ -31,6 +31,13 @@ ShoppingApp.controller('merchantDashboardController',['$scope', function($scope)
   });
 
   var historyObj = window.history;
+
+  $scope.addNewItem = function(){
+    console.log("Adding new item");
+    var user_id = $location.url().split('/')[1];
+    $location.path("/user-id="+user_id+"/add-item");
+  }
+
   // console.log(" browser history : ",historyObj);
 }]);
 
