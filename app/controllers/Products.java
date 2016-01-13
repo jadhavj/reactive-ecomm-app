@@ -75,9 +75,7 @@ public class Products extends Controller {
 								.set("name", productInfo.getString("name"));
 
 						operation.set("username", productInfo.getString("username"));
-
 						operation.set("category", productInfo.getString("category"));
-
 						operation.set("sub_category", productInfo.getString("sub_category"));
 
 						BasicDBObject pricingDBObject = (BasicDBObject) com.mongodb.util.JSON
@@ -85,7 +83,6 @@ public class Products extends Controller {
 
 						operation.set("pricing", new Pricing(pricingDBObject.getDouble("cost_price"),
 								pricingDBObject.getDouble("discount"), pricingDBObject.getDouble("selling_price")));
-
 						operation.set("features", productInfo.get("features"));
 
 						byte[] image = productInfo.get("images").toString().getBytes();
@@ -97,9 +94,7 @@ public class Products extends Controller {
 						operation.set("specifications", new Specifications(scpecificationsDBObject.getString("brand"),
 								scpecificationsDBObject.getString("model_no"),
 								scpecificationsDBObject.getString("color"), scpecificationsDBObject.getString("size")));
-
 						operation.set("itemsInStock", productInfo.getInt("items_in_stock"));
-
 						operation.set("citiesForDelivery", (productInfo.get("cities_for_delivery")));
 
 						Mongo.datastore().update(query, operation);
