@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import models.UserRole;
 import models.Address;
 import models.CardDetails;
 import org.bson.types.ObjectId;
@@ -113,9 +112,8 @@ public class User {
 	 * @param password
 	 * @param cardDetails
 	 */
-	public User(ObjectId id, String username, String password, String role, String firstname, String lastname,
+	public User(String username, String password, String role, String firstname, String lastname,
 			Address address, String email, Long mobileNumber, CardDetails cardDetails) {
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -157,7 +155,7 @@ public class User {
 	 * @return The username
 	 */
 	@JsonProperty("username")
-	public Object getUsername() {
+	public String getUsername() {
 		return username;
 	}
 

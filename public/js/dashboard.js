@@ -1,4 +1,4 @@
-ShoppingApp.controller('merchantDashboardController',['$scope', function($scope){
+ShoppingApp.controller('merchantDashboardController',['$scope','$location', function($scope, $location){
   $scope.items = items;
   $scope.top_sellers = top_sellers;
   $scope.yearly_revenues = yearly_revenues;
@@ -31,6 +31,13 @@ ShoppingApp.controller('merchantDashboardController',['$scope', function($scope)
   });
 
   var historyObj = window.history;
+
+  $scope.addNewItem = function(){
+    console.log("Adding new item");
+    var user_id = $location.url().split('/')[1];
+    $location.path("/user-id="+user_id+"/add-item");
+  }
+
   // console.log(" browser history : ",historyObj);
 }]);
 
@@ -50,10 +57,24 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
 
 }]);
 
-ShoppingApp.controller('buyerDashboardController',['$scope', function($scope){
+ShoppingApp.controller('buyerDashboardController',['$scope', '$location', function($scope, $location){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
 
   $scope.items = items.slice(0,5);
-
+  $scope.url = $location.absUrl();
+  // $scope.search = false;
   console.log("items : ",$scope.items);
+  // console.log("search up : ",$scope.search);
+
+  $scope.recommendations = $scope.items;
+
+  $scope.search = function(){
+    console.log('searching for ', $scope.searchProduct);
+    $scope.searchResults = items;
+    console.log("search results = ", $scope.searchResults);
+    var search = document.getElementById('search-results');
+    search.style.display = 'block';
+  }
+
+
 }]);

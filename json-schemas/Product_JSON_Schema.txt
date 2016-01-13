@@ -1,0 +1,133 @@
+{
+  "$schema": "Productschema",
+  "id": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "id": "name",
+      "type": "string"
+    },
+    "category": {
+      "id": "category",
+      "type": "string"
+    },
+    "sub_category": {
+      "id": "sub_category",
+      "type": "string"
+    },
+    "pricing": {
+      "id": "pricing",
+      "type": "object",
+      "properties": {
+        "cost_price": {
+          "id": "pricing/cost_price",
+          "type": "number"
+        },
+        "discount": {
+          "id": "pricing/discount",
+          "type": "number",
+		  "pattern":"^(100\.00|100\.0|100)|([0-9]{1,2}){0,1}(\.[0-9]{1,2}){0,1}$"
+
+        },
+        "selling_price": {
+          "id": "pricing/selling_price",
+          "type": "number"
+        }
+      }
+    },
+    "features": {
+      "id": "features",
+      "type": "array",
+      "items": [
+        {
+          "id": "features/0",
+          "type": "string"
+        },
+        {
+          "id": "features/1",
+          "type": "string"
+        },
+        {
+          "id": "features/2",
+          "type": "string"
+        },
+        {
+          "id": "features/3",
+          "type": "string"
+        }
+      ]
+    },
+    "image": {
+      "id": "images",
+      "type": "string",
+	  "media": {
+                "binaryEncoding": "base64",
+                "type": "image/png"
+            }
+    },
+    "specifications": {
+      "id": "specifications",
+      "type": "object",
+      "properties": {
+        "brand": {
+          "id": "specifications/brand",
+          "type": "string"
+        },
+        "modelNo": {
+          "id": "specifications/modelNo",
+          "type": "value"
+        },
+        "size": {
+          "id": "specifications/size",
+          "type": "string"
+        },
+        "size": {
+          "id": "specifications/size",
+          "type": "value"
+        }
+      }
+    },
+    "items_in_stock": {
+      "id": "items_in_stock",
+      "type": "integer"
+    },
+     "username": {
+      "id": "username",
+      "type": "string"
+    },
+    "cities_for_delivery": {
+      "id": "cities_for_delivery",
+      "type": "array",
+      "items": [
+        {
+          "id": "cities_for_delivery/0",
+          "type": "string"
+        },
+        {
+          "id": "cities_for_delivery/1",
+          "type": "string"
+        },
+        {
+          "id": "cities_for_delivery/2",
+          "type": "string"
+        },
+        {
+          "id": "cities_for_delivery/3",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "pricing",
+    "items_in_stock",
+    "username",
+	"specifications/modelNo"
+  ]
+}
+
+
+
+

@@ -18,28 +18,73 @@
   <div class="right-section fifty-percent">
     <form class="inline">
 
-      <div class="form-group">
-        <label class="block">Name</label>
-        <input type="text" class="block ninety-percent" ng-model="obj.name"/>
-      </div>
+            <div class="form-group">
+              <label class="block">Name</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.name"/>
+            </div>
 
-      <div class="form-group" class="block">
-        <label class="block"> Category</label>
-        <input type="text" class="block ninety-percent" ng-model="obj.category"/>
-      </div>
+            <div class="form-group" class="block">
+              <label class="block">Brand</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.specs.brand"/>
+            </div>
 
-      <div class="form-group" class="block">
-        <label class="block"> Price</label>
-        <input type="text" class="block ninety-percent" tooltip="INR" ng-model="obj.price"/>
-      </div>
+            <div class="form-group" class="block">
+              <label class="block">Model No.</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.specs.model"/>
+            </div>
 
-      <div class="form-group" class="block">
-        <label class="block"> Description</label>
-        <textarea rows="12" class="block ninety-percent" ng-model="obj.details"></textarea>
-      </div>
+            <div class="form-group" class="block">
+              <label class="block">Colour</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.specs.color"/>
+            </div>
 
-      <div class="block text-align-right ninety-percent" style="margin: 1px;">
-        <button class="btn btn-warning twenty-percent">Cancel</button>
+            <div class="form-group" class="block">
+              <label class="block">Size</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.specs.size"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block">Stock available</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.specs.stock_available"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block"> Category</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.category"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block">Sub-category</label>
+              <input type="text" class="block ninety-percent" ng-model="obj.category"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block">Selling Price</label>
+              <input type="text" class="block ninety-percent" tooltip="Selling Price" ng-model="obj.price.sp"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block">Cost Price</label>
+              <input type="text" class="block ninety-percent" tooltip="Cost Price" ng-model="obj.price.cp"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block">Discount %</label>
+              <input type="text" class="block ninety-percent" tooltip="Happening discount..." ng-model="obj.price.discount"/>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block"> Description</label>
+              <textarea rows="12" class="block ninety-percent" ng-model="obj.details"></textarea>
+            </div>
+
+            <div class="form-group" class="block">
+              <label class="block"> Features</label>
+              <textarea rows="12" class="block ninety-percent" ng-model="obj.features"></textarea>
+            </div>
+
+            <div class="block text-align-right ninety-percent" style="margin: 1px;">
+              <button type="reset" class="btn btn-warning twenty-percent">Cancel</button>
         <button class="btn btn-primary twenty-percent" ng-click="updateItemInfo()">SAVE</button>
       </div>
     </form>
