@@ -37,8 +37,8 @@ ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location',
     username: 'sachin@xoriant.com',
     password: 'sachin',
     name: 'Sachin',
-    // role: 'merchant'
-    role: 'buyer'
+    role: 'merchant'
+    // role: 'buyer'
   }
 
 //  $scope.user = $rootScope.$watch($rootScope.user);
