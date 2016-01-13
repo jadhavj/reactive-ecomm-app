@@ -10,3 +10,10 @@ GET     /assets/*file                       controllers.Assets.versioned(path="/
 
 GET		/login						controllers.Login.login()
 
+GET     /products                   controllers.Products.products()
+
+GET		/signup						controllers.Signup.signup()
+
+GET     /editProducts               controllers.Products.editProduct()
+
+POST    /uploadCatalog              controllers.CatalogUpload.uploadCatalog()
