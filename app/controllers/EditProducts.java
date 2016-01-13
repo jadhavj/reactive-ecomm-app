@@ -37,35 +37,32 @@ public class EditProducts extends Controller {
 								.createUpdateOperations(Product.class)
 								.set("name", productInfo.getString("name"));
 
-						Mongo.datastore().update(query, operation);
-						
-
-						operation = operation.set("username",
+						operation.set("username",
 								productInfo.getString("username"));
 
 
-						operation = operation.set("category",
+						operation.set("category",
 								productInfo.getString("category"));
 
 
-						operation = operation.set("sub_category",
+						operation.set("sub_category",
 								productInfo.getString("sub_category"));
 
 						BasicDBObject pricingDBObject = (BasicDBObject) com.mongodb.util.JSON
 								.parse(productInfo.get("pricing").toString());
 
-						operation = operation.set("pricing", new Pricing(
+						operation.set("pricing", new Pricing(
 								pricingDBObject.getDouble("cost_price"),
 								pricingDBObject.getDouble("discount"),
 								pricingDBObject.getDouble("selling_price")));
 
 
-						operation = operation.set("features",
+						operation.set("features",
 								productInfo.get("features"));
 
 			
 						byte[] image = productInfo.get("images").toString().getBytes();
-						operation = operation.set("image",
+						operation.set("image",
 								image);
 
 
@@ -73,7 +70,7 @@ public class EditProducts extends Controller {
 								.parse(productInfo.get("specifications")
 										.toString());
 
-						operation = operation.set(
+						operation.set(
 								"specifications",
 								new Specifications(scpecificationsDBObject
 										.getString("brand"),
@@ -85,14 +82,15 @@ public class EditProducts extends Controller {
 												.getString("size")));
 
 
-						operation = operation.set("itemsInStock",
+						operation.set("itemsInStock",
 								productInfo.getInt("items_in_stock"));
 
 
-						operation = operation.set("citiesForDelivery",
+						operation.set("citiesForDelivery",
 								(productInfo.get("cities_for_delivery")));
 
 						Mongo.datastore().update(query, operation);
+
 						out.write(new BasicDBObject("result", "success").toString());
 					}
 				});
