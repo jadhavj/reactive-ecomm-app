@@ -50,10 +50,24 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
 
 }]);
 
-ShoppingApp.controller('buyerDashboardController',['$scope', function($scope){
+ShoppingApp.controller('buyerDashboardController',['$scope', '$location', function($scope, $location){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
 
   $scope.items = items.slice(0,5);
-
+  $scope.url = $location.absUrl();
+  // $scope.search = false;
   console.log("items : ",$scope.items);
+  // console.log("search up : ",$scope.search);
+
+  $scope.recommendations = $scope.items;
+
+  $scope.search = function(){
+    console.log('searching for ', $scope.searchProduct);
+    $scope.searchResults = items;
+    console.log("search results = ", $scope.searchResults);
+    var search = document.getElementById('search-results');
+    search.style.display = 'block';
+  }
+
+
 }]);
