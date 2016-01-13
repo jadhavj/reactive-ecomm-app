@@ -31,6 +31,8 @@ public class Login extends Controller {
 							BasicDBObject login = new BasicDBObject();
 							login.put("login", "valid");
 							login.put("role", users.get(0).getRole());
+							login.put("name",users.get(0).getFirstname());
+							login.put("username", users.get(0).getUsername());
 							out.write(login.toJson());
 						} else {
 							BasicDBObject login = new BasicDBObject();
