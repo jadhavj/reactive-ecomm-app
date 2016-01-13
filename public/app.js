@@ -10,7 +10,7 @@ ShoppingApp.config(['$routeProvider', function($routeProvider){
     templateUrl: 'views/login.html',
     controller: 'loginController'
   }).
-  when("/:id/dashboard/merchant",{
+  when("/:id/dashboard/seller",{
     templateUrl: 'views/merchant-dashboard.html',
     controller: 'merchantDashboardController'
   }).
@@ -37,7 +37,7 @@ ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location',
     username: 'sachin@xoriant.com',
     password: 'sachin',
     name: 'Sachin',
-    role: 'merchant'
+    role: 'seller'
     // role: 'buyer'
   }
 
