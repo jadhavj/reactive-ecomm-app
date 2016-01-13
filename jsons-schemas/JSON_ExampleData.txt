@@ -1,0 +1,93 @@
+Product:
+{
+"name":"Godrej 231 Litres RT Eon 231 C 2.3 Frost Free Refrigerator (Silver)",
+"category":"Electronics",
+"sub_category":"Refridgerator",
+"pricing":{
+	"cost_price":18960,
+	"discount": 10,
+	"selling_price":17064
+	},
+"features":["Eco-friendly refrigerator","Poly-bag suspenders in the freezer","Energy rating: 2 Star","ZOP technology"],
+"images":"D:\\fridge.jpg",
+"specifications":{
+	"brand":"Godrej",
+	"modelNo":"RT Eon 231 C 2.3",
+	"color":"Silver",
+	"size":"231 litres"
+	},
+"items_in_stock":50,
+"username":"anuja",
+"cities_for_delivery":["pune","aurangabad","mumbai","delhi"]
+}
+
+
+User:
+{
+"username":"anuja",
+"password":"password",
+"role":"user",
+"firstname":"anuja",
+"lastname":"jain",
+"address":{
+	"street":"baner road",
+	"city":"pune",
+	"state":"maharashtra",
+	"zip":411045
+	},
+"email":"anuja@xoriant.com",
+"mobile_number":1234567890,
+"card_details":{
+	"card_number":0000111122223333,
+	"cardholder_name":"anuja",
+	"expiry":"02/2018",
+	"card_type":"VISA"
+	}
+}
+
+
+Cart:
+{
+"orderID":"A123",
+"orderItems":{
+		"product":{
+			"product_id":"123",
+			"description":"",
+			"Name":"Godrej 231 Litres RT Eon 231 C 2.3 Frost Free Refrigerator (Silver)",
+			"Cost_price":18960,
+			"Discount": 10,
+			"Selling_price":17064,
+			"quantity":1,
+			"thumbnail":"image.jpg"
+		}
+	},
+"orderDate":"11-11-2015",
+"Total":17064,
+"Status":"Shipped",
+"user":{
+	"billingAdrress":{
+			"firstname":"anuja",
+			"lastname":"jain",
+			"street":"baner road",
+			"city":"pune",
+			"state":"maharashtra",
+			"zip":411045,
+			"mobile_number":1234567890,
+		},
+	"shippingAddress":{
+			"firstname":"anuja",
+			"lastname":"jain",
+			"street":"baner road",
+			"city":"pune",
+			"state":"maharashtra",
+			"zip":411045,
+			"mobile_number":1234567890,
+		}
+	},
+"paymentMode":{
+	"card_number":0000111122223333,
+	"cardholder_name":"anuja",
+	"expiry":"02/2018",
+	"card_type":"VISA"
+	}
+}
