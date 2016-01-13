@@ -3,8 +3,10 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -24,8 +26,8 @@ public class Product {
 	 * 
 	 */
 	@JsonProperty("_id")
-	@Property("_id")
-	private String id;
+	@Id
+	private ObjectId id;
 	/**
 	 * 
 	 * (Required)
@@ -108,11 +110,10 @@ public class Product {
 	 * @param itemsInStock
 	 * @param Features
 	 */
-	public Product(String id, String name,String username, String category, String subCategory,
+	public Product(String name,String username, String category, String subCategory,
 			Pricing pricing, List<String> features, byte[] image,
 			Specifications specifications, Integer itemsInStock,
 			List<String> citiesForDelivery) {
-		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.category = category;
@@ -132,7 +133,7 @@ public class Product {
 	 * @return The ID
 	 */
 	@JsonProperty("_id")
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
@@ -144,7 +145,7 @@ public class Product {
 	 *            The ID
 	 */
 	@JsonProperty("_id")
-	public void setID(String id) {
+	public void setID(ObjectId id) {
 		this.id = id;
 	}
 

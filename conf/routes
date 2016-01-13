@@ -14,4 +14,6 @@ GET     /products                   controllers.Products.products()
 
 GET		/signup						controllers.Signup.signup()
 
-GET     /editProducts                controllers.EditProducts.editProducts()
+GET     /editProducts               controllers.Products.editProduct()
+
+POST    /uploadCatalog              controllers.CatalogUpload.uploadCatalog()
