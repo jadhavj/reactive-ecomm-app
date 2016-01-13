@@ -15,3 +15,4 @@ GET     /products                   controllers.Products.products()
 GET		/signup						controllers.Signup.signup()
 
 GET     /editProducts                controllers.EditProducts.editProducts()
+POST	/addProduct					 controllers.AddProduct.addProduct()
