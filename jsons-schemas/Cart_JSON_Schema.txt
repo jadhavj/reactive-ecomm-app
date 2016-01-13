@@ -1,0 +1,184 @@
+{
+  "$schema": "CartSchema",
+  "id": "cart",
+  "type": "object",
+  "properties": {
+    "orderID": {
+      "id": "orderID",
+      "type": "string"
+    },
+    "orderItems": {
+      "id": "orderItems",
+      "type": "object",
+      "properties": {
+        "product": {
+          "id": "orderItems/product",
+          "type": "object",
+          "properties": {
+            "product_id": {
+              "id": "orderItems/product/product_id",
+              "type": "string"
+            },
+            "description": {
+              "id": "orderItems/product/description",
+              "type": "string"
+            },
+            "Name": {
+              "id": "orderItems/product/Name",
+              "type": "string"
+            },
+            "Cost_price": {
+              "id": "orderItems/product/Cost_price",
+              "type": "number"
+            },
+            "Discount": {
+              "id": "orderItems/product/Discount",
+              "type": "number",
+			  "pattern":"^(100\.00|100\.0|100)|([0-9]{1,2}){0,1}(\.[0-9]{1,2}){0,1}$"
+            },
+            "Selling_price": {
+              "id": "orderItems/product/Selling_price",
+              "type": "number"
+            },
+            "quantity": {
+              "id": "orderItems/product/quantity",
+              "type": "integer"
+            },
+            "thumbnail": {
+              "id": "orderItems/product/thumbnail",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "orderDate": {
+      "id": "orderDate",
+      "type": "string"
+    },
+    "Total": {
+      "id": "Total",
+      "type": "number"
+    },
+    "Status": {
+      "id": "Status",
+      "type": "string"
+    },
+    "user": {
+      "id": "user",
+      "type": "object",
+      "properties": {
+        "BillingAdrress": {
+          "id": "user/BillingAdrress",
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "id": "user/BillingAdrress/firstname",
+              "type": "string"
+            },
+            "lastname": {
+              "id": "user/BillingAdrress/lastname",
+              "type": "string"
+            },
+            "street": {
+              "id": "user/BillingAdrress/street",
+              "type": "string"
+            },
+            "city": {
+              "id": "user/BillingAdrress/city",
+              "type": "string"
+            },
+            "state": {
+              "id": "user/BillingAdrress/state",
+              "type": "string"
+            },
+            "zip": {
+              "id": "user/BillingAdrress/zip",
+              "type": "integer"
+            },
+            "mobile_number": {
+              "id": "user/BillingAdrress/mobile_number",
+              "type": "integer"
+            }
+          }
+        },
+        "ShippingAddress": {
+          "id": "user/ShippingAddress",
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "id": "user/ShippingAddress/firstname",
+              "type": "string"
+            },
+            "lastname": {
+              "id": "user/ShippingAddress/lastname",
+              "type": "string"
+            },
+            "street": {
+              "id": "user/ShippingAddress/street",
+              "type": "string"
+            },
+            "city": {
+              "id": "user/ShippingAddress/city",
+              "type": "string"
+            },
+            "state": {
+              "id": "user/ShippingAddress/state",
+              "type": "string"
+            },
+            "zip": {
+              "id": "user/ShippingAddress/zip",
+              "type": "integer"
+            },
+            "mobile_number": {
+              "id": "user/ShippingAddress/mobile_number",
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "PaymentMode": {
+      "id": "PaymentMode",
+      "type": "object",
+      "properties": {
+        "card_number": {
+          "id": "card_details/card_number",
+          "type": "integer",
+		  "pattern":"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"
+        },
+        "cardholder_name": {
+          "id": "card_details/cardholder_name",
+          "type": "string"
+        },
+        "expiry": {
+          "id": "card_details/expiry",
+          "type": "string"
+		  "pattern":"/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/"
+        },
+        "card_type": {
+          "id": "card_details/card_type",
+          "type": "string",
+		  "oneOf":[
+			{"type":"VISA"},
+			{"type":"MASTER"},
+			{"type":"AmericanExpress"},
+			{"type":"Dinners Club"},
+			{"type":"JCB Cards"}
+			]
+        }
+      }
+    }
+  },
+  "required": [
+    "orderID",
+    "orderItems",
+    "orderDate",
+    "Total",
+    "Status",
+    "user",
+    "PaymentMode"
+  ]
+}
+
+
