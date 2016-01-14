@@ -2,7 +2,6 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
   $scope.items = items;
   $scope.top_sellers = top_sellers;
   $scope.yearly_revenues = yearly_revenues;
-  // console.log("items : ",$scope.items);
 
   var donut = c3.generate({
     bindto: '#top-sellers-donut',
@@ -35,7 +34,7 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
   $scope.addNewItem = function(){
     console.log("Adding new item");
     var user_id = $location.url().split('/')[1];
-    $location.path("/user-id="+user_id+"/add-item");
+    $location.path("/user-id="+user_id+"/add-item/");
   }
 
   // console.log(" browser history : ",historyObj);
@@ -62,9 +61,7 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
 
   $scope.items = items.slice(0,5);
   $scope.url = $location.absUrl();
-  // $scope.search = false;
   console.log("items : ",$scope.items);
-  // console.log("search up : ",$scope.search);
 
   $scope.recommendations = $scope.items;
 
