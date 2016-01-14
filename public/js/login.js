@@ -4,9 +4,8 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '
   $scope.navigate = function(){
     $rootScope.authenticated($scope.user);
     console.log("Welcome ",$scope.user.username);
-    var url = "/"+$scope.user.username+"/dashboard/"+$scope.user.role+"/";
     var absUrl = $location.absUrl().split('#')[0];
-    $window.location = absUrl+"#"+url;
+    $window.location = absUrl+"#/"+$scope.user.username+"/dashboard/"+$scope.user.role+"/";
   }
 
   $scope.throwLoginError = function(){

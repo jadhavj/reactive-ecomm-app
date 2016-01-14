@@ -6,8 +6,24 @@
     <form class="inline" name="form">
       <div class="form-group">
         <label class="inline-block thirty-percent">Name</label>
-        <input type="text" class="inline-block seventy-percent" placeholder="Your name please.." ng-model="user.name" name="uName" required=""/>
+        <input type="text" class="inline-block seventy-percent" placeholder="Your name please.." ng-model="user.username" name="uName" required=""/>
         <div ng-show="form.$submitted || form.uName.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uName.$error.required">What should I call u ?</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">First Name</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Your name please.." ng-model="user.firstname" name="fName" />
+        <div ng-show="form.$submitted || form.fName.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.uName.$error.required">What should I call u ?</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Last Name</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Your name please.." ng-model="user.lastname" name="lName" />
+        <div ng-show="form.$submitted || form.lName.$touched">
           <label class="inline-block seventy-percent error-message" ng-show="form.uName.$error.required">What should I call u ?</label>
         </div>
       </div>
@@ -29,7 +45,7 @@
 
       <div class="form-group">
         <label class="inline-block thirty-percent">Password</label>
-        <input type="password" class="inline-block seventy-percent" placeholder="desired password.." ng-model="user.password" name="uPassword" required=""/>
+        <input type="password" class="inline-block seventy-percent" placeholder="Desired password.." ng-model="user.password" name="uPassword" required=""/>
         <div ng-show="form.$submitted || form.uPassword.$touched">
           <label class="inline-block seventy-percent error-message" ng-show="form.uPassword.$error.required">Secure your account by providing password.</label>
         </div>
@@ -48,7 +64,7 @@
 
       <div class="form-group">
         <label class="inline-block thirty-percent">Contact No</label>
-        <input type="phone" class="inline-block seventy-percent" placeholder="Your mobile no please.." ng-model="user.mobile_no" name="uMobile" required=""/>
+        <input type="phone" class="inline-block seventy-percent" placeholder="Your mobile no please.." ng-model="user.mobile_number" name="uMobile" required=""/>
         <div ng-show="form.$submitted || form.uMobile.$touched">
           <label class="inline-block seventy-percent error-message" ng-show="form.uMobile.$error.required">Providing contact helps you resetting account immidiately, get offers-display. Important for my team to contact you.</label>
         </div>
@@ -56,10 +72,51 @@
 
       <div class="form-group">
         <label class="inline-block thirty-percent">Address</label>
-        <textarea rows="6"  class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address" name="uAddress" required=""></textarea>
-        <div ng-show="form.$submitted || form.uAddress.$touched">
-          <label class="inline-block seventy-percent error-message" ng-show="form.uAddress.$error.required"> Dont you want to recieve your orders ?</label>.</label>
+        <textarea rows="3" class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address.street" name="street" required=""></textarea>
+        <div ng-show="form.$submitted || form.street.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.street.$error.required"> Dont you want to recieve your orders ?</label>
         </div>
+
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address.city" name="city" required=""></textarea>
+        <div ng-show="form.$submitted || form.city.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.city.$error.required"> Dont you want to recieve your orders ?</label>.</label>
+        </div>
+
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address.state" name="state" required=""></textarea>
+        <div ng-show="form.$submitted || form.state.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.state.$error.required"> Dont you want to recieve your orders ?</label>.</label>
+        </div>
+
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your address.." ng-model="user.address.zip" name="zip" required=""></textarea>
+        <div ng-show="form.$submitted || form.zip.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.zip.$error.required"> Dont you want to recieve your orders ?</label>.</label>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent"></label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your city.." ng-model="user.address.city" name="city" required=""></textarea>
+        <div ng-show="form.$submitted || form.city.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.city.$error.required"> Please enter the city name</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent"></label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your state.." ng-model="user.address.state" name="state" required=""></textarea>
+        <div ng-show="form.$submitted || form.state.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.state.$error.required"> Please enter the state name</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent"></label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter your zip.." ng-model="user.address.zip" name="zip" required=""></textarea>
+        <div ng-show="form.$submitted || form.zip.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.zip.$error.required"> Please enter zip code</label>
+        </div>
+
       </div>
 
       <div class="right">
