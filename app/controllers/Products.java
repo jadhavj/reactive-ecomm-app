@@ -262,15 +262,16 @@ public class Products extends Controller {
 						BasicDBList productJsons = new BasicDBList();
 						for (Product product : products) {
 							try {
-								productJsons.add((DBObject) com.mongodb.util.JSON
+								BasicDBObject productDo = (BasicDBObject) com.mongodb.util.JSON
 										.parse(mapper
-												.writeValueAsString(product)));
+												.writeValueAsString(product));
+								productDo.put("_id", product.getId().toHexString());
+								productJsons.add(productDo);
 							} catch (JsonProcessingException e) {
 								e.printStackTrace();
 							}
 						}
-						out.write(new BasicDBObject("products", productJsons)
-								.toJson());
+						out.write(productJsons.toString());
 					}
 				});
 			}
