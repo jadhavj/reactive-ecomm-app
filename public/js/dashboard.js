@@ -1,5 +1,36 @@
 ShoppingApp.controller('merchantDashboardController',['$scope','$location', function($scope, $location){
-  $scope.items = items;
+  $scope.user_id = $location.url().split('/')[1];
+  // $scope.items = {};
+
+  $scope.getListOfProducts = function(){
+
+    var ws = new WebSocket("ws://localhost:9000/products");
+    ws.onopen = function()
+    {
+       ws.send(JSON.stringify({"username": "xyz"}));
+    };
+
+    ws.onmessage = function (evt)
+    {
+       var items = angular.copy(JSON.parse(evt.data).products);
+       $scope.items = items;
+      //  console.log("products : ", $scope.items);
+       ws.close();
+    };
+
+    ws.onclose = function(){
+      console.log("closing the connection");
+    };
+  }
+
+  $scope.getListOfProducts();
+  console.log("list of items : ", $scope.items);
+
+  setTimeout(function() {
+    console.log("items",$scope.items);
+    $scope.$apply();
+  }, 5000);
+  // $scope.getListOfProducts();
   $scope.top_sellers = top_sellers;
   $scope.yearly_revenues = yearly_revenues;
 
