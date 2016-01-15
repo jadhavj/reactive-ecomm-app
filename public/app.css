@@ -39,6 +39,9 @@ body {
 .nav-bar .user-snapshot a {
   cursor: pointer;
 }
+.nav-bar .user-snapshot span {
+  text-transform: capitalize;
+}
 .animate-show {
   line-height: 20px;
   opacity: 1;

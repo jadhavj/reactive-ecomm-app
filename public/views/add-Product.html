@@ -1,4 +1,4 @@
-<div class="edit-item-content hundred-percent add-edit-info"  ng-controller="addNewItemController">
+<div class="edit-item-content hundred-percent add-edit-info"  data-ng-controller="addNewItemController">
 
   <div class="block" style="border-bottom: 2px solid green; margin-bottom: 1em;">
     <h3 class="block text-align-center">Add/Edit Item</h3>
@@ -25,27 +25,27 @@
 
       <div class="form-group" class="block">
         <label class="block">Brand</label>
-        <input type="text" class="block ninety-percent" ng-model="product.specifications.brand"/>
+        <input type="text" class="block ninety-percent" ng-model="product.specs.brand"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Model No.</label>
-        <input type="text" class="block ninety-percent" ng-model="product.specifications.model"/>
+        <input type="text" class="block ninety-percent" ng-model="product.specs.model"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Colour</label>
-        <input type="text" class="block ninety-percent" ng-model="product.specifications.color"/>
+        <input type="text" class="block ninety-percent" ng-model="product.specs.color"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Size</label>
-        <input type="text" class="block ninety-percent" ng-model="product.specifications.size"/>
+        <input type="text" class="block ninety-percent" ng-model="product.specs.size"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Stock available</label>
-        <input type="text" class="block ninety-percent" ng-model="product.items_in_stock"/>
+        <input type="text" class="block ninety-percent" ng-model="product.specs.stock_available"/>
       </div>
 
       <div class="form-group" class="block">
@@ -55,27 +55,27 @@
 
       <div class="form-group" class="block">
         <label class="block">Sub-category</label>
-        <input type="text" class="block ninety-percent" ng-model="product.sub_category"/>
+        <input type="text" class="block ninety-percent" ng-model="product.category"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Selling Price</label>
-        <input type="text" class="block ninety-percent" tooltip="Selling Price" ng-model="product.pricing.selling_price"/>
+        <input type="text" class="block ninety-percent" tooltip="Selling Price" ng-model="product.price.sp"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Cost Price</label>
-        <input type="text" class="block ninety-percent" tooltip="Cost Price" ng-model="product.pricing.cost_price"/>
+        <input type="text" class="block ninety-percent" tooltip="Cost Price" ng-model="product.price.cp"/>
       </div>
 
       <div class="form-group" class="block">
         <label class="block">Discount %</label>
-        <input type="text" class="block ninety-percent" tooltip="Happening discount..." ng-model="product.pricing.discount"/>
+        <input type="text" class="block ninety-percent" tooltip="Happening discount..." ng-model="product.price.discount"/>
       </div>
 
       <div class="form-group" class="block">
-        <label class="block"> Cities for Delivery</label>
-        <input type="text" class="block ninety-percent" ng-model="product.cities_for_delivery"></textarea>
+        <label class="block"> Description</label>
+        <textarea rows="12" class="block ninety-percent" ng-model="product.details"></textarea>
       </div>
 
       <div class="form-group" class="block">
