@@ -33,6 +33,7 @@ public class Signup extends Controller {
 								.equal(email).field("username").equal(userName)
 								.asList();
 
+						
 						if (users != null && !users.isEmpty()) {
 							out.write(new BasicDBObject("result", "User already exists.").toJson());
 						} else {
@@ -43,24 +44,27 @@ public class Signup extends Controller {
 									.getString("firstname"));
 							newUser.setLastname(signupInfo
 									.getString("lastname"));
+							
 							BasicDBObject addressDBObject = (BasicDBObject) com.mongodb.util.JSON
 									.parse(signupInfo.get("address").toString());
 							newUser.setAddress(new Address(addressDBObject
 									.getString("street"), addressDBObject
 									.getString("city"), addressDBObject
-									.getString("state"), addressDBObject
-									.getLong("zip")));
-							newUser.setMobileNumber(signupInfo
-									.getLong("mobile_number"));
-							BasicDBObject cardDetailsDBObject = (BasicDBObject) com.mongodb.util.JSON
-									.parse(signupInfo.get("card_details")
-											.toString());
-							newUser.setCardDetails(new CardDetails(
-									cardDetailsDBObject.getLong("card_number"),
-									cardDetailsDBObject
-											.getString("cardholder_name"),
-									cardDetailsDBObject.getString("expiry"),
-									cardDetailsDBObject.getString("card_type")));
+									.getString("state"), Long.parseLong(addressDBObject
+									.getString("zip"))));
+							newUser.setMobileNumber(Long.parseLong(signupInfo
+									.getString("mobile_number")));
+							if (signupInfo.get("card_details") != null) {
+								BasicDBObject cardDetailsDBObject = (BasicDBObject) com.mongodb.util.JSON
+										.parse(signupInfo.get("card_details")
+												.toString());
+								newUser.setCardDetails(new CardDetails(
+										cardDetailsDBObject.getString("card_number") != null ? Long.parseLong(cardDetailsDBObject.getString("card_number")) : null,
+										cardDetailsDBObject
+												.getString("cardholder_name"),
+										cardDetailsDBObject.getString("expiry"),
+										cardDetailsDBObject.getString("card_type")));
+							}
 
 							Mongo.datastore().save(newUser);
 							out.write(new BasicDBObject("result", "success").toJson());
