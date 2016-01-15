@@ -50,7 +50,7 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
         console.log('file is ' );
         console.dir(file);
         var absUrl = $location.absUrl().split('#');
-        var uploadUrl = "http://localhost:9000/uploadCatalog";
+        var uploadUrl = "http://localhost:9000/uploadProducts";
         console.log("uploadUrl : ",uploadUrl);
         fileUpload.uploadFileToUrl(file, uploadUrl);
     };
