@@ -11,6 +11,7 @@ import play.mvc.WebSocket;
 import utils.Mongo;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
 public class Signup extends Controller {
 
@@ -21,7 +22,7 @@ public class Signup extends Controller {
 					WebSocket.Out<String> out) {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
-						Object o = com.mongodb.util.JSON.parse(event);
+						Object o = JSON.parse(event);
 						User newUser = new User();
 						BasicDBObject signupInfo = (BasicDBObject) o;
 						String email = signupInfo.getString("email");

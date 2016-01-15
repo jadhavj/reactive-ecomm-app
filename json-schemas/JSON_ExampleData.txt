@@ -49,23 +49,12 @@ User:
 Cart:
 {
 "orderID":"A123",
-"orderItems":{
-		"product":{
-			"product_id":"123",
-			"description":"",
-			"Name":"Godrej 231 Litres RT Eon 231 C 2.3 Frost Free Refrigerator (Silver)",
-			"Cost_price":18960,
-			"Discount": 10,
-			"Selling_price":17064,
-			"quantity":1,
-			"thumbnail":"image.jpg"
-		}
-	},
+"orderItems":["123","234"],
 "orderDate":"11-11-2015",
-"Total":17064,
-"Status":"Shipped",
-"user":{
-	"billingAdrress":{
+"total":27064,
+"status":"Order Placed",
+"username":"anuja",
+"shippingAddress":{
 			"firstname":"anuja",
 			"lastname":"jain",
 			"street":"baner road",
@@ -74,20 +63,5 @@ Cart:
 			"zip":411045,
 			"mobile_number":1234567890,
 		},
-	"shippingAddress":{
-			"firstname":"anuja",
-			"lastname":"jain",
-			"street":"baner road",
-			"city":"pune",
-			"state":"maharashtra",
-			"zip":411045,
-			"mobile_number":1234567890,
-		}
-	},
-"paymentMode":{
-	"card_number":0000111122223333,
-	"cardholder_name":"anuja",
-	"expiry":"02/2018",
-	"card_type":"VISA"
-	}
+"paymentMode":"COD"
 }

@@ -12,12 +12,13 @@ import play.mvc.Result;
 import utils.Mongo;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
 public class AddProduct extends Controller {
 
 	public Result addProduct() {
 		String jsonString = request().body().asJson().toString();
-		Object o = com.mongodb.util.JSON.parse(jsonString);
+		Object o =JSON.parse(jsonString);
 
 		Product product = new Product();
 		BasicDBObject addProductInfo = (BasicDBObject) o;

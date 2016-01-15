@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET		/login						controllers.Login.login()
 
@@ -14,5 +14,8 @@ GET     /products                   controllers.Products.products()
 
 GET		/signup						controllers.Signup.signup()
 
-GET     /editProducts                controllers.EditProducts.editProducts()
-POST	/addProduct					 controllers.AddProduct.addProduct()
+GET     /editProducts               controllers.EditProducts.editProducts()
+GET     /addToCart              	controllers.CartFunctionality.addToCart()
+GET     /removeFromCart             controllers.CartFunctionality.removeFromCart()
+
+POST	/addProduct					controllers.AddProduct.addProduct()

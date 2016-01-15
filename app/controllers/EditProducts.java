@@ -5,6 +5,7 @@ import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
 import play.libs.F;
 import models.Pricing;
@@ -24,7 +25,7 @@ public class EditProducts extends Controller {
 
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
-						Object o = com.mongodb.util.JSON.parse(event);
+						Object o = JSON.parse(event);
 						BasicDBObject productInfo = (BasicDBObject) o;
 
 						ObjectId id = productInfo.getObjectId("_id");
