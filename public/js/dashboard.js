@@ -78,6 +78,7 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
         var uploadUrl = "http://localhost:9000/uploadProducts";
         console.log("uploadUrl : ",uploadUrl);
         fileUpload.uploadFileToUrl(file, uploadUrl);
+        $('#notification-success').modal('show');
     };
 
 }]);
