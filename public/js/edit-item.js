@@ -1,4 +1,4 @@
-ShoppingApp.controller("editItemController", ['$scope', 'dataTransfer', '$http', function($scope, dataTransfer, $http){
+ShoppingApp.controller("editItemController", ['$rootScope', '$scope', 'dataTransfer', '$http', '$location', '$window', function($rootScope, $scope, dataTransfer, $http, $location, $window){
   console.log("in editItemController");
   $scope.obj = dataTransfer.get();
 
