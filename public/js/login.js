@@ -25,6 +25,8 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '
     ws.onmessage = function (evt)
     {
        $scope.user = JSON.parse(evt.data);
+       $rootScope.user = $scope.user; 
+       $scope.$apply();
        ($scope.user.login == 'valid') ? $scope.navigate() : $scope.throwLoginError();
     };
 
