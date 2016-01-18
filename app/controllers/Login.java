@@ -1,12 +1,13 @@
 package controllers;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
 import models.User;
 import play.libs.F;
 import play.mvc.*;
-import play.mvc.WebSocket;
 import utils.Mongo;
+
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class Login extends Controller {
 			public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
-						Object o = com.mongodb.util.JSON.parse(event);
+						Object o = JSON.parse(event);
 						BasicDBObject loginInfo = (BasicDBObject) o;
 						String username = loginInfo.getString("username");
 						String password = loginInfo.getString("password");

@@ -22,3 +22,5 @@ POST    /uploadProducts        	controllers.Products.uploadProducts()
 
 POST	/addProduct				controllers.Products.addProduct()
 
+GET     /addToCart              	controllers.CartFunctionality.addToCart()
+GET     /removeFromCart             controllers.CartFunctionality.removeFromCart()

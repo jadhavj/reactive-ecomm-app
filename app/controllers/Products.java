@@ -21,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
+
 import play.libs.F;
 import models.Pricing;
 import models.Product;
@@ -44,7 +46,7 @@ public class Products extends Controller {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
 
-						Object o = com.mongodb.util.JSON.parse(event);
+						Object o = JSON.parse(event);
 						BasicDBObject merchantInfo = (BasicDBObject) o;
 						String username = merchantInfo.getString("username");
 						ObjectMapper mapper = new ObjectMapper();
