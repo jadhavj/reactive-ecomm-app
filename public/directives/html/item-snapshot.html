@@ -1,5 +1,5 @@
 <div class="item">
-  <img src="{{obj.img}}" alt="{{obj.alt}}" class="thirty-percent img-responsive pad-a"/>
+  <img src="data:image/jpeg;base64, {{obj.image}}" alt="{{obj.name}}" class="thirty-percent img-responsive pad-a"/>
   <div class="description seventy-percent">
     <h3 class="fifty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.name}}">{{obj.name}}</h3>
     <h4 class="forty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.category}}">{{obj.category}}</h4>
@@ -8,8 +8,10 @@
       <i class="icon-edit"></i>
     </button>
     <div class="details">
-      <h4 class="block"><i>&#8377 {{obj.price.sp}}</i></h4>
-      <h5 class="text-align-justify">{{obj.details}}</h5>
+      <h4 class="block"><i>&#8377 {{obj.pricing.selling_price}}</i></h4>
+      <ul class="text-align-justify">
+       <li ng-repeat = "i in obj.specifications">{{i}}</li>
+      </ul>
     </div>
   </div>
 

@@ -21,8 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.util.JSON;
-
 import play.libs.F;
 import models.Pricing;
 import models.Product;
@@ -46,9 +44,10 @@ public class Products extends Controller {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
 
-						Object o = JSON.parse(event);
+						Object o = com.mongodb.util.JSON.parse(event);
 						BasicDBObject merchantInfo = (BasicDBObject) o;
 						String username = merchantInfo.getString("username");
+						System.out.println(Mongo.datastore().createQuery(models.Product.class).asList());
 						ObjectMapper mapper = new ObjectMapper();
 						List<Product> products = Mongo.datastore()
 								.createQuery(Product.class).field("username")
@@ -129,54 +128,45 @@ public class Products extends Controller {
 		return ok("success");
 	}
 
-	public WebSocket<String> editProduct() {
-		return new WebSocket<String>() {
+	public Result editProduct() {
+		Object o = com.mongodb.util.JSON.parse(request().body().asJson().toString());
+		BasicDBObject productInfo = (BasicDBObject) o;
 
-			public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+		String idString = productInfo.getString("_id");
+		ObjectId id = new ObjectId(idString);
 
-				in.onMessage(new F.Callback<String>() {
-					public void invoke(String event) {
-						Object o = com.mongodb.util.JSON.parse(event);
-						BasicDBObject productInfo = (BasicDBObject) o;
+		Query<Product> query = Mongo.datastore().createQuery(Product.class).field("_id").equal(id);
 
-						ObjectId id = productInfo.getObjectId("_id");
+		UpdateOperations<Product> operation = Mongo.datastore().createUpdateOperations(Product.class).set("name",
+				productInfo.getString("name"));
 
-						Query<Product> query = Mongo.datastore().createQuery(Product.class).field("_id").equal(id);
+		operation.set("username", productInfo.getString("username"));
+		operation.set("category", productInfo.getString("category"));
+		operation.set("sub_category", productInfo.getString("sub_category"));
 
-						UpdateOperations<Product> operation = Mongo.datastore().createUpdateOperations(Product.class)
-								.set("name", productInfo.getString("name"));
+		BasicDBObject pricingDBObject = (BasicDBObject) com.mongodb.util.JSON
+				.parse(productInfo.get("pricing").toString());
 
-						operation.set("username", productInfo.getString("username"));
-						operation.set("category", productInfo.getString("category"));
-						operation.set("sub_category", productInfo.getString("sub_category"));
+		operation.set("pricing", new Pricing(pricingDBObject.getDouble("cost_price"),
+				pricingDBObject.getDouble("discount"), pricingDBObject.getDouble("selling_price")));
+		operation.set("features", productInfo.get("features"));
 
-						BasicDBObject pricingDBObject = (BasicDBObject) com.mongodb.util.JSON
-								.parse(productInfo.get("pricing").toString());
+		byte[] image = productInfo.get("image").toString().getBytes();
+		operation.set("image", image);
 
-						operation.set("pricing", new Pricing(pricingDBObject.getDouble("cost_price"),
-								pricingDBObject.getDouble("discount"), pricingDBObject.getDouble("selling_price")));
-						operation.set("features", productInfo.get("features"));
+		BasicDBObject scpecificationsDBObject = (BasicDBObject) com.mongodb.util.JSON
+				.parse(productInfo.get("specifications").toString());
 
-						byte[] image = productInfo.get("images").toString().getBytes();
-						operation.set("image", image);
+		operation.set("specifications",
+				new Specifications(scpecificationsDBObject.getString("brand"),
+						scpecificationsDBObject.getString("model_no"), scpecificationsDBObject.getString("color"),
+						scpecificationsDBObject.getString("size")));
+		operation.set("itemsInStock", productInfo.getInt("items_in_stock"));
+		operation.set("citiesForDelivery", (productInfo.get("cities_for_delivery")));
 
-						BasicDBObject scpecificationsDBObject = (BasicDBObject) com.mongodb.util.JSON
-								.parse(productInfo.get("specifications").toString());
+		Mongo.datastore().update(query, operation);
 
-						operation.set("specifications", new Specifications(scpecificationsDBObject.getString("brand"),
-								scpecificationsDBObject.getString("model_no"),
-								scpecificationsDBObject.getString("color"), scpecificationsDBObject.getString("size")));
-						operation.set("itemsInStock", productInfo.getInt("items_in_stock"));
-						operation.set("citiesForDelivery", (productInfo.get("cities_for_delivery")));
-
-						Mongo.datastore().update(query, operation);
-
-						out.write(new BasicDBObject("result", "success").toString());
-					}
-				});
-
-			}
-		};
+		return ok(new BasicDBObject("result", "success").toString());
 	}
 
 	public Result uploadProducts() throws Exception {

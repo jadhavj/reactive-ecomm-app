@@ -16,7 +16,7 @@ GET     /searchProducts         controllers.Products.search()
 
 GET		/signup					controllers.Signup.signup()
 
-GET     /editProduct           	controllers.Products.editProduct()
+POST     /editProduct           	controllers.Products.editProduct()
 
 POST    /uploadProducts        	controllers.Products.uploadProducts()
 
