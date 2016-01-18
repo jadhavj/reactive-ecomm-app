@@ -21,8 +21,10 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location',
     ws.onmessage = function (evt)
     {
        $scope.user = JSON.parse(evt.data);
-       console.log("Congratulations...");
-       $location.path("/login/")
+       alert("Congratulations...\n Please login to continue");
+       //  $location.path("/login/")
+       var url = $location.absUrl().split('#').[0];
+       $window.location(url+"#/login/")
     };
 
     ws.onclose = function(){

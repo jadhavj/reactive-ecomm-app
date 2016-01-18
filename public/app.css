@@ -154,6 +154,24 @@ body {
 .lowercase {
   text-transform: lowercase;
 }
+.font-weight-100 {
+  font-weight: 100;
+}
+.font-weight-200 {
+  font-weight: 200;
+}
+.font-weight-300 {
+  font-weight: 300;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
+.font-weight-bolder {
+  font-weight: bolder;
+}
+.font-weight-lighter {
+  font-weight: lighter;
+}
 .pad-h {
   padding-left: 1em;
   padding-right: 1em;
@@ -457,6 +475,9 @@ body {
   width: 90%;
   margin: 0 auto;
 }
+#product-details span {
+  color: #555569;
+}
 xor-item-snapshot img {
   min-height: 150px;
   max-height: 200px;
@@ -474,6 +495,10 @@ xor-item-snapshot .details h4 {
 xor-item-snapshot .details h5 {
   height: 100px;
   overflow: hidden;
+}
+xor-item-snapshot ul {
+  list-style: none !important;
+  padding-left: 15px;
 }
 xor-product-card .list-item-box {
   border: 1px solid #000;
