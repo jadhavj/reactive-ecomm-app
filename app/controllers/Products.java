@@ -21,8 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.util.JSON;
-
 import play.libs.F;
 import models.Pricing;
 import models.Product;
@@ -46,9 +44,10 @@ public class Products extends Controller {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
 
-						Object o = JSON.parse(event);
+						Object o = com.mongodb.util.JSON.parse(event);
 						BasicDBObject merchantInfo = (BasicDBObject) o;
 						String username = merchantInfo.getString("username");
+						System.out.println(Mongo.datastore().createQuery(models.Product.class).asList());
 						ObjectMapper mapper = new ObjectMapper();
 						List<Product> products = Mongo.datastore()
 								.createQuery(Product.class).field("username")

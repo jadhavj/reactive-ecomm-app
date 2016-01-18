@@ -55,12 +55,19 @@
         </div>
       </div>
 
+      <script>
+        console.log("in ui results count : ", $scope.items.length());
+      </script>
+
       <div class='item-list hundred-percent margin-v'>
-        <span ng-repeat="item in items track by item.id">{{item}}
-          <xor-item-snapshot ng-repeat="i in item track by $index" obj="i">{{i}}</xor-item-snapshot>
-          <!-- <xor-item-snapshot ng-repeat="i in item" obj="i"></xor-item-snapshot> -->
-        </span>
-      </div>
+       <xor-item-snapshot ng-repeat="item in items track by item._id" obj="item"></xor-item-snapshot>
+       <!-- <span ng-repeat="item in items">
+         {{item._id}}
+       </span> -->
+       <span>
+
+       </span>
+     </div>
     </div>
 
   </div>
