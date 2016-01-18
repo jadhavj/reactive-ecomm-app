@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.ss.usermodel.PictureData;
 import org.apache.poi.ss.usermodel.Row;
@@ -25,7 +24,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 
 import play.libs.F;
-import play.libs.Json;
 import models.Pricing;
 import models.Product;
 import models.Specifications;
