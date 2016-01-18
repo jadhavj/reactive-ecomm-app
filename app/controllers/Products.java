@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+
 import play.libs.F;
 import models.Pricing;
 import models.Product;
@@ -151,7 +152,8 @@ public class Products extends Controller {
 				pricingDBObject.getDouble("discount"), pricingDBObject.getDouble("selling_price")));
 		operation.set("features", productInfo.get("features"));
 
-		byte[] image = productInfo.get("image").toString().getBytes();
+		byte[] image = null;
+		image = Base64.getDecoder().decode(productInfo.get("image").toString());
 		operation.set("image", image);
 
 		BasicDBObject scpecificationsDBObject = (BasicDBObject) com.mongodb.util.JSON
