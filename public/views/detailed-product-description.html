@@ -1,18 +1,14 @@
-<div class="edit-item-content hundred-percent add-edit-info"  data-ng-controller="itemDescriptionController">
-
-  <div class="block" style="border-bottom: 2px solid green; margin-bottom: 1em;">
-    <h3 class="block text-align-center">Add/Edit Item</h3>
-  </div>
+<div class="edit-item-content hundred-percent add-edit-info"  data-ng-controller="detailedProductViewController">
 
   <div class="left-section fifty-percent img-display">
-    <img src="{{obj.img}}" alt="{{obj.alt}}" class="img-responsive"/>
+    <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive"/>
 
-    <div class="image-roller">
+    <!-- <div class="image-roller">
       <img src="" alt=""/>
       <img src="" alt=""/>
       <img src="" alt=""/>
       <img src="" alt=""/>
-    </div>
+    </div> -->
   </div>
 
   <div class="right-section fifty-percent">
@@ -20,27 +16,56 @@
 
       <div class="form-group">
         <label class="block">Name</label>
-        <label type="text" class="block ninety-percent" ng-model="obj.name"/>
+        <span class="block ninety-percent">{{obj.name}}</span>
       </div>
 
       <div class="form-group" class="block">
         <label class="block"> Category</label>
-        <label type="text" class="block ninety-percent" ng-model="obj.category"/>
+        <span class="block ninety-percent">{{obj.category}}</span>
       </div>
 
       <div class="form-group" class="block">
-        <label class="block"> Price</label>
-        <label type="text" class="block ninety-percent" tooltip="INR" ng-model="obj.price"/>
+        <label class="block">Sub-Category</label>
+        <span class="block ninety-percent">{{obj.sub_category}}</span>
       </div>
 
       <div class="form-group" class="block">
-        <label class="block"> Description</label>
-        <textarea rows="12" class="block ninety-percent" ng-model="obj.details"></textarea>
+        <label class="block">Cost Price</label>
+        <span class="block ninety-percent" tooltip="INR">{{obj.pricing.cost_price}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Discount (%)</label>
+        <span class="block ninety-percent" tooltip="%">{{obj.pricing.discount}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Effective Price</label>
+        <span class="block ninety-percent" tooltip="INR">{{obj.pricing.selling_price}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Specifications</label>
+        <span class="block ninety-percent" ng-repeat="spec in obj.specifications track by $index">{{spec}}<br/></span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Features</label>
+        <span class="block ninety-percent" ng-repeat="feat in obj.features track by $index">{{feat}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Cities we deliver in </label>
+        <span class="block ninety-percent" ng-repeat="city in obj.cities_for_delivery track by $index">{{city}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Available stocks </label>
+        <span class="block ninety-percent">{{obj.items_in_stock}}</span>
       </div>
 
       <div class="block text-align-right ninety-percent" style="margin: 1px;">
-        <button class="btn btn-warning twenty-percent">Cancel</button>
-        <button class="btn btn-primary twenty-percent" ng-click="updateItemInfo()">SAVE</button>
+        <button class="btn btn-primary twenty-percent" ng-click="updateItemInfo()">Add to cart</button>
       </div>
     </form>
   </div>

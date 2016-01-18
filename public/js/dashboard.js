@@ -97,6 +97,7 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
     {
        var items = angular.copy(JSON.parse(evt.data));
        $scope.items = items;
+       $scope.recommendations = ($scope.items) ? $scope.items.slice(0,5) : [];
        console.log("recommended products : ", $scope.items);
        $scope.$apply();
        ws.close();
@@ -109,14 +110,29 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
 
   $scope.getRecommendedProducts();
 
-  // $scope.items = items.slice(0,5);
-
-  $scope.recommendations = $scope.items;
+  console.log("recommendations ", $scope.recommendations  );
 
   $scope.search = function(){
-    console.log('searching for ', $scope.searchProduct);
-    $scope.searchResults = items;
-    console.log("search results = ", $scope.searchResults);
+    // $scope.searchResults = items;
+
+    var ws = new WebSocket("ws://localhost:9000/searchProducts");
+    ws.onopen = function()
+    {
+       ws.send(JSON.stringify({"search_string": $scope.searchProduct}));
+    };
+
+    ws.onmessage = function (evt)
+    {
+       $scope.searchResults = angular.copy(JSON.parse(evt.data));
+       console.log("search products : ", $scope.items);
+       $scope.$apply();
+       ws.close();
+    };
+
+    ws.onclose = function(){
+      console.log("closing the connection");
+    };
+
     var search = document.getElementById('search-results');
     search.style.display = 'block';
   }
