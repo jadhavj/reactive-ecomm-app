@@ -23,8 +23,8 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location',
        $scope.user = JSON.parse(evt.data);
        alert("Congratulations...\n Please login to continue");
        //  $location.path("/login/")
-       var url = $location.absUrl().split('#').[0];
-       $window.location(url+"#/login/")
+       var url = $location.absUrl().split('#')[0];
+       $window.location=url+"#/login/";
     };
 
     ws.onclose = function(){

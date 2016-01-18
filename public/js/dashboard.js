@@ -87,10 +87,10 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
   $scope.user_id = $location.url().split('/')[1];
 
   $scope.getRecommendedProducts = function(){
-    var ws = new WebSocket("ws://localhost:9000/products");
+    var ws = new WebSocket("ws://localhost:9000/searchProducts");
     ws.onopen = function()
     {
-       ws.send(JSON.stringify({"username": $scope.user_id}));
+       ws.send(JSON.stringify({"search_string": ""}));
     };
 
     ws.onmessage = function (evt)
