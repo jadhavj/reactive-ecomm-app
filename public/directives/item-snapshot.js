@@ -6,7 +6,6 @@ ShoppingApp.directive('xorItemSnapshot', ['$location', 'dataTransfer', function(
       obj: '=obj'
     },
     link: function($scope, element, attrs){
-      console.log("received product : ", obj);
       var user_id = $location.url().split('/')[1];
       $scope.edit = function(){
         dataTransfer.set($scope.obj);
