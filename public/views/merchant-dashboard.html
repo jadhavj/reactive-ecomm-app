@@ -44,12 +44,31 @@
 
               <div data-ng-controller = "bulkUploadController">
                   <input type="file" file-model="myFile"/>
-                  <button ng-click="uploadFile()">Upload</button>
+                  <button ng-click="uploadFile()" data-dismiss="modal" data-target="#bulkItemUpload">Upload</button>
               </div>
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="notification-success" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Congratulations..</h4>
+            </div>
+            <div class="modal-body">
+              <br/>
+              <span>All products added successfully</span>
+              <br/>
+              <br/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-success">Thanks</button>
             </div>
           </div>
         </div>

@@ -10,12 +10,8 @@ ShoppingApp.directive('xorProductCard', ['$location', 'dataTransfer', function($
       $scope.goToProduct = function(){
         dataTransfer.set($scope.obj);
         console.log($location.absUrl());
-        //user-id=:id/buyer/id=:id"
         $location.path("/user-id=" + user_id + "/buyer/id="+$scope.obj._id+"/");
       }
     }
   };
 }]);
-
-
-// "569c88819558c412365434fc"
