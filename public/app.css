@@ -384,11 +384,11 @@ body {
   display: none;
 }
 .dashboard-content .product {
-  text-align: center;
+  text-align: left;
+  padding-left: 2em;
 }
 .dashboard-content .product h4 {
   text-align: left;
-  padding-left: 2em;
 }
 .dashboard-content #topCarousel .image {
   width: 39% !important;
