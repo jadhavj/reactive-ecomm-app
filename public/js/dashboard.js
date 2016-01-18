@@ -7,14 +7,15 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
     var ws = new WebSocket("ws://localhost:9000/products");
     ws.onopen = function()
     {
-       ws.send(JSON.stringify({"username": "xyz"}));
+       ws.send(JSON.stringify({"username": $scope.user_id}));
     };
 
     ws.onmessage = function (evt)
     {
-       var items = angular.copy(JSON.parse(evt.data).products);
+       var items = angular.copy(JSON.parse(evt.data));
        $scope.items = items;
-      //  console.log("products : ", $scope.items);
+       console.log("products : ", $scope.items);
+       $scope.$apply();
        ws.close();
     };
 
@@ -24,13 +25,7 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
   }
 
   $scope.getListOfProducts();
-  console.log("list of items : ", $scope.items);
 
-  setTimeout(function() {
-    console.log("items",$scope.items);
-    $scope.$apply();
-  }, 5000);
-  // $scope.getListOfProducts();
   $scope.top_sellers = top_sellers;
   $scope.yearly_revenues = yearly_revenues;
 
@@ -62,7 +57,7 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
 
   var historyObj = window.history;
 
-  $scope.addNewItem = function(){
+    $scope.addNewItem = function(){
     console.log("Adding new item");
     var user_id = $location.url().split('/')[1];
     $location.path("/user-id="+user_id+"/add-item/");
@@ -89,10 +84,32 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
 
 ShoppingApp.controller('buyerDashboardController',['$scope', '$location', function($scope, $location){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
+  $scope.user_id = $location.url().split('/')[1];
 
-  $scope.items = items.slice(0,5);
-  $scope.url = $location.absUrl();
-  console.log("items : ",$scope.items);
+  $scope.getRecommendedProducts = function(){
+    var ws = new WebSocket("ws://localhost:9000/products");
+    ws.onopen = function()
+    {
+       ws.send(JSON.stringify({"username": $scope.user_id}));
+    };
+
+    ws.onmessage = function (evt)
+    {
+       var items = angular.copy(JSON.parse(evt.data));
+       $scope.items = items;
+       console.log("recommended products : ", $scope.items);
+       $scope.$apply();
+       ws.close();
+    };
+
+    ws.onclose = function(){
+      console.log("closing the connection");
+    };
+  }
+
+  $scope.getRecommendedProducts();
+
+  // $scope.items = items.slice(0,5);
 
   $scope.recommendations = $scope.items;
 
