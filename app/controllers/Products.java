@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.PictureData;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,8 +22,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
 import play.libs.F;
+import play.libs.Json;
 import models.Pricing;
 import models.Product;
 import models.Specifications;
@@ -173,6 +176,8 @@ public class Products extends Controller {
 
 	public Result uploadProducts() throws Exception {
 
+		BasicDBObject user = (BasicDBObject) JSON.parse(request().body().asMultipartFormData().asFormUrlEncoded().get("sender")[0]);
+		
 		MultipartFormData body = request().body().asMultipartFormData();
 		FilePart catalogFile = body.getFiles().get(0);
 
@@ -220,7 +225,7 @@ public class Products extends Controller {
 
 				List<String> citiesForDelivery = Arrays.asList(nextRow.getCell(13).getStringCellValue().split(","));
 
-				Product product = new Product(name, "anuja", category, subCategory, pricing, features,
+				Product product = new Product(name, user.getString("username"), category, subCategory, pricing, features,
 						pictures.get(i - 1).getData(), specifications, itemsInStock, citiesForDelivery);
 
 				Mongo.datastore().save(product);
