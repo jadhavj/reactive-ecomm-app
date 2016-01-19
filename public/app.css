@@ -39,6 +39,10 @@ body {
 .nav-bar .user-snapshot a {
   cursor: pointer;
 }
+.nav-bar .user-snapshot i {
+  font-size: 15px !important;
+  margin-left: 5px !important;
+}
 .nav-bar .user-snapshot span {
   text-transform: capitalize;
 }
@@ -390,6 +394,9 @@ body {
 .dashboard-content .product h4 {
   text-align: left;
 }
+.dashboard-content #topCarousel {
+  margin: 30px auto;
+}
 .dashboard-content #topCarousel .image {
   width: 39% !important;
   margin-left: 10% !important;
@@ -401,15 +408,14 @@ body {
 }
 .dashboard-content #topCarousel .top-carousel-caption {
   color: #000 !important;
+  vertical-align: top;
 }
 .dashboard-content #topCarousel .carousel-inner > .item > img,
 .dashboard-content #topCarousel .carousel-inner > .item > a > img {
-  width: 70%;
-  height: 450px;
   margin: auto;
 }
 .dashboard-content #topCarousel .item img {
-  max-height: 300px;
+  height: 300px;
 }
 .dashboard-content #topCarousel ol li {
   background-color: rgba(0, 0, 0, 0.2);
@@ -478,11 +484,17 @@ body {
 #product-details span {
   color: #555569;
 }
+#cost_price {
+  text-decoration: line-through;
+}
 xor-item-snapshot img {
   min-height: 150px;
   max-height: 200px;
   min-width: 100px;
   max-width: 150px;
+  vertical-align: top;
+}
+xor-item-snapshot .description {
   vertical-align: top;
 }
 xor-item-snapshot .item {
@@ -510,7 +522,7 @@ xor-product-card .list-item-box {
 }
 xor-product-card .list-item-box img {
   height: 200px;
-  width: 200px;
+  width: 90%;
 }
 xor-product-card .list-item-box a {
   text-decoration: none;

@@ -33,7 +33,7 @@
 
       <div class="form-group" class="block">
         <label class="block">Cost Price</label>
-        <span class="block ninety-percent font-weight-lighter" tooltip="INR">{{obj.pricing.cost_price}}</span>
+        <span id="cost_price" class="block ninety-percent font-weight-lighter" tooltip="INR">{{obj.pricing.cost_price}}</span>
       </div>
 
       <div class="form-group" class="block">
@@ -67,8 +67,27 @@
       </div>
 
       <div class="block text-align-right ninety-percent" style="margin: 1px;">
-        <button class="btn btn-primary twenty-percent" ng-click="updateItemInfo()"><i class="icon-addtocart"></i> Add to cart </button>
+        <button class="btn btn-primary twenty-percent" ng-click="addToCart()"><i class="icon-addtocart"></i> Add to cart </button>
       </div>
     </form>
   </div>
+
+  <div id="notification-add-to-cart" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Congratulations..</h4>
+        </div>
+        <div class="modal-body">
+          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v" style="max-height: 600px"/>
+          <div class="margin-v">{{obj.name}} added to cart successfully.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart">Continue Shopping</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart">Proceed to checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
