@@ -506,6 +506,7 @@ xor-product-card .list-item-box {
   padding: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 xor-product-card .list-item-box img {
   height: 200px;
