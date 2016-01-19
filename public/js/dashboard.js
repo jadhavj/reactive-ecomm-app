@@ -1,4 +1,4 @@
-ShoppingApp.controller('merchantDashboardController',['$scope','$location', function($scope, $location){
+ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$window', function($scope, $location, $window){
   $scope.user_id = $location.url().split('/')[1];
   // $scope.items = {};
 
@@ -63,6 +63,9 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', func
     $location.path("/user-id="+user_id+"/add-item/");
   }
 
+  $scope.reload = function(){
+    $window.location.reload();
+  }
   // console.log(" browser history : ",historyObj);
 }]);
 

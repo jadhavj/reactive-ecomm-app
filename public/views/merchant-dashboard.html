@@ -43,8 +43,8 @@
               <p>*Please select only xml type of file for uploading items in bulk.</p>
 
               <div data-ng-controller = "bulkUploadController">
-                  <input type="file" file-model="myFile"/>
-                  <button ng-click="uploadFile()" data-dismiss="modal" data-target="#bulkItemUpload">Upload</button>
+                  <input class="btn btn-primary" type="file" file-model="myFile"/>
+                  <button ng-click="uploadFile()" data-dismiss="modal" data-target="#bulkItemUpload" class="btn btn-warning">Upload</button>
               </div>
 
             </div>
@@ -68,7 +68,7 @@
               <br/>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-success">Thanks</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-success" ng-click="reload()">Thanks</button>
             </div>
           </div>
         </div>

@@ -22,12 +22,16 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location',
     {
        $scope.user = JSON.parse(evt.data);
        console.log("Congratulations...");
-       $location.path("/login/")
+      //  $location.path("/login/")
+      $('#registration-success').modal('show');
     };
 
     ws.onclose = function(){
       console.log("closing the connection");
     };
+  }
 
+  $scope.navigateToLogin = function(){
+    $window.location = $location.absUrl().split('#')[0] + '#/login/';
   }
 }]);
