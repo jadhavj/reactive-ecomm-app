@@ -12,7 +12,7 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location',
     $rootScope.newUser = angular.copy($scope.user);
     console.log("new user registered : ", $rootScope.user);
 
-    var ws = new WebSocket("ws://localhost:9000/signup");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/signup");
     ws.onopen = function()
     {
        ws.send(JSON.stringify($scope.user));

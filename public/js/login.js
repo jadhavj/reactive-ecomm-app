@@ -1,6 +1,8 @@
 ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '$http', '$window', function($scope, $rootScope, $location, $http, $window){
   $scope.userCredentials = {};
 
+  
+  
   $scope.navigate = function(){
     $rootScope.authenticated($scope.user);
     console.log("Welcome ",$scope.user.username);
@@ -16,7 +18,7 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '
 
   $scope.submit = function(){
 
-    var ws = new WebSocket("ws://localhost:9000/login");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/login");
     ws.onopen = function(evt)
     {
        ws.send(JSON.stringify($scope.userCredentials));

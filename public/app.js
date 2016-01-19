@@ -36,6 +36,14 @@ ShoppingApp.config(['$routeProvider', function($routeProvider){
 }]);
 
 ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location', '$window' , function($scope, $rootScope, $location, $window){
+
+	var appBaseUrl = $location.absUrl();
+	var arr = appBaseUrl.split("/");
+	$rootScope.appBaseUrl = arr[0] + "//" + arr[2];
+	$rootScope.wsBaseUrl = "ws://" + arr[2];
+	console.log("appBaseUrl", $rootScope.appBaseUrl);
+	console.log("wsBaseUrl", $rootScope.wsBaseUrl);
+	
   $rootScope.user = {};
   $scope.userLoggedIn = $scope.userLoggedIn || false;
 

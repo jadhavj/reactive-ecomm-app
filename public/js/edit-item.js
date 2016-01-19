@@ -4,7 +4,7 @@ ShoppingApp.controller("editItemController", ['$rootScope', '$scope', 'dataTrans
 
   $scope.updateItemInfo = function(){
 	    console.log('Edit item : ',$scope.obj);
-	    $http.post('http://localhost:9000/editProduct', $scope.obj,{
+	    $http.post($rootScope.appBaseUrl + '/editProduct', $scope.obj,{
 	        headers: { 'Content-Type': 'application/json; charset=UTF-8'
 	        		}
 	    }).success(function(responseData) {

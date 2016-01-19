@@ -1,10 +1,10 @@
-ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$window', function($scope, $location, $window){
+ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$window', '$rootScope', function($scope, $location, $window, $rootScope){
   $scope.user_id = $location.url().split('/')[1];
   // $scope.items = {};
 
   $scope.getListOfProducts = function(){
 
-    var ws = new WebSocket("ws://localhost:9000/products");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/products");
     ws.onopen = function()
     {
        ws.send(JSON.stringify({"username": $scope.user_id}));
@@ -71,14 +71,14 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$wi
 
 
 
-ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUpload', function($scope, $location, fileUpload){
+ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUpload', '$rootScope', function($scope, $location, fileUpload, $rootScope){
 
     $scope.uploadFile = function(){
         var file = $scope.myFile;
         console.log('file is ' );
         console.dir(file);
         var absUrl = $location.absUrl().split('#');
-        var uploadUrl = "http://localhost:9000/uploadProducts";
+        var uploadUrl = $rootScope.appBaseUrl + "/uploadProducts";
         console.log("uploadUrl : ",uploadUrl);
         fileUpload.uploadFileToUrl(file, uploadUrl);
         $('#notification-success').modal('show');
@@ -91,7 +91,7 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
   $scope.user_id = $location.url().split('/')[1];
 
   $scope.getRecommendedProducts = function(){
-    var ws = new WebSocket("ws://localhost:9000/searchProducts");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/searchProducts");
     ws.onopen = function()
     {
        ws.send(JSON.stringify({"search_string": ""}));
@@ -119,7 +119,7 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', functi
   $scope.search = function(){
     // $scope.searchResults = items;
 
-    var ws = new WebSocket("ws://localhost:9000/searchProducts");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/searchProducts");
     ws.onopen = function()
     {
        ws.send(JSON.stringify({"search_string": $scope.searchProduct}));

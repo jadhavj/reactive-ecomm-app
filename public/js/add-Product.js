@@ -4,7 +4,7 @@ ShoppingApp.controller('addNewItemController', ['$scope', '$http', '$location', 
 
   $scope.addItem = function(){
     console.log('Adding item : ',$scope.product);
-    $http.post('http://localhost:9000/addProduct', $scope.product,{
+    $http.post($rootScope.appBaseUrl + '/addProduct', $scope.product,{
         headers: { 'Content-Type': 'application/json; charset=UTF-8'
         		}
     }).success(function(responseData) {
