@@ -46,7 +46,9 @@
 
       <div class="user-snapshot" ng-if='userLoggedIn'>
         <span>Hi {{user.username}},</span>
-        <span><a ng-click='logout()'  tooltip="logout"><i class="icon-exit" style="color: #FFF;" alt="logout"></i></a></span>
+        <span><a ng-click=''><i class="icon-shopping-cart" tooltip="Your cart is empty.." style="color: #FFF;" alt="empty cart"></i></a></span>
+        <span><a ng-click=''><i class="icon-shoppingcartalt" tooltip="Your cart has items.." style="color: #FFF;" alt="filled cart"></i></a></span>
+        <span><a ng-click='logout()'><i class="icon-exit" style="color: #FFF;" alt="logout" tooltip="logout"></i></a></span>
       </div>
     </div>
     <div class="hundred-percent" ng-view></div>
