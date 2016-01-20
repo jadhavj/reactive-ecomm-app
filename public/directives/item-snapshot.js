@@ -9,7 +9,7 @@ ShoppingApp.directive('xorItemSnapshot', ['$location', 'dataTransfer', function(
       var user_id = $location.url().split('/')[1];
       $scope.edit = function(){
         dataTransfer.set($scope.obj);
-        $location.path("/user-id=" + user_id + "/edit-item/item-id="+$scope.obj.id+"/");
+        $location.path("/user-id=" + user_id + "/edit-item/item-id="+$scope.obj._id+"/");
       }
     }
   };

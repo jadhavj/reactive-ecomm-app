@@ -61,8 +61,31 @@ xor-product-card{
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
   xor-item-snapshot{
+
+    button{
+      width: auto !important;
+      position: relative;
+      bottom: 1.8em;
+      left: 1em;
+
+      span{
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 615px) {
+  xor-item-snapshot{
+
+    .item{
+      div:first-child{
+        display: block;
+      }
+    }
+
     img, .description{
       width: 100% !important;
     }
