@@ -35,19 +35,23 @@
     <script type="text/javascript" src = "js/edit-item.js"></script>
     <script type="text/javascript" src = "js/add-Product.js"></script>
     <script type="text/javascript" src = "js/detailed-product-description.js"></script>
+    <script type="text/javascript" src = "js/buyer-cart.js"></script>
+    <script type="text/javascript" src = "js/buyer-checkout.js"></script>
 
   </head>
   <body ng-app="ShoppingApp">
     <div class="nav-bar span12 block" ng-controller='masterController'>
       <h1>
         <a ng-if="!userLoggedIn" href="#/login/">Shopping</a>
-        <a ng-if="userLoggedIn" href="#/dashboard/">Shopping</a>
+        <a ng-if="userLoggedIn" href="#/{{user.username}}/dashboard/{{user.role}}/">Shopping</a>
       </h1>
 
       <div class="user-snapshot" ng-if='userLoggedIn'>
         <span>Hi {{user.username}},</span>
-        <span><a ng-click=''><i class="icon-shopping-cart" tooltip="Your cart is empty.." style="color: #FFF;" alt="empty cart"></i></a></span>
-        <span><a ng-click=''><i class="icon-shoppingcartalt" tooltip="Your cart has items.." style="color: #FFF;" alt="filled cart"></i></a></span>
+        <span ng-if="user.role == 'buyer'">
+          <span><a ng-click=''><i class="icon-shopping-cart" tooltip="Your cart is empty.." style="color: #FFF;" alt="empty cart"></i></a></span>
+          <span><a ng-click=''><i class="icon-shoppingcartalt" tooltip="Your cart has items.." style="color: #FFF;" alt="filled cart"></i></a></span>
+        </span>
         <span><a ng-click='logout()'><i class="icon-exit" style="color: #FFF;" alt="logout" tooltip="logout"></i></a></span>
       </div>
     </div>
