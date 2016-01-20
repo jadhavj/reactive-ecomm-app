@@ -9,7 +9,7 @@ ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope',
   $scope.addToCart = function(){
     console.log($scope.obj.name+" added to cart..");
 
-    var ws = new WebSocket($rootScope.wsBaseUrl + "/products");
+    var ws = new WebSocket($rootScope.wsBaseUrl + "/addToCart");
     ws.onopen = function()
     {
        ws.send(JSON.stringify({"username": $scope.user_id, "product_id": $scope.obj._id}));
