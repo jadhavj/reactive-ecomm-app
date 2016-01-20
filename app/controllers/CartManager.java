@@ -83,6 +83,7 @@ public class CartManager {
 							User userInfo = Mongo.datastore().createQuery(User.class).field("username").equal(username)
 									.get();
 							List<String> products = new ArrayList<String>();
+							products.add(product.getId().toString());
 
 							Double total = product.getPricing().getSellingPrice();
 
@@ -119,7 +120,7 @@ public class CartManager {
 
 						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
 
-						Product product = Mongo.datastore().createQuery(Product.class).field("_id").equal(productId)
+						Product product = Mongo.datastore().createQuery(Product.class).field("_id").equal(new ObjectId(productId))
 								.get();
 
 						if (cart != null) {
@@ -135,7 +136,6 @@ public class CartManager {
 									break;
 								}
 							}
-
 							UpdateOperations<Cart> updatedCartItem = Mongo.datastore()
 									.createUpdateOperations(Cart.class).set("items", items).set("total", total);
 							Mongo.datastore().update(cart, updatedCartItem);
