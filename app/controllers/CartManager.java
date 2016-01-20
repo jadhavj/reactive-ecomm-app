@@ -43,25 +43,30 @@ public class CartManager {
 						try {
 							if (cart != null) {
 								cartDo = (BasicDBObject) JSON.parse(mapper.writeValueAsString(cart));
+							} else {
+								cartDo = new BasicDBObject();
 							}
 						} catch (JsonProcessingException e) {
 							e.printStackTrace();
 						}
 						
 						int i = 0;
-						for (BasicDBObject item : (List<BasicDBObject>) cartDo.get("items")) {
-							item.put("_id", cart.getItems().get(i).getId().toString());
-							item.remove("username");
-							item.remove("category");
-							item.remove("sub_category");
-							item.remove("features");
-							item.remove("specifications");
-							item.remove("items_in_stock");
-							item.remove("cities_for_delivery");
-							i++;
+						if (cartDo.get("items") != null && !((List<BasicDBObject>)cartDo.get("items")).isEmpty()) {
+							for (BasicDBObject item : (List<BasicDBObject>) cartDo.get("items")) {
+								item.put("_id", cart.getItems().get(i).getId().toString());
+								item.remove("username");
+								item.remove("category");
+								item.remove("sub_category");
+								item.remove("features");
+								item.remove("specifications");
+								item.remove("items_in_stock");
+								item.remove("cities_for_delivery");
+								i++;
+							}
+							cartDo.remove("_id");
+						} else {
+							cartDo = new BasicDBObject();
 						}
-
-						cartDo.remove("_id");
 
 						out.write(cartDo.toJson());
 					}
