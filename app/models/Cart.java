@@ -1,6 +1,5 @@
-
 package models;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +13,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@SuppressWarnings("serial")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "_id",
-    "orderID",
-    "orderItems",
-    "orderDate",
+    "items",
     "total",
     "status",
     "username",
-    "shippingAddress",
-    "paymentMode"
+    "shipping_address",
+    "payment_mode"
 })
-@Entity("Cart")
-public class Cart {
+@Entity("cart")
+public class Cart implements Serializable {
 
     /**
      * 
@@ -43,25 +41,10 @@ public class Cart {
      * (Required)
      * 
      */
-    @JsonProperty("orderID")
-    @Property("orderID")
-    private String orderID;
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("orderItems")
-    @Property("orderItems")
-    private List<String> orderItems = new ArrayList<String>();
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("orderDate")
-    @Property("orderDate")
-    private String orderDate;
+    @JsonProperty("items")
+    @Property("items")
+    private List<String> items = new ArrayList<String>();
+    
     /**
      * 
      * (Required)
@@ -91,18 +74,22 @@ public class Cart {
      * (Required)
      * 
      */
-    @JsonProperty("shippingAddress")
-	@Embedded("shippingAddress")
+    @JsonProperty("shipping_address")
+	@Embedded("shipping_address")
     private ShippingAddress shippingAddress;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("paymentMode")
-    @Embedded("paymentMode")
+    @JsonProperty("payment_mode")
+    @Embedded("payment_mode")
     private CardDetails paymentMode;
-    /**
+    
+    public Cart() {
+    }
+    
+	/**
     * 
     * (Required)
     * 
@@ -125,29 +112,6 @@ public class Cart {
    public void setId(ObjectId id) {
        this.id = id;
    }
-   /**
-   * 
-   * (Required)
-   * 
-   * @return
-   *     The orderID
-   */
-  @JsonProperty("orderID")
-  public String getOrderID() {
-      return orderID;
-  }
-
-  /**
-   * 
-   * (Required)
-   * 
-   * @param orderID
-   *     The orderID
-   */
-  @JsonProperty("orderID")
-  public void setOrderID(String orderID) {
-      this.orderID = orderID;
-  }
 
     /**
      * 
@@ -156,9 +120,9 @@ public class Cart {
      * @return
      *     The orderItems
      */
-    @JsonProperty("orderItems")
-    public List<String> getOrderItems() {
-        return orderItems;
+    @JsonProperty("items")
+    public List<String> getItems() {
+        return items;
     }
 
     /**
@@ -168,33 +132,9 @@ public class Cart {
      * @param orderItems
      *     The orderItems
      */
-    @JsonProperty("orderItems")
-    public void setOrderItems(List<String> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    /**
-     * 
-     * (Required)
-     * 
-     * @return
-     *     The orderDate
-     */
-    @JsonProperty("orderDate")
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    /**
-     * 
-     * (Required)
-     * 
-     * @param orderDate
-     *     The orderDate
-     */
-    @JsonProperty("orderDate")
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    @JsonProperty("items")
+    public void setItems(List<String> items) {
+        this.items = items;
     }
 
     /**
@@ -276,7 +216,7 @@ public class Cart {
      * @return
      *     The shippingAddress
      */
-    @JsonProperty("shippingAddress")
+    @JsonProperty("shipping_address")
     public ShippingAddress getShippingAddress() {
         return shippingAddress;
     }
@@ -288,7 +228,7 @@ public class Cart {
      * @param shippingAddress
      *     The shippingAddress
      */
-    @JsonProperty("shippingAddress")
+    @JsonProperty("shipping_address")
     public void setShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
@@ -300,7 +240,7 @@ public class Cart {
      * @return
      *     The paymentMode
      */
-    @JsonProperty("paymentMode")
+    @JsonProperty("payment_mode")
     public CardDetails getPaymentMode() {
         return paymentMode;
     }
@@ -312,10 +252,8 @@ public class Cart {
      * @param paymentMode
      *     The paymentMode
      */
-    @JsonProperty("paymentMode")
+    @JsonProperty("payment_mode")
     public void setPaymentMode(CardDetails paymentMode) {
         this.paymentMode = paymentMode;
     }
-
- 
 }
