@@ -517,6 +517,77 @@ body {
 #cost_price {
   text-decoration: line-through;
 }
+.cart-content .container {
+  margin: 1% 5%;
+}
+.cart-content .container .empty-cart {
+  width: auto;
+  background-color: red;
+  color: #FFF;
+  padding: 10px;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(white, red);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, red);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, red);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, red);
+  /* Standard syntax (must be last) */
+}
+.cart-content .container .empty-cart span {
+  font-size: 1.5em;
+}
+.cart-content .container .empty-cart p {
+  font-weight: 100;
+  font-size: 1em;
+}
+.cart-content .container .filled-cart {
+  width: auto;
+  background-color: red;
+  color: #FFF;
+  padding: 10px;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(white, green);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, green);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, green);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, green);
+  /* Standard syntax (must be last) */
+}
+.cart-content .container .filled-cart span {
+  font-size: 1.5em;
+}
+.cart-content .container .filled-cart p {
+  font-weight: 100;
+  font-size: 1em;
+}
+.cart-content .container .obj {
+  margin: 1% 3%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f7ecb5;
+}
+.cart-content .container .obj div {
+  padding: 5px;
+  height: 100px;
+}
+.cart-content .container .obj .remove-button {
+  font-size: 1.7em;
+  color: #fff;
+}
+.cart-content .container .obj img {
+  max-height: 100px !important;
+}
+.cart-content .container .obj img.middle {
+  vertical-align: middle;
+}
+.cart-content .container .obj .item-display {
+  width: 90%;
+  display: inline-block;
+}
 xor-item-snapshot img {
   min-height: 150px;
   max-height: 200px;

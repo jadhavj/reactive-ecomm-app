@@ -55,7 +55,8 @@ ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location',
   }
 
   $scope.gotoCart = function(){
-
+    var absUrl = $location.absUrl().split('#')[0];
+    $window.location =  absUrl + "#/user-id=" + $rootScope.user.username + "/cart/";
   }
 
   $rootScope.authenticated = function(user){

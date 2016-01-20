@@ -84,7 +84,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart">Continue Shopping</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart">Proceed to checkout</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="proceedToCheckout()">Proceed to checkout</button>
         </div>
       </div>
     </div>
@@ -97,7 +97,6 @@
           <h4 class="modal-title">Oooops..</h4>
         </div>
         <div class="modal-body">
-          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v" style="max-height: 600px"/>
           <div class="margin-v">Something went wrong..</div>
           <div class="margin-v">Please try after sometime.</div>
         </div>
