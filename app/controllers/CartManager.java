@@ -1,8 +1,10 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import models.Cart;
 import models.Product;
@@ -20,6 +22,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 public class CartManager {
 
@@ -161,8 +166,30 @@ public class CartManager {
 						String username = cartDo.getString("username");
 
 						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+						
+						ObjectMapper mapper = new ObjectMapper();
+						try {
+							cartDo = (BasicDBObject) JSON.parse(mapper.writeValueAsString(cart));
+						} catch (JsonProcessingException e1) {
+							e1.printStackTrace();
+						}
+						cartDo.remove("_id");
 
-						// TODO: RabbitMQ code..
+						String QUEUE_NAME = "orders";
+						ConnectionFactory factory = new ConnectionFactory();
+						factory.setHost("localhost");
+						try {
+							Connection connection = factory.newConnection();
+							Channel channel = connection.createChannel();
+							channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+							String message = cartDo.toJson();
+
+							channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+							channel.close();
+							connection.close();
+						} catch (IOException | TimeoutException e) {
+							e.printStackTrace();
+						}
 						
 						String productAddedString = new BasicDBObject("result", "success").toJson();
 						out.write(productAddedString);
