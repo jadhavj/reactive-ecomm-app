@@ -48,20 +48,28 @@ User:
 
 Cart:
 {
-"orderID":"A123",
-"orderItems":["123","234"],
-"orderDate":"11-11-2015",
-"total":27064,
-"status":"Order Placed",
-"username":"anuja",
-"shippingAddress":{
-			"firstname":"anuja",
-			"lastname":"jain",
-			"street":"baner road",
-			"city":"pune",
-			"state":"maharashtra",
-			"zip":411045,
-			"mobile_number":1234567890,
-		},
-"paymentMode":"COD"
+   "items":[
+      {
+         "_id":"569def0c6e695f12ccd58f1b",
+         "name":"HP 15 inch Expandable Laptop Backpack",
+         "pricing":{
+            "cost_price":1299.0,
+            "discount":819.0,
+            "selling_price":480.0
+         },
+         "image":"imagedata"
+      }
+   ],
+   "total":480.0,
+   "status":"incomplete",
+   "username":"jayesh",
+   "shipping_address":{
+      "firstname":"jayesh",
+      "lastname":"jadhav",
+      "street":"asdad",
+      "city":"asdas",
+      "state":"adasd",
+      "zip":13123,
+      "mobile_number":1234567890
+   }
 }
