@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "_id", "name", "username","category", "sub_category", "pricing",
-		"peatures", "image", "specifications", "items_in_stock",
+		"features", "image", "specifications", "items_in_stock",
 		"cities_for_delivery" })
 @Entity("products")
 public class Product {
