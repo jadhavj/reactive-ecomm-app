@@ -1,12 +1,15 @@
 
 package models;
 
+import java.io.Serializable;
+
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@SuppressWarnings("serial")
 @Embedded
-public class ShippingAddress {
+public class ShippingAddress implements Serializable {
 
 	@JsonProperty("firstname")
 	@Property("firstname")

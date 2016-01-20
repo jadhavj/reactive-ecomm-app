@@ -1,22 +1,19 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@SuppressWarnings("serial")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "card_number", "cardholder_name", "expiry", "card_type" })
 @Embedded
-public class CardDetails {
+public class CardDetails implements Serializable {
 
 	@JsonProperty("card_number")
 	@Property("card_number")
