@@ -25,3 +25,7 @@ POST	/addProduct				controllers.Products.addProduct()
 GET     /addToCart              controllers.CartManager.addToCart()
 
 GET     /removeFromCart			controllers.CartManager.removeFromCart()
+
+GET     /cart					controllers.CartManager.cart()
+
+GET     /checkout				controllers.CartManager.checkout()
