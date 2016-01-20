@@ -37,7 +37,7 @@ public class CartManager {
 						BasicDBObject itemDo = (BasicDBObject) JSON.parse(event);
 						String username = itemDo.getString("username");
 
-						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).field("status").equal("incomplete").get();
 						ObjectMapper mapper = new ObjectMapper();
 
 						BasicDBObject cartDo = new BasicDBObject();
@@ -190,6 +190,8 @@ public class CartManager {
 						} catch (IOException | TimeoutException e) {
 							e.printStackTrace();
 						}
+						
+						Mongo.datastore().delete(cart);
 						
 						String productAddedString = new BasicDBObject("result", "success").toJson();
 						out.write(productAddedString);
