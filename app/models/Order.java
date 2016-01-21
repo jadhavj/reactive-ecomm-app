@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "shipping_address",
     "payment_mode"
 })
-@Entity("carts")
-public class Cart implements Serializable {
+@Entity("orders")
+public class Order implements Serializable {
 
     /**
      * 
@@ -86,7 +86,7 @@ public class Cart implements Serializable {
     @Embedded("payment_mode")
     private CardDetails paymentMode;
     
-    public Cart() {
+    public Order() {
     }
     
 	/**
