@@ -42,8 +42,8 @@ public class Cart implements Serializable {
      * 
      */
     @JsonProperty("items")
-    @Property("items")
-    private List<String> items = new ArrayList<String>();
+    @Embedded("items")
+    private List<Product> items = new ArrayList<Product>();
     
     /**
      * 
@@ -121,7 +121,7 @@ public class Cart implements Serializable {
      *     The orderItems
      */
     @JsonProperty("items")
-    public List<String> getItems() {
+    public List<Product> getItems() {
         return items;
     }
 
@@ -133,7 +133,7 @@ public class Cart implements Serializable {
      *     The orderItems
      */
     @JsonProperty("items")
-    public void setItems(List<String> items) {
+    public void setItems(List<Product> items) {
         this.items = items;
     }
 
