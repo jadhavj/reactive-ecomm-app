@@ -507,8 +507,8 @@ body {
   vertical-align: top;
 }
 .add-edit-info img:first-child {
-  max-height: 400px;
-  width: 90%;
+  max-height: 800px;
+  min-height: 550px;
   margin: 0 auto;
 }
 #product-details span {
@@ -516,6 +516,10 @@ body {
 }
 #cost_price {
   text-decoration: line-through;
+}
+#notification-add-to-cart img {
+  width: auto;
+  max-height: 600px;
 }
 .cart-content .container {
   margin: 1% 5%;
@@ -581,12 +585,40 @@ body {
 .cart-content .container .obj img {
   max-height: 100px !important;
 }
-.cart-content .container .obj img.middle {
-  vertical-align: middle;
+.cart-content .container .obj .name,
+.cart-content .container .obj .amount,
+.cart-content .container .obj button {
+  position: relative;
+  bottom: 10px;
+  vertical-align: baseline-middle;
+  vertical-align: -webkit-baseline-middle;
+  vertical-align: -moz-baseline-middle;
+}
+.cart-content .container .obj .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cart-content .container .obj button {
+  bottom: 3.34em !important;
 }
 .cart-content .container .obj .item-display {
   width: 90%;
   display: inline-block;
+}
+.cart-content .checkout {
+  float: right;
+  margin-right: 8%;
+}
+@media (max-width: 850px) {
+  .amount {
+    font-size: 14px;
+  }
+}
+@media (max-width: 625px) {
+  .amount {
+    font-size: 14px;
+  }
 }
 xor-item-snapshot img {
   min-height: 150px;

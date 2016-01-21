@@ -79,11 +79,11 @@
           <h4 class="modal-title">Congratulations..</h4>
         </div>
         <div class="modal-body">
-          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v" style="max-height: 600px"/>
+          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v"/>
           <div class="margin-v">{{obj.name}} added to cart successfully.</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart">Continue Shopping</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="gotoDashboard()">Continue Shopping</button>
           <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="proceedToCheckout()">Proceed to checkout</button>
         </div>
       </div>

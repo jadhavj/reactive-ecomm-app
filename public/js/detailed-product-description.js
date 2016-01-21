@@ -32,4 +32,9 @@ ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope',
     $window.location = url;
   }
 
+  $scope.gotoDashboard = function(){
+    var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
+    $window.location = url;
+  }
+
 }]);
