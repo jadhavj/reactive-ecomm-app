@@ -1,20 +1,89 @@
 <div class="cart-content hundred-percent"  data-ng-controller="cartController">
   <div class="container ninety-percent">
     <!-- <xor-cart-content ng-repeat=""></xor-cart-content> -->
-    <div class="empty-cart">
-      <span>Greetings {{user_id}},</span>
-      <p>
-        Your cart is empty..
-      </p>
+    <div ng-if="cartIsEmpty">
+      <div class="empty-cart">
+        <span>Greetings {{username}},</span>
+        <p>
+          Your cart is empty..
+        </p>
+      </div>
     </div>
 
-    <div class="filled-cart">
-      <span>Greetings {{user_id}}</span>
-      <p>
-        Please checkout to receive the items early.
-      </p>
+    <div ng-if="!cartIsEmpty">
+      <div class="filled-cart">
+        <span>Greetings {{username}}</span>
+        <p>
+          Please checkout to receive the items early.
+        </p>
+      </div>
+
+      <div ng-repeat="item in cart.items track by $index" class="ninety-percent inline-block obj">
+
+        <div class="item-display">
+          <div class="forty-percent inline-block image">
+            <img class="middle img-responsive" height="100%" src="data:image/jpeg;base64,{{item.image}}" alt="{{item.name}}"/>
+          </div>
+
+          <div class="fifty-percent inline-block name">
+            <span>
+              {{item.name}}
+            </span>
+          </div>
+
+          <div class="ten-percent inline-block amount">
+            <span class="ten-percent inline-block">&#8377</span>
+            <span class="eighty-percent inline-block text-align-right">{{item.pricing.selling_price}}</span>
+          </div>
+        </div>
+
+        <button class="btn btn-danger ten-percent text-align-center" ng-click="removeFromCart(item)">
+          <i class="icon-remove-sign remove-button"></i>
+        </button>
+
+      </div>
+
+      <div class="ninety-percent obj">
+        <h3 class="inline-block text-align-center eighty-percent">Total</h3>
+        <h4 class="inline-block text-align-right ten-percent">&#8377 {{cart.total}}</h4>
+      </div>
+
+      <button class="btn btn-success checkout" ng-click="checkout()">Checkout</button>
     </div>
-
-
   </div>
+
+  <div id="notification-removed-from-cart" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Success..</h4>
+        </div>
+        <div class="modal-body">
+          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v" style="max-height: 600px"/>
+          <div class="margin-v">{{obj.name}} removed from cart successfully.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-removed-from-cart">Thanks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notification-removed-from-cart-failure" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Oooops..</h4>
+        </div>
+        <div class="modal-body">
+          <div class="margin-v">Something went wrong..</div>
+          <div class="margin-v">Please try after sometime.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-removed-from-cart-failure">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -1,5 +1,4 @@
-ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope', '$location','dataTransfer', function($scope, $rootScope, $location, dataTransfer){
-  console.log("in detailedProductViewController");
+ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope', '$location', '$window','dataTransfer', function($scope, $rootScope, $location, $window, dataTransfer){
   $scope.obj = dataTransfer.get();
   $scope.user_id = $rootScope.user.username;
 
@@ -19,12 +18,23 @@ ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope',
     {
        var output = angular.copy(JSON.parse(evt.data));
        ws.close();
+      //  $('#notification-add-to-cart').modal('show')
        (output.result == 'success') ? $('#notification-add-to-cart').modal('show') : $('#notification-add-to-cart-failure').modal('show');
     };
 
     ws.onclose = function(){
       console.log("closing the connection");
     };
+  }
+
+  $scope.proceedToCheckout = function(){
+    var url = $location.absUrl().split('#')[0] + "#/user-id=" + $rootScope.user.username + "/cart/";
+    $window.location = url;
+  }
+
+  $scope.gotoDashboard = function(){
+    var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
+    $window.location = url;
   }
 
 }]);
