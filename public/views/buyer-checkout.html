@@ -1,0 +1,29 @@
+<div ng-controller="checkoutController" class="checkout-content hundred-percent">
+  <div class="container ninety-percent">
+
+    <h3>
+      Dear {{user.username}},
+    </h3>
+
+    <h4>
+      Thank you for ordering.<br />
+      Your order will be delivered at
+    </h4>
+
+
+    <div class="address pad-a">
+      <span>{{cart.shipping_address.firstname}} {{cart.shipping_address.lastname}}</span>
+      <span>{{cart.shipping_address.street}}</span>
+      <span>{{cart.shipping_address.city}}-{{cart.shipping_address.zip}} </span>
+      <span>{{cart.shipping_address.state}}</span>
+    </div>
+
+    <span>You can consider that the product will be delivered within seven working days.</span>
+
+    <span>
+      Happy Shopping..
+    </span>
+
+    <button class="btn btn-success" ng-click="gotoDashboard()">Dashboard</button>
+  </div>
+</div>

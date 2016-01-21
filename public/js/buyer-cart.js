@@ -1,4 +1,4 @@
-ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$location", function($scope, $rootScope, $window, $location){
+ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$location", "dataTransfer", function($scope, $rootScope, $window, $location, dataTransfer){
 
   $scope.username = $rootScope.user.username;
   $scope.cart = [];
@@ -16,6 +16,7 @@ ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$l
        $scope.cart = angular.copy(JSON.parse((evt.data == '{}' || evt.data == '{ }') ? null : evt.data));
        $scope.cartIsEmpty = ($scope.cart == {} || $scope.cart == null) ? true : false;
        $scope.$apply();
+       dataTransfer.set($scope.cart);
        ws.close();
     };
 
