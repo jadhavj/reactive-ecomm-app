@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"features", "image", "specifications", "items_in_stock",
 		"cities_for_delivery" })
 @Entity("products")
-public class Product {
+public class Product implements Serializable {
 
 	/**
 	 * 

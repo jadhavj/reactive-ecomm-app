@@ -1,5 +1,7 @@
 package models;
 
+import java.io.Serializable;
+
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
@@ -10,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "cost_price", "discount", "selling_price" })
 @Embedded
-public class Pricing {
+public class Pricing implements Serializable {
 
 	@JsonProperty("cost_price")
 	@Property("cost_price")

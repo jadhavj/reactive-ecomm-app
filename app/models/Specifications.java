@@ -1,5 +1,7 @@
 package models;
 
+import java.io.Serializable;
+
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
 
@@ -10,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "brand", "model_no", "color", "size" })
 @Embedded
-public class Specifications {
+public class Specifications implements Serializable {
 
 	@JsonProperty("brand")
 	@Property("brand")
