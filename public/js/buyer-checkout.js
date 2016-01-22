@@ -3,6 +3,7 @@ ShoppingApp.controller('checkoutController',["$scope", "$rootScope", "$location"
   $scope.user = $rootScope.user;
   $scope.cart = dataTransfer.get();
   console.log("cart : ", $scope.cart);
+  $('#transaction-comlete').modal('show');   
 
   $scope.doCheckout = function(){
     var ws = new WebSocket($rootScope.wsBaseUrl + "/checkout");
