@@ -634,7 +634,7 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-.checkout-content .address span {
+.checkout-content span {
   display: block;
 }
 xor-item-snapshot img {

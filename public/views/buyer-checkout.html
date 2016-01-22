@@ -26,4 +26,21 @@
 
     <button class="btn btn-success" ng-click="gotoDashboard()">Dashboard</button>
   </div>
+
+  <div id="transaction-comlete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Transaction Complete..</h4>
+        </div>
+        <div class="modal-body">
+          <span>Thank you {{user.username}} for shoping with us..</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="doCheckout()">Complete Order..</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
