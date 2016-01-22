@@ -21,6 +21,7 @@ import models.Cart;
 import models.Product;
 import models.ShippingAddress;
 import models.User;
+import play.cache.Cache;
 import play.libs.F;
 import play.mvc.WebSocket;
 import utils.Mongo;
@@ -36,7 +37,16 @@ public class CartManager {
 						BasicDBObject itemDo = (BasicDBObject) JSON.parse(event);
 						String username = itemDo.getString("username");
 
-						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).field("status").equal("incomplete").get();
+						Cart cart = null;
+						
+						if (Cache.get(username) != null) {
+							cart = (Cart) Cache.get(username);
+							System.out.println("From cache.");
+						} else {
+							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+							System.out.println("From db.");
+						}
+
 						ObjectMapper mapper = new ObjectMapper();
 
 						BasicDBObject cartDo = new BasicDBObject();
@@ -84,7 +94,16 @@ public class CartManager {
 						BasicDBObject itemDo = (BasicDBObject) JSON.parse(event);
 						String username = itemDo.getString("username");
 
-						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+						Cart cart = null;
+						
+						if (Cache.get(username) != null) {
+							cart = (Cart) Cache.get(username);
+							System.out.println("From cache.");
+						} else {
+							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+							System.out.println("From db.");
+						}
+						
 
 						ObjectId productId = new ObjectId(itemDo.getString("product_id"));
 						Product product = Mongo.datastore().createQuery(Product.class).retrievedFields(false, "username", "category", "sub_category", "features", "specifications", "items_in_stock", "cities_for_delivery").field("_id").equal(productId)
@@ -100,6 +119,7 @@ public class CartManager {
 									.createUpdateOperations(Cart.class).set("items", items).set("total", total);
 
 							Mongo.datastore().update(cart, updatedCartItem);
+							Cache.set(username, cart);
 						} else {
 							String status = "incomplete";
 							User userInfo = Mongo.datastore().createQuery(User.class).field("username").equal(username)
@@ -120,6 +140,7 @@ public class CartManager {
 									userInfo.getAddress().getState(), userInfo.getAddress().getZip(),
 									userInfo.getMobileNumber()));
 							Mongo.datastore().save(cart);
+							Cache.set(username, cart);
 						}
 						String result = new BasicDBObject("result", "success").toJson();
 						out.write(result);
@@ -140,7 +161,15 @@ public class CartManager {
 						String username = cartDo.getString("username");
 						String productId = cartDo.getString("product_id");
 
-						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+						Cart cart = null;
+						
+						if (Cache.get(username) != null) {
+							cart = (Cart) Cache.get(username);
+							System.out.println("From cache.");
+						} else {
+							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+							System.out.println("From db.");
+						}
 
 						Product product = Mongo.datastore().createQuery(Product.class).field("_id").equal(new ObjectId(productId))
 								.get();
@@ -163,6 +192,7 @@ public class CartManager {
 							Mongo.datastore().update(cart, updatedCartItem);
 							String productAddedString = new BasicDBObject("result", "success").toJson();
 							out.write(productAddedString);
+							Cache.set(username, cart);
 						} else {
 							out.write(new BasicDBObject("result", "Cart empty.").toJson());
 						}
@@ -182,7 +212,15 @@ public class CartManager {
 
 						String username = cartDo.getString("username");
 
-						Cart cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+						Cart cart = null;
+						
+						if (Cache.get(username) != null) {
+							cart = (Cart) Cache.get(username);
+							System.out.println("From cache.");
+						} else {
+							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+							System.out.println("From db.");
+						}
 						
 						ObjectMapper mapper = new ObjectMapper();
 						try {
@@ -227,6 +265,8 @@ public class CartManager {
 						} catch (IOException | TimeoutException e) {
 							e.printStackTrace();
 						}
+						
+						Cache.remove(username);
 						
 						Mongo.datastore().delete(cart);
 						
