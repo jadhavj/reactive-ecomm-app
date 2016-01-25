@@ -1,4 +1,4 @@
-ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location', '$window', function($scope, $rootScope, $location, $window){
+ShoppingApp.controller('signupController', ['$scope', '$rootScope', 'getAbsUrl', function($scope, $rootScope, getAbsUrl){
   $scope.user.role = "buyer";
 
   $scope.reset = function(form){
@@ -32,6 +32,6 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', '$location',
   }
 
   $scope.navigateToLogin = function(){
-    $window.location = $location.absUrl().split('#')[0] + '#/login/';
+    getAbsUrl.navigateTo('/login/');
   }
 }]);

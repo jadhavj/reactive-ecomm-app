@@ -1,4 +1,4 @@
-ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope', '$location', '$window','dataTransfer', function($scope, $rootScope, $location, $window, dataTransfer){
+ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope', 'getAbsUrl','dataTransfer', function($scope, $rootScope, getAbsUrl, dataTransfer){
   $scope.obj = dataTransfer.get();
   $scope.user_id = $rootScope.user.username;
 
@@ -28,13 +28,15 @@ ShoppingApp.controller("detailedProductViewController", ['$scope', '$rootScope',
   }
 
   $scope.proceedToCheckout = function(){
-    var url = $location.absUrl().split('#')[0] + "#/user-id=" + $rootScope.user.username + "/cart/";
-    $window.location = url;
+    // var url = $location.absUrl().split('#')[0] + "#/user-id=" + $rootScope.user.username + "/cart/";
+    getAbsUrl.navigateTo("/user-id=" + $rootScope.user.username + "/cart/");
+    // $window.location = url;
   }
 
   $scope.gotoDashboard = function(){
-    var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
-    $window.location = url;
+    // var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
+    getAbsUrl.navigateTo("/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/");
+    // $window.location = url;
   }
 
 }]);

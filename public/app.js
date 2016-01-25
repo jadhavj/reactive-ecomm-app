@@ -34,34 +34,50 @@ ShoppingApp.config(['$routeProvider', function($routeProvider){
   })
 }]);
 
-ShoppingApp.controller('masterController', ['$scope', '$rootScope', '$location', '$window' , function($scope, $rootScope, $location, $window){
+ShoppingApp.controller('masterController', ['$scope', '$rootScope', 'getAbsUrl' , function($scope, $rootScope, getAbsUrl){
 
-	var appBaseUrl = $location.absUrl();
+	var appBaseUrl = getAbsUrl.url();
 	var arr = appBaseUrl.split("/");
 	$rootScope.appBaseUrl = arr[0] + "//" + arr[2];
 	$rootScope.wsBaseUrl = "ws://" + arr[2];
-	console.log("appBaseUrl", $rootScope.appBaseUrl);
-	console.log("wsBaseUrl", $rootScope.wsBaseUrl);
 
-  $rootScope.user = {};
-  $scope.userLoggedIn = $scope.userLoggedIn || false;
+  init()
+  function init() {
+    if (!store.enabled) {
+      alert('Local storage is not supported by your browser.\n Please disable "Private Mode", or upgrade to a modern browser.\n Or switch browser')
+      return
+    }
+  }
 
+  var user = store.get('user');
+  $rootScope.user = (user) ? user : {};
+  var userLoggedIn = store.get('userLoggedIn');
+  $scope.userLoggedIn = (userLoggedIn) ? true: false;
+  var cartIsEmpty = store.get('cartIsEmpty');
+  $scope.cartIsEmpty = (cartIsEmpty) ? true : false;
+  // $scope.$apply();
+
+  $scope.$on("cart-count", function(count){
+    console.log("cart-count --> app.js", count);
+    getAbsUrl.reload();
+  });
 
   $scope.logout = function(){
-    var absUrl = $location.absUrl().split('#');
     $rootScope.user = {};
     $scope.userLoggedIn = false;
-    $window.location.replace(absUrl[0] + '#/login/');
+    store.clear();
+    getAbsUrl.navigateTo('/login/');
   }
 
   $scope.gotoCart = function(){
-    var absUrl = $location.absUrl().split('#')[0];
-    $window.location =  absUrl + "#/user-id=" + $rootScope.user.username + "/cart/";
+    getAbsUrl.navigateTo("/user-id=" + $rootScope.user.username + "/cart/");
   }
 
   $rootScope.authenticated = function(user){
-      $scope.user = user;
-      console.log("user : ",user);
-      $scope.userLoggedIn = true;
+    $scope.user = user;
+    console.log("user : ",user);
+    $scope.userLoggedIn = true;
+    store.set('user', $rootScope.user);
+    store.set('userLoggedIn', true);
   }
 }]);

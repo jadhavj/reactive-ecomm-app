@@ -1,4 +1,4 @@
-ShoppingApp.directive('xorItemSnapshot', ['$location', 'dataTransfer', function($location, dataTransfer){
+ShoppingApp.directive('xorItemSnapshot', ['getAbsUrl', 'dataTransfer', "$rootScope", function(getAbsUrl, dataTransfer, $rootScope){
   return {
     restrict: 'E',
     templateUrl: 'directives/html/item-snapshot.html',
@@ -6,10 +6,10 @@ ShoppingApp.directive('xorItemSnapshot', ['$location', 'dataTransfer', function(
       obj: '=obj'
     },
     link: function($scope, element, attrs){
-      var user_id = $location.url().split('/')[1];
+      // var user_id = $location.url().split('/')[1];
       $scope.edit = function(){
         dataTransfer.set($scope.obj);
-        $location.path("/user-id=" + user_id + "/edit-item/item-id="+$scope.obj._id+"/");
+        getAbsUrl.navigateTo("/user-id=" + $rootScope.user.username + "/edit-item/item-id="+$scope.obj._id+"/");
       }
     }
   };

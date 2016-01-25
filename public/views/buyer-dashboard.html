@@ -18,7 +18,7 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox" ng-show="!!items.length">
-          <div class="item active">
+          <div class="item active"  ng-click='$event.preventDefault();goToProduct(items[0])'>
             <div class="image inline-block">
               <img src="data:image/jpeg;base64,{{items[0].image}}" class="img-responsive" alt="{{items[0].name}}" >
             </div>
@@ -27,7 +27,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[1])'>
             <div class="image inline-block">
               <img src="data:image/jpeg;base64,{{items[1].image}}" class="img-responsive" alt="{{items[1].name}}">
             </div>
@@ -36,7 +36,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[2])'>
             <div class="image inline-block">
               <img src="data:image/jpeg;base64,{{items[2].image}}" class="img-responsive" alt="{{items[2].name}}">
             </div>
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[3])'>
             <div class="image inline-block">
               <img src="data:image/jpeg;base64,{{items[3].image}}" class="img-responsive" alt="{{items[3].name}}">
             </div>
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[4])'>
             <div class="image inline-block">
               <img src="data:image/jpeg;base64,{{items[4].image}}" class="img-responsive" alt="{{items[4].name}}">
             </div>

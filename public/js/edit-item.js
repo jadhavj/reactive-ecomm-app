@@ -1,4 +1,4 @@
-ShoppingApp.controller("editItemController", ['$rootScope', '$scope', 'dataTransfer', '$http', '$location', '$window', function($rootScope, $scope, dataTransfer, $http, $location, $window){
+ShoppingApp.controller("editItemController", ['$rootScope', '$scope', 'dataTransfer', '$http', 'getAbsUrl', function($rootScope, $scope, dataTransfer, $http, getAbsUrl){
   console.log("in editItemController");
   $scope.obj = dataTransfer.get();
 
@@ -8,10 +8,11 @@ ShoppingApp.controller("editItemController", ['$rootScope', '$scope', 'dataTrans
 	        headers: { 'Content-Type': 'application/json; charset=UTF-8'
 	        		}
 	    }).success(function(responseData) {
-	        var absUrl = $location.absUrl().split('#')[0];
-	        $window.location = absUrl+"#/"+$rootScope.user.username+"/dashboard/"+$rootScope.user.role+"/";
+	        // var absUrl = $location.absUrl().split('#')[0];
+	        // $window.location = absUrl+"#/"+$rootScope.user.username+"/dashboard/"+$rootScope.user.role+"/";
+	        getAbsUrl.navigateTo("/"+$rootScope.user.username+"/dashboard/"+$rootScope.user.role+"/");
 	        console.log("successfully edited product");
-	    });   
+	    });
   };
 
 }]);
