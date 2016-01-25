@@ -3,6 +3,7 @@ ShoppingApp.controller('addNewItemController', ['$scope', '$http', 'getAbsUrl', 
   console.log("in addNewItemController");
 
   $scope.addItem = function(){
+    $scope.product.username = $rootScope.user.username;
     console.log('Adding item : ',$scope.product);
     $http.post($rootScope.appBaseUrl + '/addProduct', $scope.product,{
         headers: { 'Content-Type': 'application/json; charset=UTF-8'

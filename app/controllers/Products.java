@@ -115,9 +115,11 @@ public class Products extends Controller {
 			product.setItemsInStock(Integer.parseInt(addProductInfo
 					.getString("items_in_stock")));
 			List<String> citiesList = new ArrayList<String>();
-			for (String s : addProductInfo.get("cities_for_delivery")
-					.toString().split(",")) {
-				citiesList.add(s);
+			if (addProductInfo.get("cities_for_delivery") != null) {
+				for (String s : addProductInfo.get("cities_for_delivery")
+						.toString().split(",")) {
+					citiesList.add(s);
+				}
 			}
 			product.setCitiesForDelivery(citiesList);
 			Mongo.datastore().save(product);
