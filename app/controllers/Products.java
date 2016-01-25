@@ -81,8 +81,7 @@ public class Products extends Controller {
 
 		Product product = new Product();
 		BasicDBObject addProductInfo = (BasicDBObject) o;
-		// String userName = addProductInfo.getString("username");
-		String userName = "anuja";
+		String userName = addProductInfo.getString("username");
 		product.setUsername(userName);
 		List<User> users = Mongo.datastore().createQuery(User.class)
 				.field("username").equal(userName).asList();
