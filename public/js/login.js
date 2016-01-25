@@ -1,13 +1,11 @@
-ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '$http', '$window', function($scope, $rootScope, $location, $http, $window){
+ShoppingApp.controller('loginController', ['$scope','$rootScope', 'getAbsUrl', '$http', function($scope, $rootScope, getAbsUrl, $http){
   $scope.userCredentials = {};
 
-  
-  
   $scope.navigate = function(){
     $rootScope.authenticated($scope.user);
     console.log("Welcome ",$scope.user.username);
-    var absUrl = $location.absUrl().split('#')[0];
-    $window.location = absUrl+"#/"+$scope.user.username+"/dashboard/"+$scope.user.role+"/";
+    path = "/"+$scope.user.username+"/dashboard/"+$scope.user.role+"/";
+    getAbsUrl.navigateTo(path)
   }
 
   $scope.throwLoginError = function(){
@@ -27,7 +25,7 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '
     ws.onmessage = function (evt)
     {
        $scope.user = JSON.parse(evt.data);
-       $rootScope.user = $scope.user; 
+       $rootScope.user = $scope.user;
        $scope.$apply();
        ($scope.user.login == 'valid') ? $scope.navigate() : $scope.throwLoginError();
     };
@@ -43,6 +41,6 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', '$location', '
   }
 
   $scope.signup = function(){
-    $location.path('/signup')
+    getAbsUrl.navigateTo('/signup');
   }
 }]);

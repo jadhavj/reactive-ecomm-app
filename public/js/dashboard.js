@@ -1,6 +1,7 @@
-ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$window', '$rootScope', function($scope, $location, $window, $rootScope){
-  $scope.user_id = $location.url().split('/')[1];
+ShoppingApp.controller('merchantDashboardController',['$scope','getAbsUrl', '$rootScope', function($scope, getAbsUrl, $rootScope){
+  // $scope.user_id = $location.url().split('/')[1];
   // $scope.items = {};
+  $scope.user_id = $rootScope.user.username;
 
   $scope.getListOfProducts = function(){
 
@@ -59,12 +60,13 @@ ShoppingApp.controller('merchantDashboardController',['$scope','$location', '$wi
 
     $scope.addNewItem = function(){
     console.log("Adding new item");
-    var user_id = $location.url().split('/')[1];
-    $location.path("/user-id="+user_id+"/add-item/");
+    // var user_id = $location.url().split('/')[1];
+    // $location.path("/user-id="+user_id+"/add-item/");
+    getAbsUrl.navigateTo("/user-id="+$rootScope.user.username+"/add-item/");
   }
 
   $scope.reload = function(){
-    $window.location.reload();
+    getAbsUrl.reload();
   }
   // console.log(" browser history : ",historyObj);
 }]);
@@ -86,9 +88,10 @@ ShoppingApp.controller('bulkUploadController', ['$scope', '$location', 'fileUplo
 
 }]);
 
-ShoppingApp.controller('buyerDashboardController',['$scope', '$location', '$rootScope', function($scope, $location, $rootScope){
+ShoppingApp.controller('buyerDashboardController',['$scope', 'getAbsUrl', '$rootScope', 'dataTransfer', function($scope, getAbsUrl, $rootScope, dataTransfer){
   // currently accepting the items as the products for the buyer. need to have all the items from all the merchants in all items
-  $scope.user_id = $location.url().split('/')[1];
+  // $scope.user_id = $location.url().split('/')[1];
+  $scope.user_id = $rootScope.user.username;
 
   $scope.getRecommendedProducts = function(){
     var ws = new WebSocket($rootScope.wsBaseUrl + "/searchProducts");
@@ -115,6 +118,12 @@ ShoppingApp.controller('buyerDashboardController',['$scope', '$location', '$root
   $scope.getRecommendedProducts();
 
   console.log("recommendations ", $scope.recommendations  );
+
+  $scope.goToProduct = function(obj){
+    dataTransfer.set(obj);
+    getAbsUrl.navigateTo("/user-id=" + $rootScope.user.username + "/buyer/id="+obj._id+"/");
+  }
+
 
   $scope.search = function(){
     // $scope.searchResults = items;

@@ -1,8 +1,8 @@
-ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$location", "dataTransfer", function($scope, $rootScope, $window, $location, dataTransfer){
+ShoppingApp.controller("cartController", ["$scope", "$rootScope", "getAbsUrl", "dataTransfer", function($scope, $rootScope, getAbsUrl, dataTransfer){
 
   $scope.username = $rootScope.user.username;
   $scope.cart = [];
-  $scope.url = $location.absUrl().split('#')[0];
+  // $scope.url = $location.absUrl().split('#')[0];
 
   $scope.getMyCart = function(){
     var ws = new WebSocket($rootScope.wsBaseUrl + "/cart");
@@ -15,6 +15,9 @@ ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$l
     {
        $scope.cart = angular.copy(JSON.parse((evt.data == '{}' || evt.data == '{ }') ? null : evt.data));
        $scope.cartIsEmpty = ($scope.cart == {} || $scope.cart == null) ? true : false;
+       $scope.cartCount = ($scope.cartIsEmpty) ? true : $scope.cart.items.length;
+       $scope.$emit("cart-count",$scope.cartCount);
+       store.set("cartIsEmpty", $scope.cartIsEmpty);
        $scope.$apply();
        dataTransfer.set($scope.cart);
        ws.close();
@@ -56,7 +59,8 @@ ShoppingApp.controller("cartController", ["$scope", "$rootScope", "$window", "$l
   }
 
   $scope.checkout = function(){
-    $window.location = $scope.url + "#/user-id="+ $rootScope.user.username +"/checkout/";
+    // $window.location = $scope.url + "#/user-id="+ $rootScope.user.username +"/checkout/";
+    getAbsUrl.navigateTo("/user-id="+ $rootScope.user.username +"/checkout/");
   }
 
 }]);

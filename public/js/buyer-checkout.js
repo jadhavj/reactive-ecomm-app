@@ -1,9 +1,9 @@
-ShoppingApp.controller('checkoutController',["$scope", "$rootScope", "$location", "$window", "dataTransfer", function($scope, $rootScope, $location, $window, dataTransfer){
+ShoppingApp.controller('checkoutController',["$scope", "$rootScope", "getAbsUrl", "dataTransfer", function($scope, $rootScope, getAbsUrl, dataTransfer){
 
   $scope.user = $rootScope.user;
   $scope.cart = dataTransfer.get();
   console.log("cart : ", $scope.cart);
-  $('#transaction-comlete').modal('show');   
+  $('#transaction-comlete').modal('show');
 
   $scope.doCheckout = function(){
     var ws = new WebSocket($rootScope.wsBaseUrl + "/checkout");
@@ -25,8 +25,9 @@ ShoppingApp.controller('checkoutController',["$scope", "$rootScope", "$location"
   $scope.doCheckout();
 
   $scope.gotoDashboard = function(){
-    var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
-    $window.location = url;
+    // var url = $location.absUrl().split('#')[0] + "#/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/";
+    // $window.location = url;
+    getAbsUrl.navigateTo("/" + $rootScope.user.username + "/dashboard/" + $rootScope.user.role + "/")
   }
 
 }]);

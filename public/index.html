@@ -27,6 +27,7 @@
     <script type="text/javascript" src = "directives/product-card.js"></script>
     <script type="text/javascript" src = "js/factories/file-upload.js"></script>
     <script type="text/javascript" src = "js/factories/dataTransfer.js"></script>
+    <script type="text/javascript" src = "js/factories/absPath.js"></script>
     <script type="text/javascript" src = "js/login.js"></script>
     <script type="text/javascript" src = "js/signup.js"></script>
     <script type="text/javascript" src = "dummy-data/item-list.js"></script>
@@ -37,6 +38,7 @@
     <script type="text/javascript" src = "js/detailed-product-description.js"></script>
     <script type="text/javascript" src = "js/buyer-cart.js"></script>
     <script type="text/javascript" src = "js/buyer-checkout.js"></script>
+    <script type="text/javascript" src = "lib/store.min.js"></script>
 
   </head>
   <body ng-app="ShoppingApp">
@@ -49,8 +51,8 @@
       <div class="user-snapshot" ng-if='userLoggedIn'>
         <span>Hi {{user.username}},</span>
         <span ng-if="user.role == 'buyer'">
-          <span><a ng-click='gotoCart()'><i class="icon-shopping-cart" tooltip="Your cart is empty.." style="color: #FFF;" alt="empty cart"></i></a></span>
-          <span><a ng-click='gotoCart()'><i class="icon-shoppingcartalt" tooltip="Your cart has items.." style="color: #FFF;" alt="filled cart"></i></a></span>
+          <span><a ng-click='gotoCart()'><i class="icon-shopping-cart" tooltip="Your cart is empty.." style="color: #FFF;" alt="empty cart" ng-if="cartIsEmpty"></i></a></span>
+          <span><a ng-click='gotoCart()'><i class="icon-shoppingcartalt" tooltip="Your cart has items.." style="color: #FFF;" alt="filled cart" ng-if="!cartIsEmpty"></i></a></span>
         </span>
         <span><a ng-click='logout()'><i class="icon-exit" style="color: #FFF;" alt="logout" tooltip="logout"></i></a></span>
       </div>
