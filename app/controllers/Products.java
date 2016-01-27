@@ -249,7 +249,8 @@ public class Products extends Controller {
 						Product product = new Product(name, user.getString("username"), category, subCategory, pricing, features,
 								pictures.get(i - 1).getData(), specifications, itemsInStock, citiesForDelivery);
 
-						Mongo.asyncDatabase().getCollection("products").insertOne(Document.parse(mapper.writeValueAsString(product)), (Void result, final Throwable t) -> System.out.println("Inserted!"));
+						//Mongo.asyncDatabase().getCollection("products").insertOne(Document.parse(mapper.writeValueAsString(product)), (Void result, final Throwable t) -> System.out.println("Inserted!"));
+						Mongo.datastore().save(product);
 						i++;
 					}
 
