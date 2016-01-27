@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +14,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -23,17 +23,20 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.gridfs.GridFS;
-import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.util.JSON;
 
 import play.libs.F;
+import play.libs.F.Promise;
+import play.libs.F.RedeemablePromise;
+import play.libs.F.Function;
+import play.libs.F.Function0;
 import models.Pricing;
 import models.Product;
 import models.Specifications;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Results;
 import play.mvc.WebSocket;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -80,21 +83,20 @@ public class Products extends Controller {
 	}
 
 	public Result addProduct() {
-		
-		BasicDBObject addProductInfo = (BasicDBObject) JSON.parse(request().body().asMultipartFormData().asFormUrlEncoded().get("product")[0]);
+		String jsonString = request().body().asJson().toString();
+		Object o = com.mongodb.util.JSON.parse(jsonString);
+
 		Product product = new Product();
-		
-		MultipartFormData body = request().body().asMultipartFormData();
-		FilePart filePart = body.getFiles().get(0);
-		File imageFile = filePart.getFile();
+		BasicDBObject addProductInfo = (BasicDBObject) o;
+		String userName = addProductInfo.getString("username");
+		product.setUsername(userName);
 		List<User> users = Mongo.datastore().createQuery(User.class)
-				.field("username").equal(addProductInfo.getString("username")).asList();
+				.field("username").equal(userName).asList();
 		if (users != null && users.isEmpty()) {
 			String userNotSignedInString = new BasicDBObject("result",
 					"You must be signed-in to add a product").toJson();
 			System.out.println(userNotSignedInString);
 		} else {
-			product.setUsername(addProductInfo.getString("username"));
 			product.setName(addProductInfo.getString("name"));
 			product.setCategory(addProductInfo.getString("category"));
 			product.setSubCategory(addProductInfo.getString("sub_category"));
@@ -127,14 +129,6 @@ public class Products extends Controller {
 				}
 			}
 			product.setCitiesForDelivery(citiesList);
-			try {
-				FileInputStream in = new FileInputStream(imageFile);
-				byte[] imageData = new byte[new Long(imageFile.length()).intValue()];
-				in.read(imageData);
-				product.setImage(imageData);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			Mongo.datastore().save(product);
 			String productAddedString = new BasicDBObject("result",
 					"Product entry added to store.").toJson();
@@ -186,72 +180,94 @@ public class Products extends Controller {
 		return ok(new BasicDBObject("result", "success").toString());
 	}
 
-	public Result uploadProducts() throws Exception {
+	public Promise<Result> uploadProducts() throws Exception {
 
-		BasicDBObject user = (BasicDBObject) JSON.parse(request().body().asMultipartFormData().asFormUrlEncoded().get("sender")[0]);
-		
-		MultipartFormData body = request().body().asMultipartFormData();
-		FilePart catalogFile = body.getFiles().get(0);
+		Promise<String> promiseOfUploadStatus = Promise.promise(new Function0<String>() {
+			public String apply() throws IOException {
+				ObjectMapper mapper = new ObjectMapper();
+				
+				Document user = Document
+						.parse(request().body().asMultipartFormData().asFormUrlEncoded().get("sender")[0]);
+				
+				MultipartFormData body = request().body().asMultipartFormData();
+				FilePart catalogFile = body.getFiles().get(0);
 
-		if (catalogFile != null) {
-			File file = catalogFile.getFile();
-			FileInputStream inputStream = new FileInputStream(file);
+				if (catalogFile != null) {
+					File file = catalogFile.getFile();
+					FileInputStream inputStream = new FileInputStream(file);
 
-			Workbook workbook = new XSSFWorkbook(inputStream);
-			Sheet firstSheet = workbook.getSheetAt(0);
-			Iterator<Row> iterator = firstSheet.iterator();
-			@SuppressWarnings("unchecked")
-			List<PictureData> pictures = (List<PictureData>) workbook.getAllPictures();
+					Workbook workbook = new XSSFWorkbook(inputStream);
+					Sheet firstSheet = workbook.getSheetAt(0);
+					Iterator<Row> iterator = firstSheet.iterator();
+					@SuppressWarnings("unchecked")
+					List<PictureData> pictures = (List<PictureData>) workbook.getAllPictures();
 
-			int i = 0;
-			while (iterator.hasNext()) {
-				if (i == 0) {
-					i++;
-					iterator.next();
-					continue;
+					int i = 0;
+					while (iterator.hasNext()) {
+						if (i == 0) {
+							i++;
+							iterator.next();
+							continue;
+						}
+
+						Row nextRow = iterator.next();
+						if (nextRow.getCell(0) == null) {
+							break;
+						}
+
+						String name = nextRow.getCell(0).getStringCellValue();
+						String category = nextRow.getCell(1).getStringCellValue();
+						String subCategory = nextRow.getCell(2).getStringCellValue();
+
+						Double costPrice = nextRow.getCell(3).getNumericCellValue();
+						Double discount = nextRow.getCell(4).getNumericCellValue();
+						Double sellingPrice = nextRow.getCell(5).getNumericCellValue();
+						Pricing pricing = new Pricing(costPrice, discount, sellingPrice);
+
+						List<String> features = Arrays.asList(nextRow.getCell(6).getStringCellValue().split(","));
+
+						String brand = nextRow.getCell(8).getStringCellValue();
+						String modelNo = nextRow.getCell(9).getStringCellValue();
+						String color = nextRow.getCell(10).getStringCellValue();
+						String size = nextRow.getCell(11).getStringCellValue();
+						Specifications specifications = new Specifications(brand, modelNo, color, size);
+
+						Integer itemsInStock = Double.valueOf(nextRow.getCell(12).getNumericCellValue()).intValue();
+
+						List<String> citiesForDelivery = Arrays.asList(nextRow.getCell(13).getStringCellValue().split(","));
+
+						Product product = new Product(name, user.getString("username"), category, subCategory, pricing, features,
+								pictures.get(i - 1).getData(), specifications, itemsInStock, citiesForDelivery);
+
+						Mongo.asyncDatabase().getCollection("products").insertOne(Document.parse(mapper.writeValueAsString(product)), (Void result, final Throwable t) -> System.out.println("Inserted!"));
+						i++;
+					}
+
+					try {
+					Thread.sleep(10000);
+					} catch (java.lang.InterruptedException e) {
+						
+					}
+					System.out.println("DONE");
+					inputStream.close();
+					BasicDBObject result = new BasicDBObject("result", "success");
+					return result.toJson();
+				} else {
+					flash("error", "Missing file");
 				}
-
-				Row nextRow = iterator.next();
-				if (nextRow.getCell(0) == null) {
-					break;
-				}
-
-				String name = nextRow.getCell(0).getStringCellValue();
-				String category = nextRow.getCell(1).getStringCellValue();
-				String subCategory = nextRow.getCell(2).getStringCellValue();
-
-				Double costPrice = nextRow.getCell(3).getNumericCellValue();
-				Double discount = nextRow.getCell(4).getNumericCellValue();
-				Double sellingPrice = nextRow.getCell(5).getNumericCellValue();
-				Pricing pricing = new Pricing(costPrice, discount, sellingPrice);
-
-				List<String> features = Arrays.asList(nextRow.getCell(6).getStringCellValue().split(","));
-
-				String brand = nextRow.getCell(8).getStringCellValue();
-				String modelNo = nextRow.getCell(9).getStringCellValue();
-				String color = nextRow.getCell(10).getStringCellValue();
-				String size = nextRow.getCell(11).getStringCellValue();
-				Specifications specifications = new Specifications(brand, modelNo, color, size);
-
-				Integer itemsInStock = Double.valueOf(nextRow.getCell(12).getNumericCellValue()).intValue();
-
-				List<String> citiesForDelivery = Arrays.asList(nextRow.getCell(13).getStringCellValue().split(","));
-
-				Product product = new Product(name, user.getString("username"), category, subCategory, pricing, features,
-						pictures.get(i - 1).getData(), specifications, itemsInStock, citiesForDelivery);
-
-				Mongo.datastore().save(product);
-				i++;
+				BasicDBObject result = new BasicDBObject("result", "failure");
+				return result.toJson();
 			}
+		});
 
-			inputStream.close();
-			BasicDBObject result = new BasicDBObject("result", "failure");
-			return ok(result.toJson());
-		} else {
-			flash("error", "Missing file");
-		}
-		BasicDBObject result = new BasicDBObject("result", "failure");
-		return ok(result.toJson());
+		Promise<Result> promiseOfResult = promiseOfUploadStatus.map(new Function<String, Result>() {
+			public Result apply(String result) {
+				// This would apply once the redeemable promise succeed
+				return ok(result);
+			}
+		});
+
+		return promiseOfResult;
 	}
 
 	public WebSocket<String> search() {
@@ -289,4 +305,3 @@ public class Products extends Controller {
 		};
 	}
 }
-
