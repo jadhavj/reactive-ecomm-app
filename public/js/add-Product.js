@@ -1,5 +1,7 @@
-ShoppingApp.controller('addNewItemController', ['$scope', '$http', 'getAbsUrl', '$rootScope','dataTransfer',function($scope, $http, getAbsUrl, $rootScope,dataTransfer) {
-	this.addProduct = function () {
+ShoppingApp.controller('addNewItemController', ['$scope', '$http', 'getAbsUrl', '$rootScope',function($scope, $http, getAbsUrl, $rootScope) {
+  console.log("in addNewItemController");
+
+  $scope.addItem = function(){
 		var fd = new FormData();
 	    fd.append('file', $scope.myFile);
 	    $scope.product.username = $rootScope.user.username;
