@@ -6,6 +6,9 @@
 
   <div class="left-section fifty-percent img-display">
     <img src="{{product.img}}" alt="{{product.alt}}" class="img-responsive"/>
+    <input class="btn btn-primary" type="file" file-model="myFile"/>
+    <!--button ng-click="uploadFile()" data-dismiss="modal" data-target="#bulkItemUpload" class="btn btn-warning">Upload</button-->
+    
 
     <!-- <div class="image-roller">
       <img src="" alt=""/>
@@ -17,7 +20,6 @@
 
   <div class="right-section fifty-percent">
     <form class="inline">
-
       <div class="form-group">
         <label class="block">Name</label>
         <input type="text" class="block ninety-percent" ng-model="product.name"/>
@@ -90,3 +92,4 @@
     </form>
   </div>
 </div>
+
