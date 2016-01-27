@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,20 +24,20 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.util.JSON;
 
 import play.libs.F;
-import play.libs.F.Promise;
-import play.libs.F.RedeemablePromise;
 import play.libs.F.Function;
 import play.libs.F.Function0;
+import play.libs.F.Promise;
 import models.Pricing;
 import models.Product;
 import models.Specifications;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Results;
 import play.mvc.WebSocket;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -83,20 +84,21 @@ public class Products extends Controller {
 	}
 
 	public Result addProduct() {
-		String jsonString = request().body().asJson().toString();
-		Object o = com.mongodb.util.JSON.parse(jsonString);
-
+		
+		BasicDBObject addProductInfo = (BasicDBObject) JSON.parse(request().body().asMultipartFormData().asFormUrlEncoded().get("product")[0]);
 		Product product = new Product();
-		BasicDBObject addProductInfo = (BasicDBObject) o;
-		String userName = addProductInfo.getString("username");
-		product.setUsername(userName);
+		
+		MultipartFormData body = request().body().asMultipartFormData();
+		FilePart filePart = body.getFiles().get(0);
+		File imageFile = filePart.getFile();
 		List<User> users = Mongo.datastore().createQuery(User.class)
-				.field("username").equal(userName).asList();
+				.field("username").equal(addProductInfo.getString("username")).asList();
 		if (users != null && users.isEmpty()) {
 			String userNotSignedInString = new BasicDBObject("result",
 					"You must be signed-in to add a product").toJson();
 			System.out.println(userNotSignedInString);
 		} else {
+			product.setUsername(addProductInfo.getString("username"));
 			product.setName(addProductInfo.getString("name"));
 			product.setCategory(addProductInfo.getString("category"));
 			product.setSubCategory(addProductInfo.getString("sub_category"));
@@ -129,6 +131,14 @@ public class Products extends Controller {
 				}
 			}
 			product.setCitiesForDelivery(citiesList);
+			try {
+				FileInputStream in = new FileInputStream(imageFile);
+				byte[] imageData = new byte[new Long(imageFile.length()).intValue()];
+				in.read(imageData);
+				product.setImage(imageData);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			Mongo.datastore().save(product);
 			String productAddedString = new BasicDBObject("result",
 					"Product entry added to store.").toJson();
