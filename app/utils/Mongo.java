@@ -45,6 +45,12 @@ public class Mongo {
     }
     
     private static final CustomObjectMapper mapper = new CustomObjectMapper();
+
+    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create();
+    
+    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase("react-app");
+    
+    
     
     static {
     	init();
@@ -94,5 +100,9 @@ public class Mongo {
 			e.printStackTrace();
 			return null;
 		}
+    }
+    
+    public static com.mongodb.async.client.MongoDatabase asyncDatabase() {
+    	return aDatabase;
     }
 }
