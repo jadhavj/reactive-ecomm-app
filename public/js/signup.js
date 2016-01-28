@@ -6,13 +6,11 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', 'getAbsUrl',
   $scope.user.card_details = {};
   $scope.user.card_details.card_type = "VISA";
 
-  var today = new Date();
   $scope.today = {};
+  var today = new Date();
   $scope.today.date = (today.getDate() > 10) ? today.getDate() : "0"+today.getDate();
   $scope.today.month = ((today.getMonth()+1) > 10) ? (today.getMonth()+1) : "0"+(today.getMonth()+1);
   $scope.today.year = today.getFullYear();
-  $scope.today = $scope.today.year + "-" + $scope.today.month + "-" + $scope.today.date;
-  $scope.max_date = ($scope.today.year + 15) + "-12-31"
 
   $scope.reset = function(form){
     if(form){
