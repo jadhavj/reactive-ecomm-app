@@ -28,11 +28,46 @@
         </div>
       </div>
 
-
       <div class="form-group">
         <label class="inline-block thirty-percent">Register as</label>
         <input type="radio" ng-model="user.role" value="buyer">Buyer</input>
         <input type="radio" class="margin-h" ng-model="user.role" value="seller">Seller</input>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Credit/Debit Card No.</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Please enter the card no.." ng-model="user.card_details.card_number" name="card_number" required=""/>
+        <div ng-show="form.$submitted || form.card_number.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.card_number.$error.required">Please enter the credit/debit card number.</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Name on card</label>
+          <input type="text" class="inline-block seventy-percent" placeholder="Name on card.." ng-model="user.card_details.cardholder_name" name="cardholder_name" required=""/>
+        <div ng-show="form.$submitted || form.cardholder_name.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.cardholder_name.$error.required">Enter the name on the card. If name is not described, then mention the card owners name..</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Expiry Date</label>
+        <input type="text" class="inline-block seventy-percent" placeholder="Card expiry date.." ng-model="user.card_details.expiry" name="expiry" min="today" max="max_date" required=""/>
+        <div ng-show="form.$submitted || form.expiry.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.expiry.$error.required">Every card has an expiry date. Please enter that ?</label>
+        </div>
+      </div>
+
+      {{user.card_details.expiry}}
+
+      <div class="form-group">
+        <label class="inline-block thirty-percent">Card type</label>
+        <select class="inline-block seventy-percent" placeholder="Card type please.." ng-model="user.card_details.card_type" name="card_type" required="">
+          <option ng-repeat='type in card_types' value="{{type}}">{{type}}</option>
+        </select>
+        <div ng-show="form.$submitted || form.card_type.$touched">
+          <label class="inline-block seventy-percent error-message" ng-show="form.card_type.$error.required">Please enter the type of card.. Example - VISA, RuPay, Master, Maestro</label>
+        </div>
       </div>
 
       <div class="form-group">
