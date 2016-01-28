@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Fake Data" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1453966331000</longProp>
+        <longProp name="ThreadGroup.end_time">1453966331000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Create Buyers" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/createBuyers</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;user_count&quot;:10}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Place Order" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">10</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1453896746000</longProp>
+        <longProp name="ThreadGroup.end_time">1453896746000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Login" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/login</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;password&quot;:&quot;password&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Add Product" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/addToCart</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56a883b86e695f1f8fec09d7&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Add Product" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/addToCart</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56a883b86e695f1f8fec09e0&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Checkout" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/checkout</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Tear Down" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1453967747000</longProp>
+        <longProp name="ThreadGroup.end_time">1453967747000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Clean Up" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/cleanUp</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;clean_up&quot;:&quot;true&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
