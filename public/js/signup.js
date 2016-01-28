@@ -12,11 +12,12 @@ ShoppingApp.controller('signupController', ['$scope', '$rootScope', 'getAbsUrl',
   $scope.today.month = ((today.getMonth()+1) > 10) ? (today.getMonth()+1) : "0"+(today.getMonth()+1);
   $scope.today.year = today.getFullYear();
 
-  $scope.reset = function(form){
-    if(form){
-      form.$setPristine();
-      form.$setUntouched();
-    }
+  $scope.reset = function(){
+    // if(form){
+      // form.$setPristine();
+      // form.$setUntouched();
+      // $scope.forms.$setValidity();
+    // }
   }
 
   $scope.registerUser = function(){
