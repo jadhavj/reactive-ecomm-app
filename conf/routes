@@ -29,3 +29,7 @@ GET     /removeFromCart			controllers.CartManager.removeFromCart()
 GET     /cart					controllers.CartManager.cart()
 
 GET     /checkout				controllers.CartManager.checkout()
+
+GET		/createBuyers			controllers.FakeData.createBuyers()
+
+GET		/cleanUp				controllers.FakeData.cleanUp()
