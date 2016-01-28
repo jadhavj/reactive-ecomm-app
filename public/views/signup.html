@@ -52,13 +52,11 @@
 
       <div class="form-group">
         <label class="inline-block thirty-percent">Expiry Date</label>
-        <input type="text" class="inline-block seventy-percent" placeholder="Card expiry date.." ng-model="user.card_details.expiry" name="expiry" min="today" max="max_date" required=""/>
+        <input type="date" class="inline-block seventy-percent" placeholder="Card expiry date.." ng-model="user.card_details.expiry" name="expiry" min="{{today.year}}-{{today.month}}-{{today.date}}" required=""/>
         <div ng-show="form.$submitted || form.expiry.$touched">
           <label class="inline-block seventy-percent error-message" ng-show="form.expiry.$error.required">Every card has an expiry date. Please enter that ?</label>
         </div>
       </div>
-
-      {{user.card_details.expiry}}
 
       <div class="form-group">
         <label class="inline-block thirty-percent">Card type</label>
