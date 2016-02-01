@@ -19,8 +19,8 @@
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
-        <longProp name="ThreadGroup.start_time">1453966331000</longProp>
-        <longProp name="ThreadGroup.end_time">1453966331000</longProp>
+        <longProp name="ThreadGroup.start_time">1454053507000</longProp>
+        <longProp name="ThreadGroup.end_time">1454053507000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -35,7 +35,7 @@
           <stringProp name="WebSocketSampler.port">9000</stringProp>
           <stringProp name="WebSocketSampler.protocol">ws</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;user_count&quot;:10}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;user_count&quot;:100}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -79,7 +79,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1453896746000</longProp>
         <longProp name="ThreadGroup.end_time">1453896746000</longProp>
@@ -110,7 +110,7 @@
           <stringProp name="WebSocketSampler.port">9000</stringProp>
           <stringProp name="WebSocketSampler.protocol">ws</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56a883b86e695f1f8fec09d7&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab123ede35ed24ac6817d3&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -123,7 +123,20 @@
           <stringProp name="WebSocketSampler.port">9000</stringProp>
           <stringProp name="WebSocketSampler.protocol">ws</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56a883b86e695f1f8fec09e0&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab1226de35ed24ac6817d2&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.recvMessage"></stringProp>
+        </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
+        <hashTree/>
+        <net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler guiclass="net.unit8.jmeter.protocol.websocket.control.gui.WebSocketSamplerGui" testclass="net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler" testname="Remove Product" enabled="true">
+          <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.path">/removeFromCart</stringProp>
+          <stringProp name="WebSocketSampler.port">9000</stringProp>
+          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab1226de35ed24ac6817d2&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -141,6 +154,39 @@
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -198,7 +244,7 @@
           <stringProp name="WebSocketSampler.port">9000</stringProp>
           <stringProp name="WebSocketSampler.protocol">ws</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;clean_up&quot;:&quot;true&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;clean_up&quot;:&quot;false&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -236,6 +282,137 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>false</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">D:\aggregate.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
       <boolProp name="WorkBench.save">true</boolProp>
