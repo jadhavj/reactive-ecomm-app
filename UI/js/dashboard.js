@@ -1,6 +1,10 @@
+c3 = require('c3');
+
 ShoppingApp.controller('merchantDashboardController',['$scope','getAbsUrl', '$rootScope', function($scope, getAbsUrl, $rootScope){
   // $scope.user_id = $location.url().split('/')[1];
   // $scope.items = {};
+  console.log('c3',c3);
+
   $scope.user_id = $rootScope.user.username;
 
   $scope.getListOfProducts = function(){
