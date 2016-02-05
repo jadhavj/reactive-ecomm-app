@@ -18,18 +18,14 @@ var Config = {
   assets: [
     "/lib/",
     "/css/",
-    "/fonts/",
+    "/font/",
     "/images/",
     "/dummy-data/",
     "/views/"
   ]
 };
 
-
-
-
 /* Final build --------------------------------------------------------------------------------- */
-
 gulp.task("default", function() {
   console.log("------------------------------------------------------");
   console.log("Project build file. Available Targets:\r\n");
@@ -44,13 +40,11 @@ gulp.task("default", function() {
 });
 
 /* Clean --------------------------------------------------------------------------------------- */
-
 gulp.task("clean", function(cb) {
   del([Config.distdir + "/**"], cb);
 });
 
 /* Less Compilation ---------------------------------------------------------------------------- */
-
 gulp.task("lessc", function() {
   return gulp.src(Config.srcdir + "/app.less")
     .pipe(less())
@@ -61,7 +55,6 @@ gulp.task("lessc", function() {
 
 
 /* Application Bundle -------------------------------------------------------------------------- */
-
 gulp.task('build-scripts', function() {
   return  gulp.src([Config.srcdir + '/app.js', './' + Config.srcdir + '/directives/*.js', './' + Config.srcdir + '/js/**.js', './' + Config.srcdir + '/js/**/*.js', './'])
     .pipe(concat('app.js'))
@@ -71,11 +64,9 @@ gulp.task('build-scripts', function() {
 
 gulp.task('assets', function() {
   Config.assets.forEach(function(ass) {
-    console.log("assets : ", ass);
     return gulp.src(Config.srcdir + ass + "**/*.*")
       .pipe(gulp.dest(Config.distdir + ass));
   });
-  //
 });
 
 gulp.task('index', function() {
@@ -83,21 +74,9 @@ gulp.task('index', function() {
     .pipe(gulp.dest(Config.distdir));
 })
 
-gulp.task('directive-views', function() {
-  console.log("Entered in directive-views");
-  // return gulp.src('./' + Config.srcdir + '/directives/html/*.*')
-  //   .pipe(gulp.dest('./' + Config.distdir + '/views/'));
-})
-
 
 /* Final build --------------------------------------------------------------------------------- */
-
-gulp.task("build", ["clean", "lessc", "build-scripts", "assets", "index", "directive-views"], function() {
-  // copy other assets
-
-  // return gulp.src('./' + Config.srcdir + '/directives/html/*.*')
-  //   .pipe(gulp.dest('./' + Config.distdir + '/views/'));
-
+gulp.task("build", ["clean", "lessc", "build-scripts", "assets", "index"], function() {
 });
 
 /* Local server -------------------------------------------------------------------------------- */

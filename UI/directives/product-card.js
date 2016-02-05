@@ -1,7 +1,7 @@
 ShoppingApp.directive('xorProductCard', ['getAbsUrl', 'dataTransfer', '$rootScope', function(getAbsUrl, dataTransfer, $rootScope){
   return {
     restrict: 'E',
-    templateUrl: 'directives/html/product-card.html',
+    templateUrl: 'views/product-card.html',
     scope: {
       obj: '=obj'
     },

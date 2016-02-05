@@ -1,7 +1,7 @@
 ShoppingApp.directive('xorItemSnapshot', ['getAbsUrl', 'dataTransfer', "$rootScope", function(getAbsUrl, dataTransfer, $rootScope){
   return {
     restrict: 'E',
-    templateUrl: 'directives/html/item-snapshot.html',
+    templateUrl: 'views/item-snapshot.html',
     scope: {
       obj: '=obj'
     },

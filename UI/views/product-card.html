@@ -1,0 +1,8 @@
+<div class="top-5 inline-block twenty-percent text-align-center">
+  <!-- {{obj.name}} -->
+  <div class="list-item-box" ng-click='$event.preventDefault();goToProduct()'>
+    <img src="data:image/jpeg;base64, {{obj.image}}" alt="{{obj.name}}" data-toggle="tooltip" title="{{obj.name}}"/>
+    <a>{{obj.name}}</a>
+    <span class="block text-align-left">&#8377 {{obj.pricing.selling_price}}</span>
+  </div>
+</div>

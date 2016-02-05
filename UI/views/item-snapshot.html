@@ -1,0 +1,26 @@
+<div class="item">
+  <div class="thirty-percent pad-a text-align-center">
+    <img src="data:image/jpeg;base64, {{obj.image}}" alt="{{obj.name}}" class="img-responsive"/>
+  </div>
+  <div class="description seventy-percent">
+    <h3 class="fifty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.name}}">{{obj.name}}</h3>
+    <h4 class="forty-percent capitalize" data-toggle="tooltip" data-placement="top" title="{{obj.category}}">{{obj.category}}</h4>
+    <button class="btn btn-success ten-percent" ng-click="edit()" data-toggle="tooltip" title="Edit {{obj.name}}">
+      <span>Edit</span>
+      <i class="icon-edit"></i>
+    </button>
+    <div class="details">
+      <h4 class="block"><i>&#8377 {{obj.pricing.selling_price}}</i></h4>
+      <ul class="text-align-justify">
+       <li ng-repeat = "i in obj.specifications">{{i}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
+</div>
