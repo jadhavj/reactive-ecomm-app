@@ -1,0 +1,27 @@
+<div class="login-content" data-ng-controller = "loginController">
+  <div class="offers-display left">
+    <img src="images/xoriant_logo.png" class="eighty-percent img-rounded img-responsive pad-v"></img>
+  </div>
+  <div class="offers-display pad-a margin-a">
+    <h4 class="login-heading round-corner-top">Please Login</h4>
+      <form class="inline">
+        <div class="login-container form-group round-corner-bottom">
+          <label>Username</label>
+          <input type="text" placeholder="Username" ng-model="userCredentials.username"></input>
+          <label>Password</label>
+          <input type="password" placeholder="Password" ng-model="userCredentials.password"></input>
+          <h6 class="error-message" ng-show="errorMessage"><i>*{{errorMessage}}</i></h6>
+          <div class="right">
+            <button type="reset" class="btn btn-danger margin-v" ng-click="clear()">Clear</button>
+            <button type="submit" class="btn btn-primary margin-v" ng-click="submit()" ng-disabled="!userCredentials.username || !userCredentials.password">Login</button>
+          </div>
+
+          <div class="right text-align-right">
+            <span class="margin-v">Not register yet ? </span>
+            <button type="submit" class="btn btn-primary margin-v" ng-click="signup()">Sign Up</button>
+          </div>
+
+      </div>
+    </form>
+  </div>
+</div>

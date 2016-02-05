@@ -63,7 +63,7 @@ gulp.task("lessc", function() {
 /* Application Bundle -------------------------------------------------------------------------- */
 
 gulp.task('build-scripts', function() {
-  return  gulp.src(['./' + Config.srcdir + '/directives/*.js', './' + Config.srcdir + '/js/**.js', './' + Config.srcdir + '/js/**/*.js', './' + Config.srcdir + '/app.js'])
+  return  gulp.src([Config.srcdir + '/app.js', './' + Config.srcdir + '/directives/*.js', './' + Config.srcdir + '/js/**.js', './' + Config.srcdir + '/js/**/*.js', './'])
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./'+ Config.distdir +'/js/'));

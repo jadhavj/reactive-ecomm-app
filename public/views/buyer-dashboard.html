@@ -1,0 +1,101 @@
+<div class="dashboard-content hundred-percent">
+  <div data-ng-controller="buyerDashboardController">
+
+    <div class="block text-align-center">
+      <h2>Welcome the festive season with bang..</h2>
+    </div>
+
+    <div class="carousel-body">
+      <div id="topCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#topCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#topCarousel" data-slide-to="1"></li>
+          <li data-target="#topCarousel" data-slide-to="2"></li>
+          <li data-target="#topCarousel" data-slide-to="3"></li>
+          <li data-target="#topCarousel" data-slide-to="4"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" ng-show="!!items.length">
+          <div class="item active"  ng-click='$event.preventDefault();goToProduct(items[0])'>
+            <div class="image inline-block">
+              <img src="data:image/jpeg;base64,{{items[0].image}}" class="img-responsive" alt="{{items[0].name}}" >
+            </div>
+            <div class="top-carousel-caption">
+              <h3>{{items[0].name}}</h3>
+            </div>
+          </div>
+
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[1])'>
+            <div class="image inline-block">
+              <img src="data:image/jpeg;base64,{{items[1].image}}" class="img-responsive" alt="{{items[1].name}}">
+            </div>
+            <div class="top-carousel-caption">
+              <h3>{{items[1].name}}</h3>
+            </div>
+          </div>
+
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[2])'>
+            <div class="image inline-block">
+              <img src="data:image/jpeg;base64,{{items[2].image}}" class="img-responsive" alt="{{items[2].name}}">
+            </div>
+            <div class="top-carousel-caption">
+              <h3>{{items[2].name}}</h3>
+            </div>
+          </div>
+
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[3])'>
+            <div class="image inline-block">
+              <img src="data:image/jpeg;base64,{{items[3].image}}" class="img-responsive" alt="{{items[3].name}}">
+            </div>
+            <div class="top-carousel-caption">
+              <h3>{{items[3].name}}</h3>
+            </div>
+          </div>
+
+          <div class="item" ng-click='$event.preventDefault();goToProduct(items[4])'>
+            <div class="image inline-block">
+              <img src="data:image/jpeg;base64,{{items[4].image}}" class="img-responsive" alt="{{items[4].name}}">
+            </div>
+            <div class="top-carousel-caption">
+              <h3>{{items[4].name}}</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+
+        <!-- <a class="left carousel-control" href="{{url}}"+"#topCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="right carousel-control" href="{{url}}"+"#topCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+ -->
+
+      </div>
+    </div>
+
+
+    <div class="user-search">
+      <input type="text" class="user-search-box" ng-model="searchProduct" placeholder="Whats up in your mind ?"/>
+      <i class="icon-squaresearch" ng-click="search()"></i>
+    </div>
+
+    <div class="product margin-a animate-show" id="search-results">
+      <h4 class="block">Search Results..</h4>
+      <xor-product-card ng-repeat="item in searchResults track by item._id" obj="item"></xor-product-card>
+    </div>
+
+    <div class="product margin-a">
+      <h4 class="block">Recommendations for you..</h4>
+      <xor-product-card ng-repeat="item in recommendations track by item._id" obj="item"></xor-product-card>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<!-- less file used for this page is add-edit-item.less as most of the fields are same on this page  -->
+
+<div class="edit-item-content hundred-percent add-edit-info" id="product-details"  data-ng-controller="detailedProductViewController">
+
+  <div class="left-section fifty-percent img-display margin-v">
+    <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v" id="img-product"/>
+
+    <!-- <div class="image-roller">
+      <img src="" alt=""/>
+      <img src="" alt=""/>
+      <img src="" alt=""/>
+      <img src="" alt=""/>
+    </div> -->
+  </div>
+
+  <div class="right-section fifty-percent margin-v">
+    <form class="inline">
+
+      <div class="form-group">
+        <label class="block">Name</label>
+        <span class="block ninety-percent font-weight-lighter">{{obj.name}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block"> Category</label>
+        <span class="block ninety-percent font-weight-lighter capitalize">{{obj.category}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Sub-Category</label>
+        <span class="block ninety-percent font-weight-lighter capitalize">{{obj.sub_category}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Cost Price</label>
+        <span id="cost_price" class="block ninety-percent font-weight-lighter" tooltip="INR">{{obj.pricing.cost_price}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Discount (%)</label>
+        <span class="block ninety-percent font-weight-lighter" tooltip="%">{{obj.pricing.discount}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Effective Price</label>
+        <span class="block ninety-percent font-weight-lighter" tooltip="INR">{{obj.pricing.selling_price}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Specifications</label>
+        <span class="block ninety-percent font-weight-lighter capitalize" ng-repeat="spec in obj.specifications track by $index">{{spec}}<br/></span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Features</label>
+        <span class="block ninety-percent font-weight-lighter capitalize" ng-repeat="feat in obj.features track by $index">{{feat}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Cities we deliver in </label>
+        <span class="block ninety-percent font-weight-lighter capitalize" ng-repeat="city in obj.cities_for_delivery track by $index">{{city}}</span>
+      </div>
+
+      <div class="form-group" class="block">
+        <label class="block">Available stocks </label>
+        <span class="block ninety-percent font-weight-lighter">{{obj.items_in_stock}}</span>
+      </div>
+
+      <div class="block text-align-right ninety-percent" style="margin: 1px;">
+        <button class="btn btn-primary twenty-percent" ng-click="addToCart()"><i class="icon-addtocart"></i> Add to cart </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="notification-add-to-cart" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Congratulations..</h4>
+        </div>
+        <div class="modal-body">
+          <img src="data:image/jpeg;base64,{{obj.image}}" alt="{{obj.name}}" class="img-responsive margin-v"/>
+          <div class="margin-v">{{obj.name}} added to cart successfully.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="gotoDashboard()">Continue Shopping</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart" ng-click="proceedToCheckout()">Proceed to checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notification-add-to-cart-failure" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Oooops..</h4>
+        </div>
+        <div class="modal-body">
+          <div class="margin-v">Something went wrong..</div>
+          <div class="margin-v">Please try after sometime.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#notification-add-to-cart-failure">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
