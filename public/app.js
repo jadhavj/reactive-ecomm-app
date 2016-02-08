@@ -39,7 +39,7 @@ ShoppingApp.controller('masterController', ['$scope', '$rootScope', 'getAbsUrl' 
 	var appBaseUrl = getAbsUrl.url();
 	var arr = appBaseUrl.split("/");
 	$rootScope.appBaseUrl = arr[0] + "//" + arr[2];
-	$rootScope.wsBaseUrl = "ws://" + arr[2];
+	$rootScope.wsBaseUrl = "wss://" + arr[2]+":4443";
 
   init()
   function init() {
