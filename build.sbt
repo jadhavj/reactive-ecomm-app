@@ -18,3 +18,6 @@ libraryDependencies ++= Seq(
 routesGenerator := InjectedRoutesGenerator
 
  resolvers += "Spy Repository" at "http://files.couchbase.com/maven2" // required to resolve `spymemcached`, the plugin's dependency.
+
+
+fork in run := true

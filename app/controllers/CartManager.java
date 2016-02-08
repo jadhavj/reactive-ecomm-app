@@ -1,6 +1,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -252,7 +255,15 @@ public class CartManager {
 
 						String QUEUE_NAME = "orders";
 						ConnectionFactory factory = new ConnectionFactory();
-						factory.setHost("localhost");
+						try {
+							factory.setUri("amqp://yjrjgxai:hxtvMivibGNpq0cuyzFM78CVFLa8XuJg@jaguar.rmq.cloudamqp.com/yjrjgxai");
+						} catch (KeyManagementException
+								| NoSuchAlgorithmException | URISyntaxException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						factory.setUsername("yjrjgxai");
+						factory.setPassword("hxtvMivibGNpq0cuyzFM78CVFLa8XuJg");
 						try {
 							Connection connection = factory.newConnection();
 							Channel channel = connection.createChannel();

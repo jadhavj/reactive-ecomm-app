@@ -15,13 +15,14 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.util.JSON;
 
 public class Mongo {
 
     private static final Morphia morphia = new Morphia();
 
-    private static final Datastore datastore = morphia.createDatastore(new MongoClient(), "react-app");
+    private static final Datastore datastore = morphia.createDatastore(new MongoClient(new MongoClientURI("mongodb://CloudFoundry_iilvoggr_6v94fuh0_gt47v18a:2xg9hSA41Xw3fucUtpFiEiI72yPFiIBF@ds055565.mongolab.com:55565/CloudFoundry_iilvoggr_6v94fuh0")), "CloudFoundry_iilvoggr_6v94fuh0");
     
     public static class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
@@ -46,9 +47,9 @@ public class Mongo {
     
     private static final CustomObjectMapper mapper = new CustomObjectMapper();
 
-    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create();
+    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create("mongodb://CloudFoundry_iilvoggr_6v94fuh0_gt47v18a:2xg9hSA41Xw3fucUtpFiEiI72yPFiIBF@ds055565.mongolab.com:55565/CloudFoundry_iilvoggr_6v94fuh0");
     
-    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase("react-app");
+    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase("CloudFoundry_iilvoggr_6v94fuh0");
     
     
     

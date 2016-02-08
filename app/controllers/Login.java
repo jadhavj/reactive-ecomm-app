@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 
 import models.User;
+import play.Play;
 import play.libs.F;
 import play.mvc.*;
 import utils.Mongo;
@@ -16,7 +17,6 @@ import java.util.List;
 public class Login extends Controller {
 
 	public WebSocket<String> login() {
-
 		return new WebSocket<String>() {
 			public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
 				in.onMessage(new F.Callback<String>() {
