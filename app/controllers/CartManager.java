@@ -255,15 +255,18 @@ public class CartManager {
 
 						String QUEUE_NAME = "orders";
 						ConnectionFactory factory = new ConnectionFactory();
+					    String uri = play.Configuration.root().getString("rabbitmq.uri");
+					    String user = play.Configuration.root().getString("rabbitmq.user");
+					    String password = play.Configuration.root().getString("rabbitmq.password");
 						try {
-							factory.setUri("amqp://yjrjgxai:hxtvMivibGNpq0cuyzFM78CVFLa8XuJg@jaguar.rmq.cloudamqp.com/yjrjgxai");
+							factory.setUri("amqp://" + user + ":" + password + "jaguar.rmq.cloudamqp.com/" + user);
 						} catch (KeyManagementException
 								| NoSuchAlgorithmException | URISyntaxException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						factory.setUsername("yjrjgxai");
-						factory.setPassword("hxtvMivibGNpq0cuyzFM78CVFLa8XuJg");
+						factory.setUsername(user);
+						factory.setPassword(password);
 						try {
 							Connection connection = factory.newConnection();
 							Channel channel = connection.createChannel();

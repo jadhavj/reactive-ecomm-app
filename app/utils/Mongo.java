@@ -24,9 +24,9 @@ public class Mongo {
 
     private static String host = play.Configuration.root().getString("mongo.host");
     private static String port = play.Configuration.root().getString("mongo.port");
-    private static String user = play.Configuration.root().getString("mongo.host");
-    private static String password = play.Configuration.root().getString("mongo.host");
-    private static String db = play.Configuration.root().getString("mongo.host");
+    private static String user = play.Configuration.root().getString("mongo.user");
+    private static String password = play.Configuration.root().getString("mongo.password");
+    private static String db = play.Configuration.root().getString("mongo.db");
 
     private static final Datastore datastore = morphia.createDatastore(new MongoClient(new MongoClientURI("mongodb://" + user +":" + password + "@" + host + ":" + port + "/" + db)), db);
     
