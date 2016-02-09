@@ -1,6 +1,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -252,7 +255,18 @@ public class CartManager {
 
 						String QUEUE_NAME = "orders";
 						ConnectionFactory factory = new ConnectionFactory();
-						factory.setHost("localhost");
+					    String uri = play.Configuration.root().getString("rabbitmq.uri");
+					    String user = play.Configuration.root().getString("rabbitmq.user");
+					    String password = play.Configuration.root().getString("rabbitmq.password");
+						try {
+							factory.setUri("amqp://" + user + ":" + password + "jaguar.rmq.cloudamqp.com/" + user);
+						} catch (KeyManagementException
+								| NoSuchAlgorithmException | URISyntaxException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						factory.setUsername(user);
+						factory.setPassword(password);
 						try {
 							Connection connection = factory.newConnection();
 							Channel channel = connection.createChannel();

@@ -15,8 +15,8 @@ ShoppingApp.controller('loginController', ['$scope','$rootScope', 'getAbsUrl', '
   }
 
   $scope.submit = function(){
-
     var ws = new WebSocket($rootScope.wsBaseUrl + "/login");
+    console.log("Log:",ws);
     ws.onopen = function(evt)
     {
        ws.send(JSON.stringify($scope.userCredentials));

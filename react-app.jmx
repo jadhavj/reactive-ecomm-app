@@ -30,10 +30,10 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/createBuyers</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
           <stringProp name="WebSocketSampler.sendMessage">{&quot;user_count&quot;:100}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
@@ -79,7 +79,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1453896746000</longProp>
         <longProp name="ThreadGroup.end_time">1453896746000</longProp>
@@ -92,10 +92,10 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/login</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
           <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;password&quot;:&quot;password&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
@@ -105,12 +105,12 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/addToCart</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab123ede35ed24ac6817d3&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56b893147011f2000e47c6b1&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -118,12 +118,12 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/addToCart</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab1226de35ed24ac6817d2&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56b893197011f2000e47c6b2&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -131,12 +131,12 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/removeFromCart</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56ab1226de35ed24ac6817d2&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;,&quot;product_id&quot;:&quot;56b893147011f2000e47c6b1&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
@@ -144,10 +144,10 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/checkout</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
           <stringProp name="WebSocketSampler.sendMessage">{&quot;username&quot;:&quot;buyer${__threadNum}&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
@@ -239,12 +239,12 @@
           <elementProp name="WebSocketSampler.arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="WebSocketSampler.domain">localhost</stringProp>
+          <stringProp name="WebSocketSampler.domain">react-app.cfapps.io</stringProp>
           <stringProp name="WebSocketSampler.path">/cleanUp</stringProp>
-          <stringProp name="WebSocketSampler.port">9000</stringProp>
-          <stringProp name="WebSocketSampler.protocol">ws</stringProp>
+          <stringProp name="WebSocketSampler.port">4443</stringProp>
+          <stringProp name="WebSocketSampler.protocol">wss</stringProp>
           <stringProp name="WebSocketSampler.contentEncoding"></stringProp>
-          <stringProp name="WebSocketSampler.sendMessage">{&quot;clean_up&quot;:&quot;false&quot;}</stringProp>
+          <stringProp name="WebSocketSampler.sendMessage">{&quot;clean_up&quot;:&quot;true&quot;}</stringProp>
           <stringProp name="WebSocketSampler.recvMessage"></stringProp>
         </net.unit8.jmeter.protocol.websocket.sampler.WebSocketSampler>
         <hashTree/>
