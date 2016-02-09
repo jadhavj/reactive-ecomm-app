@@ -22,7 +22,13 @@ public class Mongo {
 
     private static final Morphia morphia = new Morphia();
 
-    private static final Datastore datastore = morphia.createDatastore(new MongoClient(new MongoClientURI("mongodb://CloudFoundry_iilvoggr_6v94fuh0_gt47v18a:2xg9hSA41Xw3fucUtpFiEiI72yPFiIBF@ds055565.mongolab.com:55565/CloudFoundry_iilvoggr_6v94fuh0")), "CloudFoundry_iilvoggr_6v94fuh0");
+    private static String host = play.Configuration.root().getString("mongo.host");
+    private static String port = play.Configuration.root().getString("mongo.port");
+    private static String user = play.Configuration.root().getString("mongo.host");
+    private static String password = play.Configuration.root().getString("mongo.host");
+    private static String db = play.Configuration.root().getString("mongo.host");
+
+    private static final Datastore datastore = morphia.createDatastore(new MongoClient(new MongoClientURI("mongodb://" + user +":" + password + "@" + host + ":" + port + "/" + db)), db);
     
     public static class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
@@ -47,9 +53,9 @@ public class Mongo {
     
     private static final CustomObjectMapper mapper = new CustomObjectMapper();
 
-    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create("mongodb://CloudFoundry_iilvoggr_6v94fuh0_gt47v18a:2xg9hSA41Xw3fucUtpFiEiI72yPFiIBF@ds055565.mongolab.com:55565/CloudFoundry_iilvoggr_6v94fuh0");
+    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create("mongodb://" + user +":" + password + "@" + host + ":" + port + "/" + db);
     
-    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase("CloudFoundry_iilvoggr_6v94fuh0");
+    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase(db);
     
     
     
