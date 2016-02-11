@@ -28,7 +28,7 @@ public class Mongo {
     private static String password = play.Configuration.root().getString("mongo.password");
     private static String db = play.Configuration.root().getString("mongo.db");
 
-    private static final Datastore datastore = morphia.createDatastore(new MongoClient(new MongoClientURI("mongodb://" + user +":" + password + "@" + host + ":" + port + "/" + db)), db);
+    private static final Datastore datastore = morphia.createDatastore(new MongoClient("localhost"), "react-app");
     
     public static class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
@@ -53,9 +53,9 @@ public class Mongo {
     
     private static final CustomObjectMapper mapper = new CustomObjectMapper();
 
-    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create("mongodb://" + user +":" + password + "@" + host + ":" + port + "/" + db);
+    private static com.mongodb.async.client.MongoClient aClient = com.mongodb.async.client.MongoClients.create();
     
-    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase(db);
+    private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase("react-app");
     
     
     
