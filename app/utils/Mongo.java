@@ -57,8 +57,6 @@ public class Mongo {
     
     private static com.mongodb.async.client.MongoDatabase aDatabase = aClient.getDatabase(db);
     
-    
-    
     static {
     	init();
     }

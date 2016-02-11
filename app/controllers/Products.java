@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -24,6 +25,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
+import com.mongodb.async.SingleResultCallback;
+import com.mongodb.async.client.FindIterable;
+import com.mongodb.client.result.UpdateResult;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.util.JSON;
@@ -53,29 +58,31 @@ public class Products extends Controller {
 
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
-
 						Object o = com.mongodb.util.JSON.parse(event);
 						BasicDBObject merchantInfo = (BasicDBObject) o;
 						String username = merchantInfo.getString("username");
-						System.out.println(Mongo.datastore().createQuery(models.Product.class).asList());
 						ObjectMapper mapper = new ObjectMapper();
-						List<Product> products = Mongo.datastore()
-								.createQuery(Product.class).field("username")
-								.equal(username).asList();
+						
 						BasicDBList productJsons = new BasicDBList();
-						for (Product product : products) {
-							try {
-								BasicDBObject productDo = (BasicDBObject) com.mongodb.util.JSON
-										.parse(mapper
-												.writeValueAsString(product));
-								productDo.put("_id", product.getId().toHexString());
-								productJsons.add(productDo);
-							} catch (JsonProcessingException e) {
-								e.printStackTrace();
-							}
-						}
-						out.write(productJsons.toString());
 
+						Block<Document> printDocumentBlock = new Block<Document>() {
+						    @Override
+						    public void apply(final Document product) {
+								BasicDBObject productDo = (BasicDBObject) com.mongodb.util.JSON.parse(product.toJson());
+								productDo.put("_id", product.getObjectId("_id").toString());
+								productJsons.add(productDo);
+						    }
+						};
+						SingleResultCallback<Void> callbackWhenFinished = new SingleResultCallback<Void>() {
+						    @Override
+						    public void onResult(final Void result, final Throwable t) {
+								out.write(productJsons.toString());
+						    }
+						};
+						Document query = new Document();
+						query.put("username", username);
+						FindIterable<Document> products = Mongo.asyncDatabase().getCollection("products").find(query);
+						products.forEach(printDocumentBlock, callbackWhenFinished);
 					}
 				});
 
@@ -114,12 +121,12 @@ public class Products extends Controller {
 				featuresList.add(s);
 			}
 			product.setFeatures(featuresList);
-			BasicDBObject specificationsDBObject = (BasicDBObject) com.mongodb.util.JSON
+			BasicDBObject specificationsDo = (BasicDBObject) com.mongodb.util.JSON
 					.parse(addProductInfo.get("specifications").toString());
-			product.setSpecifications(new Specifications(specificationsDBObject
-					.getString("brand"), specificationsDBObject
-					.getString("model_no"), specificationsDBObject
-					.getString("color"), specificationsDBObject
+			product.setSpecifications(new Specifications(specificationsDo
+					.getString("brand"), specificationsDo
+					.getString("model_no"), specificationsDo
+					.getString("color"), specificationsDo
 					.getString("size")));
 			product.setItemsInStock(Integer.parseInt(addProductInfo
 					.getString("items_in_stock")));
@@ -139,13 +146,12 @@ public class Products extends Controller {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Mongo.datastore().save(product);
-			String productAddedString = new BasicDBObject("result",
-					"Product entry added to store.").toJson();
-			System.out.println(productAddedString);
-
+			
+			Document productDo = Document.parse(Mongo.getEntityAsJson(product));
+			
+			Mongo.asyncDatabase().getCollection("products").insertOne(productDo, (Void result, final Throwable t) -> System.out.println("Inserted product."));
 		}
-		return ok("success");
+		return ok(new BasicDBObject("result", "success").toString());
 	}
 
 	public Result editProduct() {
@@ -155,38 +161,39 @@ public class Products extends Controller {
 		String idString = productInfo.getString("_id");
 		ObjectId id = new ObjectId(idString);
 
-		Query<Product> query = Mongo.datastore().createQuery(Product.class).field("_id").equal(id);
+		Product operation = new Product();
 
-		UpdateOperations<Product> operation = Mongo.datastore().createUpdateOperations(Product.class).set("name",
-				productInfo.getString("name"));
+		operation.setName(productInfo.getString("name"));
+		operation.setUsername(productInfo.getString("username"));
+		operation.setCategory(productInfo.getString("category"));
+		operation.setSubCategory(productInfo.getString("sub_category"));
 
-		operation.set("username", productInfo.getString("username"));
-		operation.set("category", productInfo.getString("category"));
-		operation.set("sub_category", productInfo.getString("sub_category"));
+		Document pricingDBObject = Document.parse(productInfo.get("pricing").toString());
 
-		BasicDBObject pricingDBObject = (BasicDBObject) com.mongodb.util.JSON
-				.parse(productInfo.get("pricing").toString());
-
-		operation.set("pricing", new Pricing(pricingDBObject.getDouble("cost_price"),
-				pricingDBObject.getDouble("discount"), pricingDBObject.getDouble("selling_price")));
-		operation.set("features", productInfo.get("features"));
+		operation.setPricing(new Pricing((double) pricingDBObject.getInteger("cost_price"),
+				(double) pricingDBObject.getInteger("discount"), (double) pricingDBObject.getInteger("selling_price")));
+		operation.setFeatures((List<String>) productInfo.get("features"));
 
 		byte[] image = null;
 		image = Base64.getDecoder().decode(productInfo.get("image").toString());
-		operation.set("image", image);
+		operation.setImage(image);
 
-		BasicDBObject scpecificationsDBObject = (BasicDBObject) com.mongodb.util.JSON
-				.parse(productInfo.get("specifications").toString());
+		Document specificationsDo = Document.parse(productInfo.get("specifications").toString());
 
-		operation.set("specifications",
-				new Specifications(scpecificationsDBObject.getString("brand"),
-						scpecificationsDBObject.getString("model_no"), scpecificationsDBObject.getString("color"),
-						scpecificationsDBObject.getString("size")));
-		operation.set("itemsInStock", productInfo.getInt("items_in_stock"));
-		operation.set("citiesForDelivery", (productInfo.get("cities_for_delivery")));
-
-		Mongo.datastore().update(query, operation);
-
+		operation.setSpecifications(new Specifications(specificationsDo.getString("brand"),
+						specificationsDo.getString("model_no"), specificationsDo.getString("color"),
+						specificationsDo.getString("size")));
+		operation.setItemsInStock(Integer.parseInt(productInfo.getString("items_in_stock")));
+		operation.setCitiesForDelivery((List<String>) productInfo.get("cities_for_delivery"));
+		System.out.println(Mongo.getEntityAsJson(operation));
+		Mongo.asyncDatabase().getCollection("products").updateOne(new Document("_id", new ObjectId(idString)), new Document("$set", Document.parse(Mongo.getEntityAsJson(operation))),
+			    new SingleResultCallback<UpdateResult>() {
+			        @Override
+			        public void onResult(final UpdateResult result, final Throwable t) {
+			            System.out.println("Updated product.");
+			        }
+			    });
+		
 		return ok(new BasicDBObject("result", "success").toString());
 	}
 
@@ -249,17 +256,10 @@ public class Products extends Controller {
 						Product product = new Product(name, user.getString("username"), category, subCategory, pricing, features,
 								pictures.get(i - 1).getData(), specifications, itemsInStock, citiesForDelivery);
 
-						//Mongo.asyncDatabase().getCollection("products").insertOne(Document.parse(mapper.writeValueAsString(product)), (Void result, final Throwable t) -> System.out.println("Inserted!"));
-						Mongo.datastore().save(product);
+						Mongo.asyncDatabase().getCollection("products").insertOne(Document.parse(mapper.writeValueAsString(product)), (Void result, final Throwable t) -> System.out.println("Inserted product."));
 						i++;
 					}
 
-					try {
-					Thread.sleep(10000);
-					} catch (java.lang.InterruptedException e) {
-						
-					}
-					System.out.println("DONE");
 					inputStream.close();
 					BasicDBObject result = new BasicDBObject("result", "success");
 					return result.toJson();
@@ -294,22 +294,27 @@ public class Products extends Controller {
 						BasicDBObject merchantInfo = (BasicDBObject) o;
 						String searchString = merchantInfo.getString("search_string");
 						ObjectMapper mapper = new ObjectMapper();
-						List<Product> products = Mongo.datastore()
-								.createQuery(Product.class).field("name")
-								.contains(searchString).asList();
+						
 						BasicDBList productJsons = new BasicDBList();
-						for (Product product : products) {
-							try {
-								BasicDBObject productDo = (BasicDBObject) com.mongodb.util.JSON
-										.parse(mapper
-												.writeValueAsString(product));
-								productDo.put("_id", product.getId().toHexString());
+
+						Block<Document> printDocumentBlock = new Block<Document>() {
+						    @Override
+						    public void apply(final Document product) {
+								BasicDBObject productDo = (BasicDBObject) com.mongodb.util.JSON.parse(product.toJson());
+								productDo.put("_id", product.getObjectId("_id").toString());
 								productJsons.add(productDo);
-							} catch (JsonProcessingException e) {
-								e.printStackTrace();
-							}
-						}
-						out.write(productJsons.toString());
+						    }
+						};
+						SingleResultCallback<Void> callbackWhenFinished = new SingleResultCallback<Void>() {
+						    @Override
+						    public void onResult(final Void result, final Throwable t) {
+								out.write(productJsons.toString());
+						    }
+						};
+						Document query = new Document();
+						query.put("name", new Document("$regex", searchString));
+						FindIterable<Document> products = Mongo.asyncDatabase().getCollection("products").find(query);
+						products.forEach(printDocumentBlock, callbackWhenFinished);
 					}
 				});
 			}

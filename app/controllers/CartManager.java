@@ -9,12 +9,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.UpdateOperations;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
+import com.mongodb.async.SingleResultCallback;
+import com.mongodb.client.result.UpdateResult;
 import com.mongodb.util.JSON;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -97,56 +100,64 @@ public class CartManager {
 						BasicDBObject itemDo = (BasicDBObject) JSON.parse(event);
 						String username = itemDo.getString("username");
 
-						Cart cart = null;
-						
-						if (Cache.get(username) != null) {
-							cart = (Cart) Cache.get(username);
-							System.out.println("From cache.");
-						} else {
-							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
-							System.out.println("From db.");
-						}
-						
-
 						ObjectId productId = new ObjectId(itemDo.getString("product_id"));
-						Product product = Mongo.datastore().createQuery(Product.class).retrievedFields(false, "username", "category", "sub_category", "features", "specifications", "items_in_stock", "cities_for_delivery").field("_id").equal(productId)
-								.get();
+						
+						SingleResultCallback<Document> callback = new SingleResultCallback<Document>() {
+						    @Override
+						    public void onResult(final Document document, final Throwable t) {
+								Cart cart = null;
+								
+								if (Cache.get(username) != null) {
+									cart = (Cart) Cache.get(username);
+									System.out.println("From cache.");
+								} else {
+									cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+									System.out.println("From db.");
+								}
 
-						if (cart != null) {
-							List<Product> items = cart.getItems();
+								BasicDBObject productDo = (BasicDBObject) JSON.parse(document.toJson());
+								productDo.put("_id", document.getObjectId("_id").toString());
+								Product product = Mongo.getEntityFromJson(productDo.toJson(), Product.class);
+								if (cart != null) {
+									List<Product> items = cart.getItems();
 
-							items.add(product);
-							Double total = cart.getTotal();
-							total += product.getPricing().getSellingPrice();
-							UpdateOperations<Cart> updatedCartItem = Mongo.datastore()
-									.createUpdateOperations(Cart.class).set("items", items).set("total", total);
+									items.add(product);
+									Double total = cart.getTotal();
+									total += product.getPricing().getSellingPrice();
+									UpdateOperations<Cart> updatedCartItem = Mongo.datastore()
+											.createUpdateOperations(Cart.class).set("items", items).set("total", total);
 
-							Mongo.datastore().update(cart, updatedCartItem);
-							Cache.set(username, cart);
-						} else {
-							String status = "incomplete";
-							User userInfo = Mongo.datastore().createQuery(User.class).field("username").equal(username)
-									.get();
-							List<Product> products = new ArrayList<Product>();
-							products.add(product);
+									Mongo.datastore().update(cart, updatedCartItem);
+									Cache.set(username, cart);
+								} else {
+									String status = "incomplete";
+									User userInfo = Mongo.datastore().createQuery(User.class).field("username").equal(username)
+											.get();
+									List<Product> products = new ArrayList<Product>();
+									products.add(product);
 
-							Double total = product.getPricing().getSellingPrice();
+									Double total = product.getPricing().getSellingPrice();
 
-							cart = new Cart();
-							cart.setUsername(username);
-							cart.setItems(products);
-							cart.setTotal(total);
-							cart.setStatus(status);
-							cart.setPaymentMode(userInfo.getCardDetails());
-							cart.setShippingAddress(new ShippingAddress(userInfo.getFirstname(), userInfo.getLastname(),
-									userInfo.getAddress().getStreet(), userInfo.getAddress().getCity(),
-									userInfo.getAddress().getState(), userInfo.getAddress().getZip(),
-									userInfo.getMobileNumber()));
-							Mongo.datastore().save(cart);
-							Cache.set(username, cart);
-						}
-						String result = new BasicDBObject("result", "success").toJson();
-						out.write(result);
+									cart = new Cart();
+									cart.setUsername(username);
+									cart.setItems(products);
+									cart.setTotal(total);
+									cart.setStatus(status);
+									cart.setPaymentMode(userInfo.getCardDetails());
+									cart.setShippingAddress(new ShippingAddress(userInfo.getFirstname(), userInfo.getLastname(),
+											userInfo.getAddress().getStreet(), userInfo.getAddress().getCity(),
+											userInfo.getAddress().getState(), userInfo.getAddress().getZip(),
+											userInfo.getMobileNumber()));
+									Mongo.datastore().save(cart);
+									Cache.set(username, cart);
+								}
+								String result = new BasicDBObject("result", "success").toJson();
+								out.write(result);
+						    }
+						};
+						
+						Mongo.asyncDatabase().getCollection("products").find(new Document("_id", productId)).first(callback);
+						
 					}
 				});
 			}
@@ -159,46 +170,61 @@ public class CartManager {
 			public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
 				in.onMessage(new F.Callback<String>() {
 					public void invoke(String event) {
-						BasicDBObject cartDo = (BasicDBObject) com.mongodb.util.JSON.parse(event);
+						BasicDBObject itemDo = (BasicDBObject) JSON.parse(event);
+						String username = itemDo.getString("username");
 
-						String username = cartDo.getString("username");
-						String productId = cartDo.getString("product_id");
-
-						Cart cart = null;
+						ObjectId productId = new ObjectId(itemDo.getString("product_id"));
 						
-						if (Cache.get(username) != null) {
-							cart = (Cart) Cache.get(username);
-							System.out.println("From cache.");
-						} else {
-							cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
-							System.out.println("From db.");
-						}
-
-						Product product = Mongo.datastore().createQuery(Product.class).field("_id").equal(new ObjectId(productId))
-								.get();
-						
-						if (cart != null) {
-							Double total = cart.getTotal();
-							List<Product> items = cart.getItems();
-
-							Iterator<Product> iter = items.iterator();
-							while (iter.hasNext()) {
-								Product miniProduct = iter.next();
-								if (miniProduct.getId().toString().equals(product.getId().toString())) {
-									iter.remove();
-									total -= product.getPricing().getSellingPrice();
-									break;
+						SingleResultCallback<Document> callback = new SingleResultCallback<Document>() {
+						    @Override
+						    public void onResult(final Document document, final Throwable t) {
+								Cart cart = null;
+								
+								if (Cache.get(username) != null) {
+									cart = (Cart) Cache.get(username);
+									System.out.println("From cache.");
+								} else {
+									cart = Mongo.datastore().createQuery(Cart.class).field("username").equal(username).get();
+									System.out.println("From db.");
 								}
-							}
-							UpdateOperations<Cart> updatedCartItem = Mongo.datastore()
-									.createUpdateOperations(Cart.class).set("items", items).set("total", total);
-							Mongo.datastore().update(cart, updatedCartItem);
-							String productAddedString = new BasicDBObject("result", "success").toJson();
-							out.write(productAddedString);
-							Cache.set(username, cart);
-						} else {
-							out.write(new BasicDBObject("result", "Cart empty.").toJson());
-						}
+
+								BasicDBObject productDo = (BasicDBObject) JSON.parse(document.toJson());
+								productDo.put("_id", document.getObjectId("_id").toString());
+								Product product = Mongo.getEntityFromJson(productDo.toJson(), Product.class);
+								if (cart != null) {
+									Double total = cart.getTotal();
+									List<Product> items = cart.getItems();
+
+									Iterator<Product> iter = items.iterator();
+									while (iter.hasNext()) {
+										Product miniProduct = iter.next();
+										if (miniProduct.getId().toString().equals(product.getId().toString())) {
+											iter.remove();
+											total -= product.getPricing().getSellingPrice();
+											break;
+										}
+									}
+									Mongo.asyncDatabase().getCollection("products").updateOne(new Document("_id", document.getObjectId("_id")), new Document("$set", Document.parse(Mongo.getEntityAsJson(product))),
+										    new SingleResultCallback<UpdateResult>() {
+										        @Override
+										        public void onResult(final UpdateResult result, final Throwable t) {
+										            System.out.println("Product removed");
+										        }
+										    });
+									String productAddedString = new BasicDBObject("result", "success").toJson();
+									out.write(productAddedString);
+									Cache.set(username, cart);
+								} else {
+									out.write(new BasicDBObject("result", "Cart empty.").toJson());
+								}
+								
+								String result = new BasicDBObject("result", "success").toJson();
+								out.write(result);
+						    }
+						};
+						
+						Mongo.asyncDatabase().getCollection("products").find(new Document("_id", productId)).first(callback);
+						BasicDBObject cartDo = (BasicDBObject) com.mongodb.util.JSON.parse(event);
 					}
 				});
 			}
