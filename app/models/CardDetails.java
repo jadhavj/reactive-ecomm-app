@@ -17,7 +17,7 @@ public class CardDetails implements Serializable {
 
 	@JsonProperty("card_number")
 	@Property("card_number")
-	private Long cardNumber;
+	private String cardNumber;
 	@JsonProperty("cardholder_name")
 	@Property("cardholder_name")
 	private String cardholderName;
@@ -42,7 +42,7 @@ public class CardDetails implements Serializable {
 	 * @param expiry
 	 * @param cardNumber
 	 */
-	public CardDetails(Long cardNumber, String cardholderName, String expiry, String cardType) {
+	public CardDetails(String cardNumber, String cardholderName, String expiry, String cardType) {
 		this.cardNumber = cardNumber;
 		this.cardholderName = cardholderName;
 		this.expiry = expiry;
@@ -54,7 +54,7 @@ public class CardDetails implements Serializable {
 	 * @return The cardNumber
 	 */
 	@JsonProperty("card_number")
-	public Long getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
@@ -64,7 +64,7 @@ public class CardDetails implements Serializable {
 	 *            The card_number
 	 */
 	@JsonProperty("card_number")
-	public void setCardNumber(Long cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 

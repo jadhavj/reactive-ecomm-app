@@ -30,7 +30,7 @@ public class FakeData extends Controller {
 							User user = new User();
 							user.setUsername("buyer" + i);
 							user.setAddress(new Address("street", "city", "state", (long) 123456));
-							user.setCardDetails(new CardDetails((long) 1234567890, "user" + 1, "10/10/2017", "visa"));
+							user.setCardDetails(new CardDetails("1234567890", "user" + 1, "10/10/2017", "visa"));
 							user.setEmail("user" + 1 + "domain.com");
 							user.setFirstname("first");
 							user.setLastname("last");
